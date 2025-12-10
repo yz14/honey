@@ -412,7 +412,7 @@
 @media (max-width: 768px) {
   /* 时间轴容器 - 适应手机屏幕 */
   .timeline-view {
-    height: calc(100vh - 56px - 52px); /* header + 底部统计条 */
+    height: calc(100vh - 56px - 56px); /* header + 底部统计条 */
     padding-bottom: 0;
   }
   

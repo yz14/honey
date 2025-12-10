@@ -485,7 +485,7 @@
     height: 100%;
     border-radius: 0;
     /* 确保地图占满可用空间 */
-    min-height: calc(100vh - 56px - 52px);
+    min-height: calc(100vh - 56px - 56px);
   }
   
   .echarts-map {
@@ -498,7 +498,7 @@
   .map-controls {
     display: flex !important;
     top: auto;
-    bottom: 62px; /* 留出底部统计条空间 */
+    bottom: 66px; /* 留出底部统计条空间 */
     right: var(--space-2);
     z-index: 200; /* 确保在ECharts之上 */
   }
@@ -514,7 +514,7 @@
     width: 100%;
     left: 0;
     right: 0;
-    bottom: 52px; /* 留出底部统计条空间 */
+    bottom: 56px; /* 留出底部统计条空间 */
     top: auto;
     max-height: 45vh;
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;

@@ -188,16 +188,38 @@ const App = (function() {
     if (statKm) animateValue(statKm, stats.totalKm);
     if (statProvinces) animateValue(statProvinces, stats.provinces);
     
-    // 同时更新手机端统计
+    // 同时更新手机端统计（保留单位span）
     const mobileHoney = document.getElementById('stat-honey-mobile');
     const mobileKm = document.getElementById('stat-km-mobile');
     const mobileProvinces = document.getElementById('stat-provinces-mobile');
     const mobileDays = document.getElementById('stat-days-mobile');
     
-    if (mobileHoney) animateValue(mobileHoney, stats.totalHoney);
-    if (mobileKm) animateValue(mobileKm, stats.totalKm);
-    if (mobileProvinces) animateValue(mobileProvinces, stats.provinces);
-    if (mobileDays) animateValue(mobileDays, stats.totalDays);
+    if (mobileHoney) animateMobileValue(mobileHoney, stats.totalHoney, 'kg');
+    if (mobileKm) animateMobileValue(mobileKm, stats.totalKm, 'km');
+    if (mobileProvinces) animateMobileValue(mobileProvinces, stats.provinces, '个');
+    if (mobileDays) animateMobileValue(mobileDays, stats.totalDays, '天');
+  }
+  
+  // 手机端数字动画（保留单位）
+  function animateMobileValue(element, target, unit) {
+    const duration = 1000;
+    const currentText = element.textContent.replace(/[^\d]/g, '');
+    const start = parseInt(currentText) || 0;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = Math.floor(start + (target - start) * easeOutQuart);
+      element.innerHTML = `${current}<span class="stat-item__unit">${unit}</span>`;
+      
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    
+    requestAnimationFrame(update);
   }
 
   // 数字动画
