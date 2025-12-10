@@ -12,7 +12,8 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 50%, #B2DFDB 100%);
+  /* 宫崎骏风格的淡黄色背景 */
+  background: #FDF8E7;
   overflow: hidden;
 }
 
@@ -585,9 +586,14 @@
     min-height: 44px; /* 触摸区域 */
   }
   
-  /* 省份名称标签 - 手机端隐藏 */
+  /* 省份名称标签 - 手机端在标题下方显示 */
   .map-province-label {
-    display: none !important;
+    display: block;
+    top: 28px; /* 在标题和地图之间 */
+    font-size: var(--text-xs);
+    padding: 4px var(--space-3);
+    background: rgba(107, 68, 35, 0.9); /* 宫崎骏风格棕色 */
+    color: #FDF8E7; /* 淡黄色文字 */
   }
   
   /* 隐藏图例 */

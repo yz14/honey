@@ -206,10 +206,10 @@ const MapView = (function() {
       title: {
         text: '🐝 蜂农采蜜足迹图',
         left: 'center',
-        top: isMobile ? 8 : 15,
+        top: isMobile ? 6 : 15,
         textStyle: {
-          color: '#558B2F',
-          fontSize: isMobile ? 14 : 18,
+          color: '#6B4423', // 宫崎骏风格的棕色
+          fontSize: isMobile ? 16 : 18,
           fontWeight: 'bold',
           fontFamily: 'Quicksand, Nunito, sans-serif'
         }
@@ -404,8 +404,8 @@ const MapView = (function() {
     chartInstance.on('click', function(params) {
       if (params.seriesType === 'scatter' && params.data.record) {
         showMarkerInfo(params.data.record);
-      } else if (params.componentType === 'geo' && !isMobile) {
-        // 桌面端点击省份显示省份名称，手机端不显示
+      } else if (params.componentType === 'geo') {
+        // 点击省份显示省份名称（手机端和桌面端都支持）
         showProvinceLabel(params.name);
       }
     });
