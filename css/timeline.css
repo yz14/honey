@@ -475,20 +475,9 @@
     object-fit: cover;
   }
   
-  /* 图片上的蜂蜜徽章 */
+  /* 隐藏图片上的查看故事按钮 */
   .timeline-item__story-btn {
-    display: block !important;
-    position: absolute;
-    bottom: var(--space-2);
-    right: var(--space-2);
-    padding: 6px 12px;
-    background: rgba(255,255,255,0.95);
-    color: var(--honey-700);
-    border: none;
-    border-radius: var(--radius-full);
-    font-size: 12px;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: none !important;
   }
   
   /* 缩略图 */
@@ -581,17 +570,21 @@
     font-size: 10px;
   }
   
-  /* 标签 */
+  /* 标签 - 均匀分布 */
   .timeline-item__tags {
     display: flex !important;
     flex-wrap: wrap;
-    gap: var(--space-1);
+    justify-content: space-between;
+    gap: var(--space-2);
     margin-bottom: var(--space-2);
   }
   
   .timeline-item__tag {
+    flex: 1;
+    text-align: center;
     font-size: 11px;
-    padding: 3px 10px;
+    padding: 4px 8px;
+    min-width: 0;
   }
   
   /* 查看按钮 */

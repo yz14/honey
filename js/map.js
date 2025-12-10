@@ -252,7 +252,7 @@ const MapView = (function() {
     const option = {
       backgroundColor: 'transparent',
       title: {
-        text: '🐝 蜂农采蜜足迹图',
+        text: '采蜜足迹图',
         left: 'center',
         top: isMobile ? 6 : 15,
         textStyle: {
