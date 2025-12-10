@@ -204,17 +204,18 @@ const MapView = (function() {
     const option = {
       backgroundColor: 'transparent',
       title: {
-        text: isMobile ? '' : '🐝 蜂农采蜜足迹图', // 手机端隐藏标题，留更多空间给地图
+        text: '🐝 蜂农采蜜足迹图',
         left: 'center',
-        top: 15,
+        top: isMobile ? 8 : 15,
         textStyle: {
           color: '#558B2F',
-          fontSize: 18,
+          fontSize: isMobile ? 14 : 18,
           fontWeight: 'bold',
           fontFamily: 'Quicksand, Nunito, sans-serif'
         }
       },
       tooltip: {
+        show: !isMobile, // 手机端禁用tooltip，使用底部面板
         trigger: 'item',
         backgroundColor: 'rgba(255, 255, 255, 0.95)',
         borderColor: '#FFA726',
@@ -246,7 +247,6 @@ const MapView = (function() {
               </div>
             `;
           }
-          // 不显示地图省份的tooltip，使用自定义的中央标签
           return '';
         }
       },
@@ -404,25 +404,26 @@ const MapView = (function() {
     chartInstance.on('click', function(params) {
       if (params.seriesType === 'scatter' && params.data.record) {
         showMarkerInfo(params.data.record);
-      } else if (params.componentType === 'geo') {
-        // 点击省份，显示省份名称
+      } else if (params.componentType === 'geo' && !isMobile) {
+        // 桌面端点击省份显示省份名称，手机端不显示
         showProvinceLabel(params.name);
       }
     });
     
-    // 鼠标悬停在省份上时显示名称
-    chartInstance.on('mouseover', function(params) {
-      if (params.componentType === 'geo') {
-        showProvinceLabel(params.name);
-      }
-    });
-    
-    // 鼠标移出地图时隐藏省份名称
-    chartInstance.on('mouseout', function(params) {
-      if (params.componentType === 'geo') {
-        hideProvinceLabel();
-      }
-    });
+    // 桌面端：鼠标悬停在省份上时显示名称
+    if (!isMobile) {
+      chartInstance.on('mouseover', function(params) {
+        if (params.componentType === 'geo') {
+          showProvinceLabel(params.name);
+        }
+      });
+      
+      chartInstance.on('mouseout', function(params) {
+        if (params.componentType === 'geo') {
+          hideProvinceLabel();
+        }
+      });
+    }
 
     // 窗口大小变化时重绘
     window.addEventListener('resize', function() {
