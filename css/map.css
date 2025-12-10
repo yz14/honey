@@ -987,5 +987,6 @@
 @media (max-width: 768px) {
   .honey-bottles-container {
     display: block;
+    bottom: 20px; /* 往上移动，确保在屏幕内 */
   }
 }
