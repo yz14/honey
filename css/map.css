@@ -486,7 +486,7 @@
     height: 100%;
     border-radius: 0;
     /* 确保地图占满可用空间 */
-    min-height: calc(100vh - 52px - 56px);
+    min-height: calc(100vh - 52px);
   }
   
   .echarts-map {
@@ -495,13 +495,13 @@
     height: 100% !important;
   }
   
-  /* 地图控件 - 移到右下角，避开底部 */
+  /* 地图控件 - 移到右下角 */
   .map-controls {
     display: flex !important;
     top: auto;
-    bottom: 66px; /* 留出底部统计条空间 */
+    bottom: var(--space-3);
     right: var(--space-2);
-    z-index: 200; /* 确保在ECharts之上 */
+    z-index: 200;
   }
   
   .map-control-btn {
@@ -515,7 +515,7 @@
     width: 100%;
     left: 0;
     right: 0;
-    bottom: 56px; /* 留出底部统计条空间 */
+    bottom: 0;
     top: auto;
     max-height: 40vh;
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
@@ -600,4 +600,46 @@
   .map-legend {
     display: none;
   }
+  
+  /* 左上角统计信息 */
+  .map-stats-overlay {
+    display: flex !important;
+  }
+}
+
+/* 地图左上角统计信息（手机端） */
+.map-stats-overlay {
+  display: none;
+  position: absolute;
+  top: 36px;
+  left: var(--space-2);
+  z-index: 50;
+  flex-direction: column;
+  gap: 4px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.map-stats-overlay__item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: #6B4423;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+.map-stats-overlay__label {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.map-stats-overlay__value {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.map-stats-overlay__unit {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.7;
 }

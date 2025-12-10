@@ -35,6 +35,7 @@ const MapView = (function() {
   // 渲染地图视图
   function render() {
     const records = DataManager.getRecords();
+    const stats = DataManager.getStats();
     
     container.innerHTML = `
       <div class="map-container">
@@ -43,6 +44,25 @@ const MapView = (function() {
         
         <!-- 省份名称显示 -->
         <div class="map-province-label" id="province-label"></div>
+        
+        <!-- 左上角统计信息（手机端显示） -->
+        <div class="map-stats-overlay">
+          <div class="map-stats-overlay__item">
+            <span class="map-stats-overlay__label">产蜜</span>
+            <span class="map-stats-overlay__value">${stats.totalHoney}</span>
+            <span class="map-stats-overlay__unit">kg</span>
+          </div>
+          <div class="map-stats-overlay__item">
+            <span class="map-stats-overlay__label">里程</span>
+            <span class="map-stats-overlay__value">${stats.totalKm}</span>
+            <span class="map-stats-overlay__unit">km</span>
+          </div>
+          <div class="map-stats-overlay__item">
+            <span class="map-stats-overlay__label">途经</span>
+            <span class="map-stats-overlay__value">${stats.provinces}</span>
+            <span class="map-stats-overlay__unit">省</span>
+          </div>
+        </div>
         
         <!-- 控制按钮 -->
         <div class="map-controls">
@@ -253,10 +273,10 @@ const MapView = (function() {
       geo: {
         map: 'china',
         roam: true,
-        // 手机端放大地图以填满宽度，中心点下移以显示更多地图
-        zoom: isMobile ? 1.35 : 1.2,
-        center: isMobile ? [105, 32] : [105, 36],
-        aspectScale: isMobile ? 0.85 : 0.75, // 手机端调整宽高比
+        // 手机端调整地图以适应屏幕宽度
+        zoom: isMobile ? 1.15 : 1.2,
+        center: isMobile ? [105, 35] : [105, 36],
+        aspectScale: 0.75, // 保持正常宽高比
         scaleLimit: {
           min: isMobile ? 1.0 : 0.8,
           max: 5
