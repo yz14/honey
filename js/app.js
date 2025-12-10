@@ -56,6 +56,7 @@ const App = (function() {
     elements.statsSidebar = document.querySelector('.stats-sidebar');
     elements.mapView = document.getElementById('map-view');
     elements.timelineView = document.getElementById('timeline-view');
+    elements.logo = document.querySelector('.header__logo');
     
     // 统计数据元素
     elements.statHoney = document.getElementById('stat-honey');
@@ -93,6 +94,15 @@ const App = (function() {
         switchView(view);
       });
     });
+    
+    // 点击logo回到地图模式（刷新地图）
+    if (elements.logo) {
+      elements.logo.style.cursor = 'pointer';
+      elements.logo.addEventListener('click', () => {
+        switchView('map');
+        MapView.refresh();
+      });
+    }
     
     // 窗口大小变化
     window.addEventListener('resize', Utils.debounce(handleResize, 250));

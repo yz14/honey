@@ -45,23 +45,11 @@ const MapView = (function() {
         <!-- 省份名称显示 -->
         <div class="map-province-label" id="province-label"></div>
         
-        <!-- 左上角统计信息（手机端显示） -->
-        <div class="map-stats-overlay">
-          <div class="map-stats-overlay__item">
-            <span class="map-stats-overlay__label">产蜜</span>
-            <span class="map-stats-overlay__value">${stats.totalHoney}</span>
-            <span class="map-stats-overlay__unit">kg</span>
-          </div>
-          <div class="map-stats-overlay__item">
-            <span class="map-stats-overlay__label">里程</span>
-            <span class="map-stats-overlay__value">${stats.totalKm}</span>
-            <span class="map-stats-overlay__unit">km</span>
-          </div>
-          <div class="map-stats-overlay__item">
-            <span class="map-stats-overlay__label">途经</span>
-            <span class="map-stats-overlay__value">${stats.provinces}</span>
-            <span class="map-stats-overlay__unit">省</span>
-          </div>
+        <!-- 左上角统计描述（手机端显示） -->
+        <div class="map-stats-overlay" id="map-stats-overlay">
+          <p>踏足 <strong>${stats.provinces}</strong> 省</p>
+          <p>行程 <strong>${stats.totalKm}</strong> 公里</p>
+          <p>采集 <strong>${stats.totalHoney}</strong> 斤蜜</p>
         </div>
         
         <!-- 控制按钮 -->
@@ -153,30 +141,28 @@ const MapView = (function() {
       itemStyle: { areaColor: provinceColors[name] }
     }));
 
-    // 准备采蜜点数据
+    // 准备采蜜点数据 - 统一大小，通过颜色深浅表示产量
+    const maxHoney = Math.max(...records.map(r => r.honey.amount));
     const scatterData = records.map(record => {
       const honey = record.honey.amount;
-      let symbolSize, color;
-      
-      if (honey > 400) {
-        symbolSize = 35;
-        color = '#FF6B00';
-      } else if (honey >= 200) {
-        symbolSize = 28;
-        color = '#FFA726';
-      } else {
-        symbolSize = 22;
-        color = '#FFD54F';
-      }
+      // 根据产量计算颜色深浅 (0.3 - 1.0)
+      const ratio = honey / maxHoney;
+      const opacity = 0.4 + ratio * 0.6;
+      // 颜色从浅黄到深橙
+      const r = Math.round(255);
+      const g = Math.round(200 - ratio * 80);
+      const b = Math.round(100 - ratio * 100);
+      const color = `rgb(${r}, ${g}, ${b})`;
 
       return {
         name: record.location.name,
         value: [record.location.lng, record.location.lat, honey],
-        symbolSize: symbolSize,
+        symbolSize: 24, // 统一大小
         itemStyle: {
           color: color,
-          shadowBlur: 10,
-          shadowColor: 'rgba(255, 152, 0, 0.5)'
+          opacity: opacity,
+          shadowBlur: 8,
+          shadowColor: 'rgba(255, 152, 0, 0.4)'
         },
         record: record
       };
@@ -457,8 +443,9 @@ const MapView = (function() {
     let isZooming = false; // 是否正在缩放
     let zoomTimeout = null;
     
-    // 监听地图缩放/平移事件，暂时隐藏流动线以避免位置偏移
-    chartInstance.on('georoam', function() {
+    // 监听地图缩放/平移事件
+    const statsOverlay = document.getElementById('map-stats-overlay');
+    chartInstance.on('georoam', function(params) {
       if (!isZooming) {
         isZooming = true;
         // 缩放时隐藏流动线效果
@@ -467,7 +454,9 @@ const MapView = (function() {
             name: 'migrationEffect',
             data: []
           }]
-        }, false); // false: 不合并，直接替换
+        }, false);
+        // 隐藏左上角描述
+        if (statsOverlay) statsOverlay.classList.add('hidden');
       }
       
       // 清除之前的定时器
@@ -475,9 +464,10 @@ const MapView = (function() {
         clearTimeout(zoomTimeout);
       }
       
-      // 缩放结束300ms后恢复流动线
+      // 缩放结束后恢复
       zoomTimeout = setTimeout(function() {
         isZooming = false;
+        // 恢复流动线
         if (chartInstance && linesData.length > 0) {
           chartInstance.setOption({
             series: [{
@@ -485,6 +475,11 @@ const MapView = (function() {
               data: [linesData[currentLineIndex]]
             }]
           }, false);
+        }
+        // 检查缩放级别，如果放大太多则保持隐藏
+        const currentZoom = chartInstance.getOption().geo[0].zoom;
+        if (currentZoom <= 1.5 && statsOverlay) {
+          statsOverlay.classList.remove('hidden');
         }
       }, 300);
     });
@@ -687,6 +682,25 @@ const MapView = (function() {
     selectedRecord = null;
   }
 
+  // 刷新地图（重置视图）
+  function refresh() {
+    if (chartInstance) {
+      // 重置地图缩放和位置
+      const isMobile = window.innerWidth <= 768;
+      chartInstance.setOption({
+        geo: {
+          zoom: isMobile ? 1.15 : 1.2,
+          center: isMobile ? [105, 35] : [105, 36]
+        }
+      });
+      // 关闭信息面板
+      closeInfoPanel();
+      // 显示左上角描述
+      const statsOverlay = document.getElementById('map-stats-overlay');
+      if (statsOverlay) statsOverlay.classList.remove('hidden');
+    }
+  }
+
   // 公开API
   return {
     init,
@@ -695,6 +709,7 @@ const MapView = (function() {
     zoomIn,
     zoomOut,
     reset,
+    refresh,
     destroy
   };
 })();
