@@ -37,6 +37,28 @@ const MapView = (function() {
     const records = DataManager.getRecords();
     const stats = DataManager.getStats();
     
+    // 生成蜂蜜产量柱状图数据
+    const honeyByType = {};
+    records.forEach(r => {
+      const type = r.honey.type.replace('蜜', '');
+      honeyByType[type] = (honeyByType[type] || 0) + r.honey.amount;
+    });
+    const maxHoney = Math.max(...Object.values(honeyByType));
+    const honeyBarsHtml = Object.entries(honeyByType)
+      .sort((a, b) => b[1] - a[1])
+      .map(([type, amount]) => {
+        const heightPercent = (amount / maxHoney) * 100;
+        const hue = 35 + (1 - amount/maxHoney) * 15; // 35-50 橙黄色系
+        return `
+          <div class="honey-bar">
+            <div class="honey-bar__fill" style="height: ${heightPercent}%; background: hsl(${hue}, 85%, 55%);">
+              <span class="honey-bar__value">${amount}</span>
+            </div>
+            <span class="honey-bar__label">${type}</span>
+          </div>
+        `;
+      }).join('');
+    
     container.innerHTML = `
       <div class="map-container">
         <!-- ECharts 地图容器 -->
@@ -45,11 +67,16 @@ const MapView = (function() {
         <!-- 省份名称显示 -->
         <div class="map-province-label" id="province-label"></div>
         
-        <!-- 左上角统计描述（手机端显示） -->
+        <!-- 左侧统计描述（手机端显示） -->
         <div class="map-stats-overlay" id="map-stats-overlay">
           <p>踏足 <strong>${stats.provinces}</strong> 省</p>
           <p>行程 <strong>${stats.totalKm}</strong> 公里</p>
           <p>采集 <strong>${stats.totalHoney}</strong> 斤蜜</p>
+        </div>
+        
+        <!-- 底部蜂蜜产量柱状图（手机端显示） -->
+        <div class="honey-chart" id="honey-chart">
+          <div class="honey-chart__bars">${honeyBarsHtml}</div>
         </div>
         
         <!-- 控制按钮 -->
@@ -445,6 +472,7 @@ const MapView = (function() {
     
     // 监听地图缩放/平移事件
     const statsOverlay = document.getElementById('map-stats-overlay');
+    const honeyChart = document.getElementById('honey-chart');
     chartInstance.on('georoam', function(params) {
       if (!isZooming) {
         isZooming = true;
@@ -455,8 +483,9 @@ const MapView = (function() {
             data: []
           }]
         }, false);
-        // 隐藏左上角描述
+        // 隐藏左上角描述和底部柱状图
         if (statsOverlay) statsOverlay.classList.add('hidden');
+        if (honeyChart) honeyChart.classList.add('hidden');
       }
       
       // 清除之前的定时器
@@ -478,8 +507,9 @@ const MapView = (function() {
         }
         // 检查缩放级别，如果放大太多则保持隐藏
         const currentZoom = chartInstance.getOption().geo[0].zoom;
-        if (currentZoom <= 1.5 && statsOverlay) {
-          statsOverlay.classList.remove('hidden');
+        if (currentZoom <= 1.5) {
+          if (statsOverlay) statsOverlay.classList.remove('hidden');
+          if (honeyChart) honeyChart.classList.remove('hidden');
         }
       }, 300);
     });
@@ -695,9 +725,11 @@ const MapView = (function() {
       });
       // 关闭信息面板
       closeInfoPanel();
-      // 显示左上角描述
+      // 显示左上角描述和底部柱状图
       const statsOverlay = document.getElementById('map-stats-overlay');
+      const honeyChart = document.getElementById('honey-chart');
       if (statsOverlay) statsOverlay.classList.remove('hidden');
+      if (honeyChart) honeyChart.classList.remove('hidden');
     }
   }
 
