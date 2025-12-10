@@ -208,12 +208,12 @@ const MapView = (function() {
     const option = {
       backgroundColor: 'transparent',
       title: {
-        text: '🐝 蜂农采蜜足迹图',
+        text: isMobile ? '' : '🐝 蜂农采蜜足迹图', // 手机端隐藏标题，留更多空间给地图
         left: 'center',
-        top: isMobile ? 8 : 15,
+        top: 15,
         textStyle: {
           color: '#558B2F',
-          fontSize: isMobile ? 14 : 18,
+          fontSize: 18,
           fontWeight: 'bold',
           fontFamily: 'Quicksand, Nunito, sans-serif'
         }
@@ -273,10 +273,12 @@ const MapView = (function() {
       geo: {
         map: 'china',
         roam: true,
-        zoom: isMobile ? 1.0 : 1.2,
-        center: isMobile ? [105, 38] : [105, 36],
+        // 手机端放大地图以填满宽度，中心点下移以显示更多地图
+        zoom: isMobile ? 1.35 : 1.2,
+        center: isMobile ? [105, 32] : [105, 36],
+        aspectScale: isMobile ? 0.85 : 0.75, // 手机端调整宽高比
         scaleLimit: {
-          min: isMobile ? 0.6 : 0.8,
+          min: isMobile ? 1.0 : 0.8,
           max: 5
         },
         label: {

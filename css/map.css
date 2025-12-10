@@ -446,6 +446,14 @@
   .map-container {
     height: 100%;
     border-radius: 0;
+    /* 确保地图占满可用空间 */
+    min-height: calc(100vh - 56px - 60px);
+  }
+  
+  .echarts-map {
+    /* ECharts容器占满父容器 */
+    width: 100% !important;
+    height: 100% !important;
   }
   
   /* 地图控件 - 移到右下角，避开标题 */
