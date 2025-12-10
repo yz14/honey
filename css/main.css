@@ -480,8 +480,20 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --header-height: 56px;
+  }
+  
   .header {
-    padding: 0 var(--space-4);
+    padding: 0 var(--space-3);
+  }
+  
+  .header__logo-icon {
+    font-size: 1.5rem;
+  }
+  
+  .header__logo-text {
+    font-size: var(--text-base);
   }
   
   .header__logo-subtitle {
@@ -492,28 +504,79 @@ a:hover {
     margin-right: var(--space-2);
   }
   
+  .header__year-value {
+    font-size: var(--text-base);
+    min-width: 50px;
+  }
+  
+  .view-toggle__btn {
+    padding: var(--space-2);
+  }
+  
   .view-toggle__btn span {
     display: none;
   }
   
-  .stats-bar__inner {
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    justify-content: space-around;
+  /* 手机端：隐藏左侧统计栏，改为底部悬浮条 */
+  .main-layout {
+    flex-direction: column;
   }
   
-  .stat-item__icon {
-    width: 40px;
-    height: 40px;
-    font-size: var(--text-xl);
+  .stats-sidebar {
+    display: none;
   }
   
-  .stat-item__value {
-    font-size: var(--text-xl);
+  /* 手机端底部统计条 */
+  .stats-mobile {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    padding: var(--space-2) var(--space-3);
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .stats-mobile .stat-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--space-1);
+  }
+  
+  .stats-mobile .stat-item__icon {
+    font-size: 1rem;
+  }
+  
+  .stats-mobile .stat-item__value {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--honey-dark);
+  }
+  
+  .stats-mobile .stat-item__label {
+    font-size: 10px;
+    color: var(--gray-500);
+  }
+  
+  .stats-mobile .stat-item__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* 视图容器占满剩余空间，底部留出统计条空间 */
+  .view-container {
+    height: calc(100vh - var(--header-height) - 60px) !important;
   }
   
   .container {
-    padding: 0 var(--space-4);
+    padding: 0 var(--space-3);
   }
 }
 

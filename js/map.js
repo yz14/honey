@@ -201,16 +201,19 @@ const MapView = (function() {
       });
     }
 
+    // 检测是否为手机端
+    const isMobile = window.innerWidth <= 768;
+    
     // ECharts 配置
     const option = {
       backgroundColor: 'transparent',
       title: {
         text: '🐝 蜂农采蜜足迹图',
         left: 'center',
-        top: 15,
+        top: isMobile ? 8 : 15,
         textStyle: {
           color: '#558B2F',
-          fontSize: 18,
+          fontSize: isMobile ? 14 : 18,
           fontWeight: 'bold',
           fontFamily: 'Quicksand, Nunito, sans-serif'
         }
@@ -270,14 +273,14 @@ const MapView = (function() {
       geo: {
         map: 'china',
         roam: true,
-        zoom: 1.2,
-        center: [105, 36],
+        zoom: isMobile ? 1.0 : 1.2,
+        center: isMobile ? [105, 38] : [105, 36],
         scaleLimit: {
-          min: 0.8,
+          min: isMobile ? 0.6 : 0.8,
           max: 5
         },
         label: {
-          show: true,
+          show: !isMobile, // 手机端不显示省份名称，太挤
           fontSize: 10,
           color: '#558B2F',
           formatter: function(params) {
@@ -358,9 +361,11 @@ const MapView = (function() {
           symbol: 'pin',
           symbolSize: function(val) {
             const honey = val[2];
-            if (honey > 400) return 45;
-            if (honey >= 200) return 38;
-            return 30;
+            // 手机端使用更小的标记
+            const scale = isMobile ? 0.7 : 1;
+            if (honey > 400) return 45 * scale;
+            if (honey >= 200) return 38 * scale;
+            return 30 * scale;
           },
           itemStyle: {
             color: {
@@ -372,12 +377,12 @@ const MapView = (function() {
               ]
             },
             borderColor: '#fff',
-            borderWidth: 2,
-            shadowBlur: 10,
+            borderWidth: isMobile ? 1 : 2,
+            shadowBlur: isMobile ? 5 : 10,
             shadowColor: 'rgba(255, 152, 0, 0.5)'
           },
           label: {
-            show: true,
+            show: !isMobile, // 手机端不显示标签，太挤
             formatter: '{@[2]}',
             position: 'inside',
             fontSize: 10,

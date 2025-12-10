@@ -168,6 +168,7 @@ const App = (function() {
   function updateStats() {
     const stats = DataManager.getStats();
     
+    // 更新桌面端统计
     if (elements.statHoney) {
       animateValue(elements.statHoney, stats.totalHoney);
     }
@@ -180,6 +181,17 @@ const App = (function() {
     if (elements.statRecords) {
       animateValue(elements.statRecords, stats.recordCount);
     }
+    
+    // 同时更新手机端统计
+    const mobileHoney = document.getElementById('stat-honey-mobile');
+    const mobileLocations = document.getElementById('stat-locations-mobile');
+    const mobileDays = document.getElementById('stat-days-mobile');
+    const mobileRecords = document.getElementById('stat-records-mobile');
+    
+    if (mobileHoney) animateValue(mobileHoney, stats.totalHoney);
+    if (mobileLocations) animateValue(mobileLocations, stats.locations);
+    if (mobileDays) animateValue(mobileDays, stats.totalDays);
+    if (mobileRecords) animateValue(mobileRecords, stats.recordCount);
   }
 
   // 数字动画
