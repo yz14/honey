@@ -760,6 +760,14 @@ const MapView = (function() {
     const card = document.getElementById('honey-detail-card');
     const content = document.getElementById('honey-detail-content');
     
+    // 解析结晶特性（分成两行）
+    const crystalParts = details.crystallize.split('，');
+    const crystalLine1 = crystalParts[0] || '';
+    const crystalLine2 = crystalParts[1] || '';
+    
+    // 取第一个产地
+    const mainOrigin = details.origin.split('、')[0];
+    
     content.innerHTML = `
       <button class="honey-detail__close" onclick="MapView.closeHoneyDetail()">×</button>
       
@@ -768,65 +776,91 @@ const MapView = (function() {
         <img src="${details.image}" alt="${details.name}">
         <div class="honey-detail__header-overlay">
           <h2 class="honey-detail__title">${details.name}</h2>
+          <div class="honey-detail__price">${details.price}</div>
         </div>
       </div>
       
       <!-- 主要信息 -->
       <div class="honey-detail__body">
-        <!-- 核心指标卡片 -->
-        <div class="honey-detail__hero">
-          <div class="honey-detail__hero-item">
-            <span class="honey-detail__hero-value">${details.baume}</span>
-            <span class="honey-detail__hero-label">波美度</span>
+        <!-- 基础属性条（四列） -->
+        <div class="honey-detail__attrs">
+          <div class="honey-detail__attr">
+            <span class="honey-detail__attr-value">${details.baume}</span>
+            <span class="honey-detail__attr-label">波美度</span>
           </div>
-          <div class="honey-detail__hero-divider"></div>
-          <div class="honey-detail__hero-item">
-            <span class="honey-detail__hero-value">${details.price}</span>
-            <span class="honey-detail__hero-label">参考价格</span>
+          <div class="honey-detail__attr">
+            <span class="honey-detail__attr-value">${details.season.split('(')[0]}</span>
+            <span class="honey-detail__attr-label">采集季</span>
           </div>
-          <div class="honey-detail__hero-divider"></div>
-          <div class="honey-detail__hero-item">
-            <span class="honey-detail__hero-value">${details.season}</span>
-            <span class="honey-detail__hero-label">采集季</span>
+          <div class="honey-detail__attr">
+            <span class="honey-detail__attr-value">${mainOrigin}</span>
+            <span class="honey-detail__attr-label">产地</span>
+          </div>
+          <div class="honey-detail__attr">
+            <span class="honey-detail__attr-value">${crystalLine1}</span>
+            <span class="honey-detail__attr-label">${crystalLine2}</span>
           </div>
         </div>
         
-        <!-- 功效标签 -->
-        <div class="honey-detail__tags">
-          ${details.benefits.map(b => `<span class="honey-detail__tag">${b}</span>`).join('')}
-        </div>
-        
-        <!-- 口感描述 -->
-        <div class="honey-detail__card">
-          <div class="honey-detail__card-header">
-            <span class="honey-detail__card-icon">🍯</span>
-            <span class="honey-detail__card-title">口感特点</span>
+        <!-- 口感特点（突出） -->
+        <div class="honey-detail__highlight">
+          <div class="honey-detail__highlight-header">
+            <span class="honey-detail__highlight-icon">🍯</span>
+            <h3 class="honey-detail__highlight-title">口感特点</h3>
           </div>
-          <p class="honey-detail__card-text">${details.taste}</p>
+          <p class="honey-detail__highlight-text">${details.taste}</p>
         </div>
         
-        <!-- 产地信息 -->
-        <div class="honey-detail__info-row">
-          <div class="honey-detail__info-item">
-            <span class="honey-detail__info-icon">📍</span>
-            <div>
-              <span class="honey-detail__info-label">主产地</span>
-              <span class="honey-detail__info-value">${details.origin}</span>
+        <!-- 营养成分（重点突出） -->
+        <div class="honey-detail__highlight honey-detail__highlight--nutrition">
+          <div class="honey-detail__highlight-header">
+            <span class="honey-detail__highlight-icon">🧪</span>
+            <h3 class="honey-detail__highlight-title">营养成分</h3>
+          </div>
+          <div class="honey-detail__nutrition-grid">
+            <div class="honey-detail__nutrition-item">
+              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.glucose)}; --color: #FFD700;">
+                <span>${details.nutrition.glucose}</span>
+              </div>
+              <span class="honey-detail__nutrition-name">葡萄糖</span>
+            </div>
+            <div class="honey-detail__nutrition-item">
+              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.fructose)}; --color: #FF9800;">
+                <span>${details.nutrition.fructose}</span>
+              </div>
+              <span class="honey-detail__nutrition-name">果糖</span>
+            </div>
+            <div class="honey-detail__nutrition-text-item">
+              <span class="honey-detail__nutrition-label">维生素</span>
+              <span class="honey-detail__nutrition-value">${details.nutrition.vitamins}</span>
+            </div>
+            <div class="honey-detail__nutrition-text-item">
+              <span class="honey-detail__nutrition-label">矿物质</span>
+              <span class="honey-detail__nutrition-value">${details.nutrition.minerals}</span>
             </div>
           </div>
-          <div class="honey-detail__info-item">
-            <span class="honey-detail__info-icon">💎</span>
-            <div>
-              <span class="honey-detail__info-label">结晶特性</span>
-              <span class="honey-detail__info-value">${details.crystallize}</span>
-            </div>
+        </div>
+        
+        <!-- 主要功效（重点突出） -->
+        <div class="honey-detail__highlight honey-detail__highlight--benefits">
+          <div class="honey-detail__highlight-header">
+            <span class="honey-detail__highlight-icon">✨</span>
+            <h3 class="honey-detail__highlight-title">主要功效</h3>
+          </div>
+          <div class="honey-detail__benefits">
+            ${details.benefits.map((b, i) => `
+              <div class="honey-detail__benefit">
+                <span class="honey-detail__benefit-num">${i + 1}</span>
+                <span class="honey-detail__benefit-text">${b}</span>
+              </div>
+            `).join('')}
           </div>
         </div>
         
         <!-- 储存提示 -->
-        <div class="honey-detail__tip">
-          <span class="honey-detail__tip-icon">💡</span>
-          <span class="honey-detail__tip-text">${details.storage}</span>
+        <div class="honey-detail__storage">
+          <span class="honey-detail__storage-icon">📦</span>
+          <span class="honey-detail__storage-text">储存方式：${details.storage}</span>
         </div>
       </div>
     `;
