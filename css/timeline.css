@@ -412,7 +412,7 @@
 @media (max-width: 768px) {
   /* 时间轴容器 - 适应手机屏幕 */
   .timeline-view {
-    height: calc(100vh - 56px - 56px); /* header + 底部统计条 */
+    height: calc(100vh - 52px - 56px); /* header + 底部统计条 */
     padding-bottom: 0;
   }
   
@@ -425,12 +425,20 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     gap: var(--space-3);
-    padding: var(--space-3);
+    padding: var(--space-4);
     min-height: auto;
     height: auto;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
     background: var(--white);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    /* 触摸反馈 */
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .timeline-item:active {
+    transform: scale(0.98);
     box-shadow: var(--shadow-sm);
   }
   

@@ -478,11 +478,28 @@
   }
   
   .modal__header {
-    min-height: 200px;
+    min-height: 180px;
+  }
+  
+  /* 关闭按钮 - 增大触摸区域 */
+  .modal__close {
+    width: 44px;
+    height: 44px;
+    top: var(--space-3);
+    right: var(--space-3);
+    font-size: var(--text-xl);
   }
   
   .modal__title {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
+  }
+  
+  .modal__subtitle {
+    font-size: var(--text-sm);
+  }
+  
+  .modal__body {
+    padding: var(--space-4);
   }
   
   .modal__stats {
@@ -491,20 +508,39 @@
   }
   
   .modal__stat {
-    padding: var(--space-3);
+    padding: var(--space-2);
+  }
+  
+  .modal__stat-icon {
+    font-size: var(--text-base);
   }
   
   .modal__stat-value {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
+  }
+  
+  .modal__stat-label {
+    font-size: 10px;
+  }
+  
+  .modal__section-title {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-3);
   }
   
   .modal__gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
   }
   
+  .modal__gallery-item {
+    min-height: 80px;
+  }
+  
+  /* Lightbox 优化 */
   .lightbox__nav {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
   
   .lightbox__nav--prev {
@@ -513,5 +549,12 @@
   
   .lightbox__nav--next {
     right: var(--space-2);
+  }
+  
+  .lightbox__close {
+    width: 44px;
+    height: 44px;
+    top: var(--space-3);
+    right: var(--space-3);
   }
 }

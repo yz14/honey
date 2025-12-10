@@ -22,6 +22,16 @@ body {
   line-height: var(--leading-normal);
   min-height: 100vh;
   overflow-x: hidden;
+  /* 移动端优化 */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+/* 按钮和可点击元素的基础触摸优化 */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 /* === Typography === */
@@ -481,40 +491,66 @@ a:hover {
 
 @media (max-width: 768px) {
   :root {
-    --header-height: 56px;
+    --header-height: 52px;
   }
   
   .header {
-    padding: 0 var(--space-3);
+    padding: 0 var(--space-2);
+  }
+  
+  .header__logo {
+    gap: var(--space-2);
   }
   
   .header__logo-icon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   
   .header__logo-text {
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
   }
   
   .header__logo-subtitle {
     display: none;
   }
   
+  /* 年份选择器 - 更紧凑 */
   .header__year-selector {
-    margin-right: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    margin-right: var(--space-1);
+    gap: var(--space-1);
+  }
+  
+  .header__year-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 44px; /* 触摸区域最小44px */
+    min-height: 44px;
   }
   
   .header__year-value {
-    font-size: var(--text-base);
-    min-width: 50px;
+    font-size: var(--text-sm);
+    min-width: 44px;
+  }
+  
+  /* 视图切换 - 更紧凑但触摸区域足够 */
+  .view-toggle {
+    padding: 2px;
   }
   
   .view-toggle__btn {
     padding: var(--space-2);
+    min-width: 44px;
+    min-height: 44px;
   }
   
   .view-toggle__btn span {
     display: none;
+  }
+  
+  .view-toggle__btn svg {
+    width: 20px;
+    height: 20px;
   }
   
   /* 手机端：隐藏左侧统计栏，改为底部悬浮条 */
@@ -572,7 +608,7 @@ a:hover {
   
   /* 视图容器占满剩余空间，底部留出统计条空间 */
   .view-container {
-    height: calc(100vh - var(--header-height) - 56px) !important;
+    height: calc(100vh - 52px - 56px) !important;
   }
   
   .container {
