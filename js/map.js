@@ -245,24 +245,8 @@ const MapView = (function() {
                 点击查看详情
               </div>
             `;
-          } else if (params.seriesType === 'map') {
-            // 获取该省份的采蜜统计
-            const provinceName = params.name;
-            const provinceRecords = records.filter(r => 
-              r.location.province.includes(provinceName)
-            );
-            
-            if (provinceRecords.length > 0) {
-              const totalHoney = provinceRecords.reduce((sum, r) => sum + r.honey.amount, 0);
-              return `
-                <div style="font-weight: bold; font-size: 14px;">${provinceName}</div>
-                <div style="margin-top: 6px; color: #FF8F00;">
-                  🍯 ${provinceRecords.length}次采蜜 · ${totalHoney}kg
-                </div>
-              `;
-            }
-            return `<div style="font-weight: bold;">${provinceName}</div>`;
           }
+          // 不显示地图省份的tooltip，使用自定义的中央标签
           return '';
         }
       },
@@ -426,9 +410,18 @@ const MapView = (function() {
       }
     });
     
+    // 鼠标悬停在省份上时显示名称
+    chartInstance.on('mouseover', function(params) {
+      if (params.componentType === 'geo') {
+        showProvinceLabel(params.name);
+      }
+    });
+    
     // 鼠标移出地图时隐藏省份名称
-    chartInstance.on('globalout', function() {
-      hideProvinceLabel();
+    chartInstance.on('mouseout', function(params) {
+      if (params.componentType === 'geo') {
+        hideProvinceLabel();
+      }
     });
 
     // 窗口大小变化时重绘
