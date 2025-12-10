@@ -800,24 +800,31 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border: none;
   border-radius: 50%;
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-  font-size: 20px;
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  font-size: 24px;
+  font-weight: 300;
   cursor: pointer;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+}
+
+.honey-detail__close:active {
+  transform: scale(0.95);
 }
 
 /* 头部图片区域 */
 .honey-detail__header {
   position: relative;
-  height: 180px;
+  height: 160px;
   overflow: hidden;
 }
 
@@ -832,155 +839,174 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px 16px 16px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.7));
-  color: #fff;
+  padding: 50px 20px 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
 }
 
 .honey-detail__title {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.honey-detail__price {
-  font-size: 16px;
-  font-weight: 600;
-  color: #FFD700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  margin: 0;
 }
 
 /* 内容区域 */
 .honey-detail__body {
-  padding: 16px;
-  max-height: calc(85vh - 180px);
+  padding: 20px;
+  max-height: calc(85vh - 160px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background: #FFFDF7;
 }
 
-.honey-detail__section {
-  margin-bottom: 20px;
+/* ===== 核心指标卡片 ===== */
+.honey-detail__hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+  border-radius: 16px;
+  padding: 16px 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(255, 193, 7, 0.2);
 }
 
-.honey-detail__section:last-child {
-  margin-bottom: 0;
+.honey-detail__hero-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
 }
 
-.honey-detail__section-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
+.honey-detail__hero-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #D84315;
+  line-height: 1.2;
+}
+
+.honey-detail__hero-label {
+  font-size: 11px;
+  color: #8D6E63;
+  margin-top: 4px;
+}
+
+.honey-detail__hero-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(139, 69, 19, 0.2);
+}
+
+/* ===== 功效标签 ===== */
+.honey-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.honey-detail__tag {
+  padding: 6px 14px;
+  background: #fff;
+  border: 1.5px solid #FFB300;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #E65100;
+}
+
+/* ===== 内容卡片 ===== */
+.honey-detail__card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.honey-detail__card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 2px solid #FFE4B5;
 }
 
-/* 属性网格 */
-.honey-detail__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.honey-detail__card-icon {
+  font-size: 20px;
+}
+
+.honey-detail__card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #5D4037;
+}
+
+.honey-detail__card-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ===== 信息行 ===== */
+.honey-detail__info-row {
+  display: flex;
   gap: 10px;
+  margin-bottom: 12px;
 }
 
-.honey-detail__item {
+.honey-detail__info-item {
+  flex: 1;
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  padding: 10px;
-  background: #FFF9E6;
-  border-radius: 10px;
+  gap: 10px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
 
-.honey-detail__icon {
+.honey-detail__info-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.honey-detail__info-label {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 2px;
+}
+
+.honey-detail__info-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ===== 提示条 ===== */
+.honey-detail__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.honey-detail__tip-icon {
   font-size: 18px;
   flex-shrink: 0;
 }
 
-.honey-detail__item-info {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.honey-detail__label {
-  font-size: 10px;
-  color: #888;
-}
-
-.honey-detail__value {
-  font-size: 12px;
-  font-weight: 600;
-  color: #333;
-  word-break: break-word;
-}
-
-.honey-detail__desc {
+.honey-detail__tip-text {
   font-size: 13px;
-  color: #555;
-  line-height: 1.6;
-}
-
-/* 营养成分 */
-.honey-detail__nutrition {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.honey-detail__nutrition-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.honey-detail__nutrition-label {
-  width: 50px;
-  font-size: 11px;
-  color: #666;
-  flex-shrink: 0;
-}
-
-.honey-detail__nutrition-bar {
-  flex: 1;
-  height: 8px;
-  background: #f0f0f0;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.honey-detail__nutrition-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
-}
-
-.honey-detail__nutrition-value {
-  width: 36px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #333;
-  text-align: right;
-}
-
-.honey-detail__nutrition-text {
-  flex: 1;
-  font-size: 12px;
-  color: #333;
-}
-
-/* 功效标签 */
-.honey-detail__benefits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.honey-detail__benefit {
-  padding: 6px 12px;
-  background: linear-gradient(135deg, #FFE4B5, #FFD700);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #5D4037;
+  color: #1565C0;
+  line-height: 1.5;
 }
 
 /* 手机端显示瓶子 */
