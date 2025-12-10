@@ -182,16 +182,22 @@ const App = (function() {
       animateValue(elements.statRecords, stats.recordCount);
     }
     
+    // 更新新增的统计项
+    const statKm = document.getElementById('stat-km');
+    const statProvinces = document.getElementById('stat-provinces');
+    if (statKm) animateValue(statKm, stats.totalKm);
+    if (statProvinces) animateValue(statProvinces, stats.provinces);
+    
     // 同时更新手机端统计
     const mobileHoney = document.getElementById('stat-honey-mobile');
-    const mobileLocations = document.getElementById('stat-locations-mobile');
+    const mobileKm = document.getElementById('stat-km-mobile');
+    const mobileProvinces = document.getElementById('stat-provinces-mobile');
     const mobileDays = document.getElementById('stat-days-mobile');
-    const mobileRecords = document.getElementById('stat-records-mobile');
     
     if (mobileHoney) animateValue(mobileHoney, stats.totalHoney);
-    if (mobileLocations) animateValue(mobileLocations, stats.locations);
+    if (mobileKm) animateValue(mobileKm, stats.totalKm);
+    if (mobileProvinces) animateValue(mobileProvinces, stats.provinces);
     if (mobileDays) animateValue(mobileDays, stats.totalDays);
-    if (mobileRecords) animateValue(mobileRecords, stats.recordCount);
   }
 
   // 数字动画

@@ -70,6 +70,9 @@ const DataManager = (function() {
       },
       {
         id: 2,
+        // distanceFromPrev: 手工设置从上一个地点到这里的实际行驶距离（公里）
+        // 如果不设置，则自动计算两点直线距离
+        distanceFromPrev: 950, // 从云南大理到四川若尔盖的实际行驶距离约950公里
         location: {
           name: "四川阿坝若尔盖草原",
           province: "四川省",
@@ -357,6 +360,18 @@ const DataManager = (function() {
     return state.records.find(record => record.id === id);
   }
 
+  // 计算两点之间的距离（使用Haversine公式，返回公里数）
+  function calculateDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371; // 地球半径（公里）
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return Math.round(R * c);
+  }
+
   // 获取统计数据
   function getStats() {
     const records = state.records;
@@ -370,11 +385,38 @@ const DataManager = (function() {
       return sum + Math.ceil((end - start) / (1000 * 60 * 60 * 24));
     }, 0);
 
+    // 计算总省份数
+    const provinces = new Set(records.map(r => r.location.province)).size;
+
+    // 计算总公里数（按时间顺序）
+    const sortedRecords = [...records].sort((a, b) => 
+      new Date(a.date.start) - new Date(b.date.start)
+    );
+    
+    let totalKm = 0;
+    for (let i = 0; i < sortedRecords.length - 1; i++) {
+      const from = sortedRecords[i];
+      const to = sortedRecords[i + 1];
+      
+      // 如果有手工设置的距离，使用手工距离
+      if (to.distanceFromPrev !== undefined) {
+        totalKm += to.distanceFromPrev;
+      } else {
+        // 否则计算直线距离
+        totalKm += calculateDistance(
+          from.location.lat, from.location.lng,
+          to.location.lat, to.location.lng
+        );
+      }
+    }
+
     return {
       totalHoney,
       locations,
       totalDays,
-      recordCount: records.length
+      recordCount: records.length,
+      provinces,
+      totalKm
     };
   }
 
