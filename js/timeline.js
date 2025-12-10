@@ -67,17 +67,25 @@ const TimelineView = (function() {
       ? record.media[0].url 
       : 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800';
     
+    // 取前2个标签用于手机端简洁显示
+    const topTags = record.tags.slice(0, 2);
+    
     return `
       <div class="timeline-item" data-index="${index}" data-id="${record.id}">
         <!-- 左侧：图片 -->
         <div class="timeline-item__left">
           <div class="timeline-item__gallery">
-            <div class="timeline-item__main-image" onclick="ModalView.open(${record.id})">
+            <div class="timeline-item__main-image">
               <img src="${mainImage}" alt="${record.story.title}" loading="lazy">
               <div class="timeline-item__image-overlay"></div>
-              <div class="timeline-item__honey-badge">
+              <!-- 桌面端显示kg徽章 -->
+              <div class="timeline-item__honey-badge timeline-item__honey-badge--desktop">
                 🍯 ${record.honey.amount}${record.honey.unit}
               </div>
+              <!-- 手机端显示查看故事按钮 -->
+              <button class="timeline-item__story-btn" onclick="ModalView.open(${record.id})">
+                查看故事
+              </button>
             </div>
             ${renderThumbnails(record.media)}
           </div>
@@ -92,11 +100,21 @@ const TimelineView = (function() {
         <!-- 右侧：信息 -->
         <div class="timeline-item__right">
           <div class="timeline-item__info">
-            <div class="timeline-item__location">
-              ${Utils.getIcon('location')}
-              <span>${record.location.province} · ${record.location.city}</span>
+            <!-- 手机端地点+时间同行 -->
+            <div class="timeline-item__header-row">
+              <div class="timeline-item__location">
+                ${Utils.getIcon('location')}
+                <span>${record.location.province} · ${record.location.city}</span>
+              </div>
+              <div class="timeline-item__date-mobile">${dateRange.rangeText}</div>
             </div>
-            <h2 class="timeline-item__title">${record.story.title}</h2>
+            <!-- 手机端标题+标签同行 -->
+            <div class="timeline-item__title-row">
+              <h2 class="timeline-item__title">${record.story.title}</h2>
+              <div class="timeline-item__tags-inline">
+                ${topTags.map(tag => `<span class="timeline-item__tag-inline">${tag}</span>`).join('')}
+              </div>
+            </div>
             <p class="timeline-item__excerpt">${record.story.excerpt}</p>
             
             <div class="timeline-item__stats">

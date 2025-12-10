@@ -44,14 +44,26 @@ const MapView = (function() {
       honeyByType[type] = (honeyByType[type] || 0) + r.honey.amount;
     });
     const maxHoney = Math.max(...Object.values(honeyByType));
+    const minHoney = Math.min(...Object.values(honeyByType));
+    // 清新纯净的颜色数组
+    const freshColors = [
+      '#4ECDC4', // 薄荷绿
+      '#45B7D1', // 天空蓝
+      '#96CEB4', // 淡绿
+      '#88D8B0', // 翠绿
+      '#7FCDCD', // 青色
+      '#5BC0BE', // 湖蓝
+    ];
     const honeyBarsHtml = Object.entries(honeyByType)
       .sort((a, b) => b[1] - a[1])
-      .map(([type, amount]) => {
-        const heightPercent = (amount / maxHoney) * 100;
-        const hue = 35 + (1 - amount/maxHoney) * 15; // 35-50 橙黄色系
+      .map(([type, amount], index) => {
+        // 高度差异更明显：最小20%，最大95%
+        const ratio = (amount - minHoney) / (maxHoney - minHoney || 1);
+        const heightPercent = 20 + ratio * 75;
+        const color = freshColors[index % freshColors.length];
         return `
           <div class="honey-bar">
-            <div class="honey-bar__fill" style="height: ${heightPercent}%; background: hsl(${hue}, 85%, 55%);">
+            <div class="honey-bar__fill" style="height: ${heightPercent}%; background: ${color};">
               <span class="honey-bar__value">${amount}</span>
             </div>
             <span class="honey-bar__label">${type}</span>
