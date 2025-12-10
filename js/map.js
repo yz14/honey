@@ -54,16 +54,19 @@ const MapView = (function() {
       '#7FCDCD', // 青色
       '#5BC0BE', // 湖蓝
     ];
+    // 柱状图最大高度(px)，最高柱子会达到这个高度
+    const maxBarHeight = 150;
+    const minBarHeight = 30;
     const honeyBarsHtml = Object.entries(honeyByType)
       .sort((a, b) => b[1] - a[1])
       .map(([type, amount], index) => {
-        // 最高值98%，最低值25%，比例分布
+        // 按比例计算高度，最大值达到maxBarHeight
         const ratio = amount / maxHoney;
-        const heightPercent = 25 + ratio * 73; // 25% ~ 98%
+        const height = minBarHeight + ratio * (maxBarHeight - minBarHeight);
         const color = freshColors[index % freshColors.length];
         return `
           <div class="honey-bar">
-            <div class="honey-bar__fill" style="height: ${heightPercent}%; background: ${color};">
+            <div class="honey-bar__fill" style="height: ${height}px; background: ${color};">
               <span class="honey-bar__value">${amount}</span>
             </div>
             <span class="honey-bar__label">${type}</span>

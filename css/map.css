@@ -664,9 +664,9 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
-  height: 160px; /* 增加高度使最高柱接近地图底部 */
-  gap: 8px;
-  padding: 0 var(--space-2);
+  height: 180px; /* 柱状图区域高度 */
+  gap: 6px;
+  padding: 0 var(--space-1);
 }
 
 .honey-bar {
@@ -674,15 +674,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 60px;
+  max-width: 50px;
+  height: 100%; /* 关键：让honey-bar占满高度 */
+  justify-content: flex-end; /* 柱子底部对齐 */
 }
 
 .honey-bar__fill {
   width: 100%;
-  min-height: 12px;
   border-radius: 3px 3px 0 0;
   position: relative;
   transition: height 0.5s ease;
+  /* 移除min-height，让高度完全由JS控制 */
 }
 
 .honey-bar__value {
