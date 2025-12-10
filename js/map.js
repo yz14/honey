@@ -57,9 +57,9 @@ const MapView = (function() {
     const honeyBarsHtml = Object.entries(honeyByType)
       .sort((a, b) => b[1] - a[1])
       .map(([type, amount], index) => {
-        // 高度差异更明显：最小20%，最大95%
-        const ratio = (amount - minHoney) / (maxHoney - minHoney || 1);
-        const heightPercent = 20 + ratio * 75;
+        // 最高值98%，最低值25%，比例分布
+        const ratio = amount / maxHoney;
+        const heightPercent = 25 + ratio * 73; // 25% ~ 98%
         const color = freshColors[index % freshColors.length];
         return `
           <div class="honey-bar">

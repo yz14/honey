@@ -428,8 +428,7 @@
   /* 每个采集点充满整个屏幕 */
   .timeline-item {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    gap: 0;
+    gap: var(--space-2);
     padding: var(--space-3);
     min-height: calc(100vh - 52px);
     height: calc(100vh - 52px);
@@ -441,6 +440,7 @@
     scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
   
   .timeline-item:active {
@@ -453,15 +453,19 @@
     display: none;
   }
   
+  /* 图片区域 - 占40% */
   .timeline-item__left {
-    order: 2;
-    flex: 1;
+    order: 1;
+    flex: 0 0 40%;
     min-height: 0;
   }
   
+  /* 信息区域 - 占60% */
   .timeline-item__right {
-    order: 1;
-    padding: 0 0 var(--space-2) 0;
+    order: 2;
+    flex: 1;
+    padding: 0;
+    overflow-y: auto;
   }
   
   /* 地点+时间同行 */
@@ -525,13 +529,53 @@
     margin: 0;
   }
   
-  /* 隐藏桌面端元素 */
-  .timeline-item__stats,
-  .timeline-item__tags,
-  .timeline-item__btn,
+  /* 隐藏部分桌面端元素 */
   .timeline-item__thumbnails,
   .timeline-item__honey-badge--desktop {
     display: none !important;
+  }
+  
+  /* 保留并优化统计信息 */
+  .timeline-item__stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+  
+  .timeline-item__stat {
+    padding: var(--space-2);
+    background: var(--gray-50);
+    border-radius: var(--radius-md);
+  }
+  
+  .timeline-item__stat-value {
+    font-size: var(--text-sm);
+  }
+  
+  .timeline-item__stat-label {
+    font-size: 10px;
+  }
+  
+  /* 保留标签 */
+  .timeline-item__tags {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+  }
+  
+  .timeline-item__tag {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+  
+  /* 保留查看按钮 */
+  .timeline-item__btn {
+    display: flex !important;
+    margin-top: var(--space-3);
+    width: 100%;
+    justify-content: center;
   }
   
   /* 图片区域 */
@@ -554,26 +598,14 @@
     object-fit: cover;
   }
   
-  /* 查看故事按钮 */
+  /* 隐藏图片上的按钮，使用底部按钮 */
   .timeline-item__story-btn {
-    display: block;
-    position: absolute;
-    bottom: var(--space-3);
-    right: var(--space-3);
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--honey-700);
-    border: none;
-    border-radius: var(--radius-full);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: transform 0.2s ease;
+    display: none !important;
   }
   
-  .timeline-item__story-btn:active {
-    transform: scale(0.95);
+  /* 隐藏内联标签，使用原始标签 */
+  .timeline-item__tags-inline {
+    display: none !important;
   }
   
   .timeline-item__info {

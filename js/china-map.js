@@ -302,7 +302,7 @@ const ChinaMap = (function() {
         
         <!-- 地图标题 -->
         <text x="50" y="4" font-size="2.5" fill="#558B2F" text-anchor="middle" font-weight="bold" opacity="0.6">
-          🐝 蜂农采蜜足迹图
+          采蜜足迹图
         </text>
       </svg>
     `;
