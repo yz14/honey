@@ -475,6 +475,69 @@ const DataManager = (function() {
     state.selectedRecord = record;
   }
 
+  // 蜂蜜详细信息数据库
+  const honeyDetails = {
+    '油菜花': {
+      name: '油菜花蜜', image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600',
+      color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南、四川、贵州',
+      taste: '清香淡雅，口感细腻', crystallize: '易结晶，结晶后呈乳白色',
+      nutrition: { glucose: '35%', fructose: '40%', vitamins: 'B1,B2,C', minerals: '钙、铁、锌' },
+      benefits: ['清热解毒', '润肺止咳', '美容养颜', '促进消化'],
+      storage: '阴凉干燥处，避光保存', price: '68-88元/500g'
+    },
+    '高原野花': {
+      name: '高原野花蜜', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600',
+      color: '#DAA520', baume: '42-43°Be', season: '夏季(5-7月)', origin: '四川阿坝、青海、西藏',
+      taste: '花香浓郁，回味悠长', crystallize: '不易结晶，质地浓稠',
+      nutrition: { glucose: '32%', fructose: '42%', vitamins: 'B群,E', minerals: '钾、镁、硒' },
+      benefits: ['增强免疫', '抗氧化', '调节血压', '改善睡眠'],
+      storage: '密封冷藏，保质期长', price: '128-168元/500g'
+    },
+    '槐花': {
+      name: '槐花蜜', image: 'https://images.unsplash.com/photo-1571506165871-ee72a35bc9d4?w=600',
+      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '山东、河南、陕西',
+      taste: '清淡爽口，带槐花香', crystallize: '不易结晶，色泽清透',
+      nutrition: { glucose: '30%', fructose: '45%', vitamins: 'C,K', minerals: '钙、磷' },
+      benefits: ['清热凉血', '护肝养胃', '安神助眠', '润肠通便'],
+      storage: '常温避光保存', price: '78-98元/500g'
+    },
+    '荆条': {
+      name: '荆条蜜', image: 'https://images.unsplash.com/photo-1550411294-875e72553a22?w=600',
+      color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北、山西、内蒙古',
+      taste: '甜润醇厚，略带酸味', crystallize: '易结晶，颗粒细腻',
+      nutrition: { glucose: '33%', fructose: '40%', vitamins: 'B1,B2', minerals: '铁、锰' },
+      benefits: ['补气养血', '健脾益胃', '祛风除湿', '增强体质'],
+      storage: '阴凉干燥处', price: '58-78元/500g'
+    },
+    '枣花': {
+      name: '枣花蜜', image: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?w=600',
+      color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '河北、山东、新疆',
+      taste: '浓郁甘甜，枣香四溢', crystallize: '不易结晶，色深质浓',
+      nutrition: { glucose: '32%', fructose: '43%', vitamins: 'C,P', minerals: '铁、铜、锌' },
+      benefits: ['补血养气', '安神益智', '养肝护肝', '美容驻颜'],
+      storage: '密封避光保存', price: '88-118元/500g'
+    },
+    '椴树': {
+      name: '椴树蜜', image: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600',
+      color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '黑龙江、吉林、长白山',
+      taste: '清香怡人，甜而不腻', crystallize: '易结晶，雪白细腻',
+      nutrition: { glucose: '36%', fructose: '39%', vitamins: 'B群,E', minerals: '钙、镁、钾' },
+      benefits: ['清热润燥', '养心安神', '增强记忆', '延缓衰老'],
+      storage: '低温密封保存', price: '98-128元/500g'
+    }
+  };
+
+  // 获取蜂蜜详情
+  function getHoneyDetails(type) {
+    const key = type.replace('蜜', '');
+    return honeyDetails[key] || null;
+  }
+
+  // 获取所有蜂蜜类型
+  function getAllHoneyTypes() {
+    return Object.keys(honeyDetails);
+  }
+
   // 公开API
   return {
     init,
@@ -488,6 +551,8 @@ const DataManager = (function() {
     getCurrentView,
     setCurrentView,
     getSelectedRecord,
-    setSelectedRecord
+    setSelectedRecord,
+    getHoneyDetails,
+    getAllHoneyTypes
   };
 })();

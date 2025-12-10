@@ -660,66 +660,332 @@
   transition: opacity 0.3s ease;
 }
 
-.honey-chart__bars {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
-  height: 180px; /* 柱状图区域高度 */
-  gap: 6px;
-  padding: 0 var(--space-1);
+/* ===== 蜂蜜瓶子容器 ===== */
+.honey-bottles-container {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px 12px;
+  background: linear-gradient(transparent, rgba(255,255,255,0.95));
+  z-index: 100;
 }
 
-.honey-bar {
-  flex: 1;
+.honey-bottles__scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.honey-bottles__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== 蜂蜜瓶子样式 ===== */
+.honey-bottle {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.honey-bottle:hover,
+.honey-bottle:active {
+  transform: scale(1.05);
+}
+
+.honey-bottle__jar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 50px;
-  height: 100%; /* 关键：让honey-bar占满高度 */
-  justify-content: flex-end; /* 柱子底部对齐 */
+  width: 48px;
 }
 
-.honey-bar__fill {
-  width: 100%;
+.honey-bottle__cap {
+  width: 24px;
+  height: 8px;
+  background: linear-gradient(180deg, #8B4513 0%, #5D3A1A 100%);
   border-radius: 3px 3px 0 0;
-  position: relative;
-  transition: height 0.5s ease;
-  /* 移除min-height，让高度完全由JS控制 */
+  margin-bottom: -2px;
+  z-index: 1;
 }
 
-.honey-bar__value {
+.honey-bottle__body {
+  width: 40px;
+  height: 56px;
+  border-radius: 4px 4px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    inset 0 -10px 20px rgba(0,0,0,0.1),
+    inset 0 2px 4px rgba(255,255,255,0.5),
+    0 4px 8px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.honey-bottle__body::before {
+  content: '';
   position: absolute;
   top: 4px;
-  left: 0;
-  right: 0;
-  font-size: 11px;
-  font-weight: 600;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  left: 4px;
+  width: 8px;
+  height: 20px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 4px;
+  transform: rotate(-15deg);
 }
 
-.honey-bar__label {
-  width: 100%;
-  font-size: 12px;
+.honey-bottle__name {
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.7);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+}
+
+.honey-bottle__amount {
+  font-size: 9px;
   color: #5D4037;
+  font-weight: 600;
   margin-top: 4px;
   text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transform: rotate(-30deg);
-  transform-origin: top center;
 }
 
-/* 手机端显示柱状图 */
+/* ===== 蜂蜜详情卡片 ===== */
+.honey-detail-card {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.honey-detail-card.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.honey-detail-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+}
+
+.honey-detail-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 85vh;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.honey-detail-card.open .honey-detail-card__content {
+  transform: translateY(0);
+}
+
+/* 关闭按钮 */
+.honey-detail__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 头部图片区域 */
+.honey-detail__header {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.honey-detail__header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.honey-detail__header-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 16px 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: #fff;
+}
+
+.honey-detail__title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.honey-detail__price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFD700;
+}
+
+/* 内容区域 */
+.honey-detail__body {
+  padding: 16px;
+  max-height: calc(85vh - 180px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.honey-detail__section {
+  margin-bottom: 20px;
+}
+
+.honey-detail__section:last-child {
+  margin-bottom: 0;
+}
+
+.honey-detail__section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #FFE4B5;
+}
+
+/* 属性网格 */
+.honey-detail__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.honey-detail__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  background: #FFF9E6;
+  border-radius: 10px;
+}
+
+.honey-detail__icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.honey-detail__item-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.honey-detail__label {
+  font-size: 10px;
+  color: #888;
+}
+
+.honey-detail__value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+  word-break: break-word;
+}
+
+.honey-detail__desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 营养成分 */
+.honey-detail__nutrition {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.honey-detail__nutrition-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.honey-detail__nutrition-label {
+  width: 50px;
+  font-size: 11px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.honey-detail__nutrition-bar {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.honey-detail__nutrition-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.honey-detail__nutrition-value {
+  width: 36px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+  text-align: right;
+}
+
+.honey-detail__nutrition-text {
+  flex: 1;
+  font-size: 12px;
+  color: #333;
+}
+
+/* 功效标签 */
+.honey-detail__benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.honey-detail__benefit {
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #FFE4B5, #FFD700);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #5D4037;
+}
+
+/* 手机端显示瓶子 */
 @media (max-width: 768px) {
-  .honey-chart {
+  .honey-bottles-container {
     display: block;
-  }
-  
-  .honey-chart__bars {
-    padding-bottom: 20px; /* 给倾斜的标签留空间 */
   }
 }

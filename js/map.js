@@ -37,39 +37,37 @@ const MapView = (function() {
     const records = DataManager.getRecords();
     const stats = DataManager.getStats();
     
-    // 生成蜂蜜产量柱状图数据
+    // 生成蜂蜜瓶子数据
     const honeyByType = {};
     records.forEach(r => {
       const type = r.honey.type.replace('蜜', '');
       honeyByType[type] = (honeyByType[type] || 0) + r.honey.amount;
     });
-    const maxHoney = Math.max(...Object.values(honeyByType));
-    const minHoney = Math.min(...Object.values(honeyByType));
-    // 清新纯净的颜色数组
-    const freshColors = [
-      '#4ECDC4', // 薄荷绿
-      '#45B7D1', // 天空蓝
-      '#96CEB4', // 淡绿
-      '#88D8B0', // 翠绿
-      '#7FCDCD', // 青色
-      '#5BC0BE', // 湖蓝
-    ];
-    // 柱状图最大高度(px)，最高柱子会达到这个高度
-    const maxBarHeight = 150;
-    const minBarHeight = 30;
-    const honeyBarsHtml = Object.entries(honeyByType)
+    
+    // 蜂蜜瓶子颜色（与蜂蜜颜色对应）
+    const honeyColors = {
+      '油菜花': '#FFD700',
+      '高原野花': '#DAA520',
+      '槐花': '#F5F5DC',
+      '荆条': '#CD853F',
+      '枣花': '#8B4513',
+      '椴树': '#FFFACD'
+    };
+    
+    const honeyBottlesHtml = Object.entries(honeyByType)
       .sort((a, b) => b[1] - a[1])
-      .map(([type, amount], index) => {
-        // 按比例计算高度，最大值达到maxBarHeight
-        const ratio = amount / maxHoney;
-        const height = minBarHeight + ratio * (maxBarHeight - minBarHeight);
-        const color = freshColors[index % freshColors.length];
+      .map(([type, amount]) => {
+        const color = honeyColors[type] || '#FFB347';
+        const details = DataManager.getHoneyDetails(type);
         return `
-          <div class="honey-bar">
-            <div class="honey-bar__fill" style="height: ${height}px; background: ${color};">
-              <span class="honey-bar__value">${amount}</span>
+          <div class="honey-bottle" onclick="MapView.showHoneyDetail('${type}')" data-type="${type}">
+            <div class="honey-bottle__jar">
+              <div class="honey-bottle__cap"></div>
+              <div class="honey-bottle__body" style="background: linear-gradient(180deg, ${color}dd 0%, ${color} 100%);">
+                <span class="honey-bottle__name">${type}</span>
+              </div>
+              <div class="honey-bottle__amount">${amount}kg</div>
             </div>
-            <span class="honey-bar__label">${type}</span>
           </div>
         `;
       }).join('');
@@ -89,9 +87,15 @@ const MapView = (function() {
           <p>采集 <strong>${stats.totalHoney}</strong> 斤蜜</p>
         </div>
         
-        <!-- 底部蜂蜜产量柱状图（手机端显示） -->
-        <div class="honey-chart" id="honey-chart">
-          <div class="honey-chart__bars">${honeyBarsHtml}</div>
+        <!-- 底部蜂蜜瓶子（手机端显示） -->
+        <div class="honey-bottles-container" id="honey-bottles">
+          <div class="honey-bottles__scroll">${honeyBottlesHtml}</div>
+        </div>
+        
+        <!-- 蜂蜜详情卡片 -->
+        <div class="honey-detail-card" id="honey-detail-card">
+          <div class="honey-detail-card__overlay" onclick="MapView.closeHoneyDetail()"></div>
+          <div class="honey-detail-card__content" id="honey-detail-content"></div>
         </div>
         
         <!-- 控制按钮 -->
@@ -740,11 +744,131 @@ const MapView = (function() {
       });
       // 关闭信息面板
       closeInfoPanel();
-      // 显示左上角描述和底部柱状图
+      // 显示左上角描述和底部瓶子
       const statsOverlay = document.getElementById('map-stats-overlay');
-      const honeyChart = document.getElementById('honey-chart');
+      const honeyBottles = document.getElementById('honey-bottles');
       if (statsOverlay) statsOverlay.classList.remove('hidden');
-      if (honeyChart) honeyChart.classList.remove('hidden');
+      if (honeyBottles) honeyBottles.classList.remove('hidden');
+    }
+  }
+
+  // 显示蜂蜜详情卡片
+  function showHoneyDetail(type) {
+    const details = DataManager.getHoneyDetails(type);
+    if (!details) return;
+    
+    const card = document.getElementById('honey-detail-card');
+    const content = document.getElementById('honey-detail-content');
+    
+    content.innerHTML = `
+      <button class="honey-detail__close" onclick="MapView.closeHoneyDetail()">×</button>
+      
+      <!-- 顶部图片区域 -->
+      <div class="honey-detail__header">
+        <img src="${details.image}" alt="${details.name}">
+        <div class="honey-detail__header-overlay">
+          <h2 class="honey-detail__title">${details.name}</h2>
+          <div class="honey-detail__price">${details.price}</div>
+        </div>
+      </div>
+      
+      <!-- 主要信息 -->
+      <div class="honey-detail__body">
+        <!-- 基本属性 -->
+        <div class="honey-detail__section">
+          <div class="honey-detail__grid">
+            <div class="honey-detail__item">
+              <span class="honey-detail__icon">🍯</span>
+              <div class="honey-detail__item-info">
+                <span class="honey-detail__label">波美度</span>
+                <span class="honey-detail__value">${details.baume}</span>
+              </div>
+            </div>
+            <div class="honey-detail__item">
+              <span class="honey-detail__icon">🗓️</span>
+              <div class="honey-detail__item-info">
+                <span class="honey-detail__label">采集季节</span>
+                <span class="honey-detail__value">${details.season}</span>
+              </div>
+            </div>
+            <div class="honey-detail__item">
+              <span class="honey-detail__icon">📍</span>
+              <div class="honey-detail__item-info">
+                <span class="honey-detail__label">主产地</span>
+                <span class="honey-detail__value">${details.origin}</span>
+              </div>
+            </div>
+            <div class="honey-detail__item">
+              <span class="honey-detail__icon">💎</span>
+              <div class="honey-detail__item-info">
+                <span class="honey-detail__label">结晶特性</span>
+                <span class="honey-detail__value">${details.crystallize}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 口感描述 -->
+        <div class="honey-detail__section">
+          <h3 class="honey-detail__section-title">🎨 口感特点</h3>
+          <p class="honey-detail__desc">${details.taste}</p>
+        </div>
+        
+        <!-- 营养成分 -->
+        <div class="honey-detail__section">
+          <h3 class="honey-detail__section-title">🧪 营养成分</h3>
+          <div class="honey-detail__nutrition">
+            <div class="honey-detail__nutrition-item">
+              <span class="honey-detail__nutrition-label">葡萄糖</span>
+              <div class="honey-detail__nutrition-bar">
+                <div class="honey-detail__nutrition-fill" style="width: ${details.nutrition.glucose}; background: #FFD700;"></div>
+              </div>
+              <span class="honey-detail__nutrition-value">${details.nutrition.glucose}</span>
+            </div>
+            <div class="honey-detail__nutrition-item">
+              <span class="honey-detail__nutrition-label">果糖</span>
+              <div class="honey-detail__nutrition-bar">
+                <div class="honey-detail__nutrition-fill" style="width: ${details.nutrition.fructose}; background: #FFA500;"></div>
+              </div>
+              <span class="honey-detail__nutrition-value">${details.nutrition.fructose}</span>
+            </div>
+            <div class="honey-detail__nutrition-item">
+              <span class="honey-detail__nutrition-label">维生素</span>
+              <span class="honey-detail__nutrition-text">${details.nutrition.vitamins}</span>
+            </div>
+            <div class="honey-detail__nutrition-item">
+              <span class="honey-detail__nutrition-label">矿物质</span>
+              <span class="honey-detail__nutrition-text">${details.nutrition.minerals}</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 功效 -->
+        <div class="honey-detail__section">
+          <h3 class="honey-detail__section-title">✨ 主要功效</h3>
+          <div class="honey-detail__benefits">
+            ${details.benefits.map(b => `<span class="honey-detail__benefit">${b}</span>`).join('')}
+          </div>
+        </div>
+        
+        <!-- 储存方式 -->
+        <div class="honey-detail__section">
+          <h3 class="honey-detail__section-title">📦 储存方式</h3>
+          <p class="honey-detail__desc">${details.storage}</p>
+        </div>
+      </div>
+    `;
+    
+    card.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 关闭蜂蜜详情卡片
+  function closeHoneyDetail() {
+    const card = document.getElementById('honey-detail-card');
+    if (card) {
+      card.classList.remove('open');
+      document.body.style.overflow = '';
     }
   }
 
@@ -757,6 +881,8 @@ const MapView = (function() {
     zoomOut,
     reset,
     refresh,
-    destroy
+    destroy,
+    showHoneyDetail,
+    closeHoneyDetail
   };
 })();
