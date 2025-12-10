@@ -260,8 +260,8 @@ const MapView = (function() {
         left: 'center',
         top: isMobile ? 6 : 15,
         textStyle: {
-          color: '#6B4423', // 宫崎骏风格的棕色
-          fontSize: isMobile ? 16 : 18,
+          color: '#6B4423',
+          fontSize: isMobile ? 20 : 24,
           fontWeight: 'bold',
           fontFamily: 'Quicksand, Nunito, sans-serif'
         }
