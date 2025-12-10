@@ -41,17 +41,13 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
+        <!-- 省份名称显示 -->
+        <div class="map-province-label" id="province-label"></div>
+        
         <!-- 控制按钮 -->
         <div class="map-controls">
-          <button class="map-control-btn" title="放大" onclick="MapView.zoomIn()">
-            ${Utils.getIcon('zoomIn')}
-          </button>
-          <button class="map-control-btn" title="缩小" onclick="MapView.zoomOut()">
-            ${Utils.getIcon('zoomOut')}
-          </button>
-          <button class="map-control-btn" title="重置" onclick="MapView.reset()">
-            ${Utils.getIcon('home')}
-          </button>
+          <button class="map-control-btn" title="放大" onclick="MapView.zoomIn()">+</button>
+          <button class="map-control-btn" title="缩小" onclick="MapView.zoomOut()">−</button>
         </div>
         
         <!-- 图例 -->
@@ -427,7 +423,15 @@ const MapView = (function() {
     chartInstance.on('click', function(params) {
       if (params.seriesType === 'scatter' && params.data.record) {
         showMarkerInfo(params.data.record);
+      } else if (params.componentType === 'geo') {
+        // 点击省份，显示省份名称
+        showProvinceLabel(params.name);
       }
+    });
+    
+    // 鼠标移出地图时隐藏省份名称
+    chartInstance.on('globalout', function() {
+      hideProvinceLabel();
     });
 
     // 窗口大小变化时重绘
@@ -456,38 +460,40 @@ const MapView = (function() {
     subtitle.textContent = `${record.location.province} · ${dateRange.rangeText}`;
     
     content.innerHTML = `
-      <div class="map-info-panel__stat">
-        <span class="map-info-panel__stat-icon">🍯</span>
-        <div>
-          <div class="map-info-panel__stat-label">蜂蜜产量</div>
-          <div class="map-info-panel__stat-value">${record.honey.amount}${record.honey.unit}</div>
+      <div class="map-info-panel__stats">
+        <div class="map-info-panel__stat">
+          <span class="map-info-panel__stat-icon">🍯</span>
+          <div>
+            <div class="map-info-panel__stat-value">${record.honey.amount}${record.honey.unit}</div>
+            <div class="map-info-panel__stat-label">产量</div>
+          </div>
+        </div>
+        <div class="map-info-panel__stat">
+          <span class="map-info-panel__stat-icon">🌸</span>
+          <div>
+            <div class="map-info-panel__stat-value">${record.honey.type}</div>
+            <div class="map-info-panel__stat-label">蜜源</div>
+          </div>
+        </div>
+        <div class="map-info-panel__stat">
+          <span class="map-info-panel__stat-icon">📅</span>
+          <div>
+            <div class="map-info-panel__stat-value">${dateRange.days}天</div>
+            <div class="map-info-panel__stat-label">驻留</div>
+          </div>
+        </div>
+        <div class="map-info-panel__stat">
+          <span class="map-info-panel__stat-icon">${record.weather.icon}</span>
+          <div>
+            <div class="map-info-panel__stat-value">${record.weather.avgTemp}°C</div>
+            <div class="map-info-panel__stat-label">气温</div>
+          </div>
         </div>
       </div>
-      <div class="map-info-panel__stat">
-        <span class="map-info-panel__stat-icon">🌸</span>
-        <div>
-          <div class="map-info-panel__stat-label">蜜源类型</div>
-          <div class="map-info-panel__stat-value">${record.honey.type}</div>
-        </div>
-      </div>
-      <div class="map-info-panel__stat">
-        <span class="map-info-panel__stat-icon">📅</span>
-        <div>
-          <div class="map-info-panel__stat-label">驻留时间</div>
-          <div class="map-info-panel__stat-value">${dateRange.days} 天</div>
-        </div>
-      </div>
-      <div class="map-info-panel__stat">
-        <span class="map-info-panel__stat-icon">${record.weather.icon}</span>
-        <div>
-          <div class="map-info-panel__stat-label">平均气温</div>
-          <div class="map-info-panel__stat-value">${record.weather.avgTemp}°C</div>
-        </div>
-      </div>
-      <p style="margin-top: var(--space-4); color: var(--gray-600); font-size: var(--text-sm);">
+      <p style="margin-top: var(--space-3); color: var(--gray-600); font-size: var(--text-sm); line-height: 1.5;">
         ${record.story.excerpt}
       </p>
-      <button class="btn btn--primary map-info-panel__btn" onclick="ModalView.open(${record.id})">
+      <button class="btn btn--primary btn--sm map-info-panel__btn" onclick="ModalView.open(${record.id})">
         查看详情
       </button>
     `;
@@ -526,6 +532,34 @@ const MapView = (function() {
     
     selectedRecord = null;
     DataManager.setSelectedRecord(null);
+  }
+
+  // 显示省份名称
+  let provinceLabelTimer = null;
+  
+  function showProvinceLabel(name) {
+    const label = document.getElementById('province-label');
+    if (!label) return;
+    
+    // 清除之前的定时器
+    if (provinceLabelTimer) {
+      clearTimeout(provinceLabelTimer);
+    }
+    
+    label.textContent = name;
+    label.classList.add('show');
+    
+    // 3秒后自动隐藏
+    provinceLabelTimer = setTimeout(() => {
+      hideProvinceLabel();
+    }, 3000);
+  }
+  
+  function hideProvinceLabel() {
+    const label = document.getElementById('province-label');
+    if (label) {
+      label.classList.remove('show');
+    }
   }
 
   // 缩放功能

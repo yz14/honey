@@ -231,30 +231,63 @@
   right: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
   z-index: 100;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
 .map-control-btn {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--white);
+  background: transparent;
   border: none;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
   cursor: pointer;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--gray-600);
   transition: all var(--transition-fast);
+}
+
+.map-control-btn:first-child {
+  border-bottom: 1px solid var(--gray-200);
 }
 
 .map-control-btn:hover {
   background: var(--honey-light);
   color: var(--honey-dark);
-  transform: scale(1.05);
+}
+
+.map-control-btn:active {
+  background: var(--honey-gold);
+  color: var(--white);
+}
+
+/* 省份名称显示 */
+.map-province-label {
+  position: absolute;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--honey-dark);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+.map-province-label.show {
+  opacity: 1;
 }
 
 /* === Map Legend === */
@@ -373,14 +406,19 @@
   overflow-y: auto;
 }
 
+.map-info-panel__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
 .map-info-panel__stat {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3);
+  gap: var(--space-2);
+  padding: var(--space-2);
   background: var(--gray-50);
   border-radius: var(--radius-md);
-  margin-bottom: var(--space-3);
 }
 
 .map-info-panel__stat-icon {
@@ -447,7 +485,7 @@
     height: 100%;
     border-radius: 0;
     /* 确保地图占满可用空间 */
-    min-height: calc(100vh - 56px - 60px);
+    min-height: calc(100vh - 56px - 52px);
   }
   
   .echarts-map {
@@ -459,8 +497,8 @@
   /* 地图控件 - 移到右下角，避开标题 */
   .map-controls {
     top: auto;
-    bottom: 70px; /* 留出底部统计条空间 */
-    right: var(--space-3);
+    bottom: 62px; /* 留出底部统计条空间 */
+    right: var(--space-2);
   }
   
   .map-control-btn {
@@ -474,9 +512,9 @@
     width: 100%;
     left: 0;
     right: 0;
-    bottom: 60px; /* 留出底部统计条空间 */
+    bottom: 52px; /* 留出底部统计条空间 */
     top: auto;
-    max-height: 50vh;
+    max-height: 45vh;
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     transform: translateY(110%);
   }
@@ -486,19 +524,58 @@
   }
   
   .map-info-panel__header {
-    padding: var(--space-3);
+    padding: var(--space-2) var(--space-3);
   }
   
   .map-info-panel__title {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
+  }
+  
+  .map-info-panel__subtitle {
+    font-size: var(--text-xs);
   }
   
   .map-info-panel__content {
-    padding: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    max-height: none;
+  }
+  
+  /* 手机端统计项一行四个 */
+  .map-info-panel__stats {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-1);
   }
   
   .map-info-panel__stat {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-1);
+    gap: 2px;
+  }
+  
+  .map-info-panel__stat-icon {
+    font-size: var(--text-base);
+  }
+  
+  .map-info-panel__stat-value {
+    font-size: var(--text-xs);
+  }
+  
+  .map-info-panel__stat-label {
+    font-size: 9px;
+  }
+  
+  .map-info-panel__btn {
+    margin-top: var(--space-2);
     padding: var(--space-2);
+    font-size: var(--text-xs);
+  }
+  
+  /* 省份名称标签 */
+  .map-province-label {
+    top: var(--space-2);
+    font-size: var(--text-xs);
+    padding: var(--space-1) var(--space-3);
   }
   
   /* 隐藏图例 */
