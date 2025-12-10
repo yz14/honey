@@ -433,8 +433,43 @@ const MapView = (function() {
     });
     
     // 流动线依次切换动画
+    let currentLineIndex = 0;
+    let isZooming = false; // 是否正在缩放
+    let zoomTimeout = null;
+    
+    // 监听地图缩放/平移事件，暂时隐藏流动线以避免位置偏移
+    chartInstance.on('georoam', function() {
+      if (!isZooming) {
+        isZooming = true;
+        // 缩放时隐藏流动线效果
+        chartInstance.setOption({
+          series: [{
+            name: 'migrationEffect',
+            data: []
+          }]
+        }, false); // false: 不合并，直接替换
+      }
+      
+      // 清除之前的定时器
+      if (zoomTimeout) {
+        clearTimeout(zoomTimeout);
+      }
+      
+      // 缩放结束300ms后恢复流动线
+      zoomTimeout = setTimeout(function() {
+        isZooming = false;
+        if (chartInstance && linesData.length > 0) {
+          chartInstance.setOption({
+            series: [{
+              name: 'migrationEffect',
+              data: [linesData[currentLineIndex]]
+            }]
+          }, false);
+        }
+      }, 300);
+    });
+    
     if (linesData.length > 1) {
-      let currentLineIndex = 0;
       const lineInterval = 1500; // 每条线显示1.5秒后切换到下一条
       
       // 清除之前的定时器
@@ -448,6 +483,9 @@ const MapView = (function() {
           return;
         }
         
+        // 如果正在缩放，跳过更新
+        if (isZooming) return;
+        
         currentLineIndex = (currentLineIndex + 1) % linesData.length;
         
         // 更新流动线数据，只显示当前这一条
@@ -456,7 +494,7 @@ const MapView = (function() {
             name: 'migrationEffect',
             data: [linesData[currentLineIndex]]
           }]
-        });
+        }, false);
       }, lineInterval);
     }
   }
