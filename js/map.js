@@ -325,32 +325,29 @@ const MapView = (function() {
           },
           data: linesData
         },
-        // 迁徙路径线 - 动态流动效果（按时间顺序依次流动）
-        ...linesData.map((line, index) => ({
+        // 迁徙路径线 - 动态流动效果（单条流动线，由JS控制切换）
+        {
+          name: 'migrationEffect',
           type: 'lines',
           coordinateSystem: 'geo',
           zlevel: 2,
           effect: {
             show: true,
-            // 通过不同的period实现错开效果：第一条最快，后面依次慢一点开始
-            period: 3 + index * 0.3,
+            period: 1.5, // 流动速度
             trailLength: 0.5,
             symbol: 'arrow',
-            symbolSize: 5,
+            symbolSize: 6,
             color: '#FF8F00',
             loop: true
           },
           lineStyle: {
             color: '#FFA726',
-            width: 2.5,
-            opacity: 0.8,
+            width: 3,
+            opacity: 0.9,
             curveness: 0.3
           },
-          // 动画延迟：每条线依次延迟启动
-          animationDelay: index * 500,
-          animationDuration: 1000,
-          data: [line]
-        })),
+          data: linesData.length > 0 ? [linesData[0]] : [] // 初始只显示第一条
+        },
         // 采蜜点标记 - 使用蜂蜜罐造型的pin
         {
           type: 'scatter',
@@ -440,6 +437,34 @@ const MapView = (function() {
         chartInstance.resize();
       }
     });
+    
+    // 流动线依次切换动画
+    if (linesData.length > 1) {
+      let currentLineIndex = 0;
+      const lineInterval = 1500; // 每条线显示1.5秒后切换到下一条
+      
+      // 清除之前的定时器
+      if (window.migrationTimer) {
+        clearInterval(window.migrationTimer);
+      }
+      
+      window.migrationTimer = setInterval(function() {
+        if (!chartInstance) {
+          clearInterval(window.migrationTimer);
+          return;
+        }
+        
+        currentLineIndex = (currentLineIndex + 1) % linesData.length;
+        
+        // 更新流动线数据，只显示当前这一条
+        chartInstance.setOption({
+          series: [{
+            name: 'migrationEffect',
+            data: [linesData[currentLineIndex]]
+          }]
+        });
+      }, lineInterval);
+    }
   }
 
   // 显示标记信息
@@ -594,6 +619,12 @@ const MapView = (function() {
 
   // 销毁
   function destroy() {
+    // 清除流动线定时器
+    if (window.migrationTimer) {
+      clearInterval(window.migrationTimer);
+      window.migrationTimer = null;
+    }
+    
     if (chartInstance) {
       chartInstance.dispose();
       chartInstance = null;
