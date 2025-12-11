@@ -478,7 +478,8 @@ const DataManager = (function() {
   // 蜂蜜详细信息数据库
   const honeyDetails = {
     '油菜花': {
-      name: '油菜花蜜', image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600',
+      name: '油菜花蜜', 
+      image: 'https://images.unsplash.com/photo-1560717799-5090c6275cbb?w=600', // 油菜花田
       color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南',
       crystallize: '易结晶，乳白细腻',
       taste: '清香淡雅、口感细腻，甜度适中，入口即化，后味清爽回甘',
@@ -487,7 +488,8 @@ const DataManager = (function() {
       storage: '阴凉干燥处，避光保存', price: '68-88元/500g'
     },
     '高原野花': {
-      name: '高原野花蜜', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600',
+      name: '高原野花蜜', 
+      image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600', // 高原野花
       color: '#DAA520', baume: '42-43°Be', season: '夏季(5-7月)', origin: '四川阿坝',
       crystallize: '不易结晶，质地浓稠',
       taste: '花香浓郁、层次丰富，口感醇厚饱满，回味悠长，带有高原野花独特芬芳',
@@ -496,7 +498,8 @@ const DataManager = (function() {
       storage: '密封冷藏，保质期长', price: '128-168元/500g'
     },
     '槐花': {
-      name: '槐花蜜', image: 'https://images.unsplash.com/photo-1571506165871-ee72a35bc9d4?w=600',
+      name: '槐花蜜', 
+      image: 'https://images.unsplash.com/photo-1621600411688-4be93c68a590?w=600', // 槐花/洋槐
       color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '山东',
       crystallize: '不易结晶，色泽清透',
       taste: '清香淡雅、甜而不腻，口味柔和细腻，后味清爽，带有淡淡槐花香气',
@@ -505,7 +508,8 @@ const DataManager = (function() {
       storage: '常温避光保存', price: '78-98元/500g'
     },
     '荆条': {
-      name: '荆条蜜', image: 'https://images.unsplash.com/photo-1550411294-875e72553a22?w=600',
+      name: '荆条蜜', 
+      image: 'https://images.unsplash.com/photo-1595159815606-7ec52c1c63ed?w=600', // 紫色荆条花
       color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
       crystallize: '易结晶，颗粒细腻',
       taste: '甜润醇厚、略带微酸，口感绵密顺滑，回味持久，有独特草本清香',
@@ -514,7 +518,8 @@ const DataManager = (function() {
       storage: '阴凉干燥处', price: '58-78元/500g'
     },
     '枣花': {
-      name: '枣花蜜', image: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?w=600',
+      name: '枣花蜜', 
+      image: 'https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=600', // 枣树/枣花
       color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '新疆',
       crystallize: '不易结晶，色深质浓',
       taste: '浓郁甘甜、枣香四溢，口感厚重饱满，甜度较高，回味带有红枣特有香气',
@@ -523,7 +528,8 @@ const DataManager = (function() {
       storage: '密封避光保存', price: '88-118元/500g'
     },
     '椴树': {
-      name: '椴树蜜', image: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600',
+      name: '椴树蜜', 
+      image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600', // 椴树/林间
       color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '长白山',
       crystallize: '易结晶，雪白细腻',
       taste: '清香怡人、甜而不腻，口感细腻如脂，入口即化，带有椴树花独特清香',
