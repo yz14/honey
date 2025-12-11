@@ -479,7 +479,7 @@ const DataManager = (function() {
   const honeyDetails = {
     '油菜花': {
       name: '油菜花蜜', 
-      image: 'https://images.unsplash.com/photo-1560717799-5090c6275cbb?w=600', // 油菜花田
+      image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600',
       color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南',
       crystallize: '易结晶，乳白细腻',
       taste: '清香淡雅、口感细腻，甜度适中，入口即化，后味清爽回甘',
@@ -489,7 +489,7 @@ const DataManager = (function() {
     },
     '龙眼': {
       name: '龙眼蜜', 
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600', // 龙眼果园
+      image: 'https://images.unsplash.com/photo-1606567595334-d39972c85dfd?w=600',
       color: '#D4A574', baume: '42-43°Be', season: '夏季(5-6月)', origin: '广西南宁',
       crystallize: '不易结晶，质地浓稠',
       taste: '浓郁甘甜、果香四溢，口感醇厚丝滑，回味悠长，带有龙眼特有的鲜果芳香',
@@ -499,7 +499,7 @@ const DataManager = (function() {
     },
     '五倍子': {
       name: '五倍子蜜', 
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600', // 深山林区
+      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600',
       color: '#8B5A2B', baume: '42-43°Be', season: '秋季(8-9月)', origin: '湖北恩施',
       crystallize: '不易结晶，质地细腻',
       taste: '醇厚微涩、药香独特，口感细腻浓稠，回味甘润，带有山野草本清香',
@@ -507,19 +507,29 @@ const DataManager = (function() {
       benefits: '清热解毒、消炎杀菌，润肺止咳、化痰平喘，收敛止治、改善肠胃',
       storage: '密封避光保存', price: '138-188元/500g'
     },
-    '槐花': {
-      name: '槐花蜜', 
-      image: 'https://images.unsplash.com/photo-1621600411688-4be93c68a590?w=600', // 槐花/洋槐
-      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '山东',
+    '洋槐': {
+      name: '洋槐蜜', 
+      image: 'https://images.unsplash.com/photo-1462275646964-a0e3571f4f9f?w=600',
+      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '陕西',
       crystallize: '不易结晶，色泽清透',
       taste: '清香淡雅、甜而不腻，口味柔和细腻，后味清爽，带有淡淡槐花香气',
       nutrition: '果糖≈45%，葡萄糖≈30%，维生素C、K，矿物质钙、磷，多种酶类：淀粉酶、转化酶等',
       benefits: '润肺止咳、清热解燥，安神助眠、改善睡眠，促进肠道蠕动、缓解便秘，温和不燥',
       storage: '常温避光保存', price: '78-98元/500g'
     },
+    '百花': {
+      name: '百花蜜', 
+      image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600',
+      color: '#DAA520', baume: '41-42°Be', season: '夏季(6-8月)', origin: '湖北神农架',
+      crystallize: '易结晶，颜色深浅不一',
+      taste: '花香馥郁、层次丰富，口感醇厚满满，回味悠长，融合多种花香的综合风味',
+      nutrition: '果糖≈40%，葡萄糖≈34%，维生素B群、C、E，矿物质铁、镁、锌，多种花粉营养',
+      benefits: '滋阴润燥、补中益气，清热解毒、增强免疫，调节肠胃、润肤美容',
+      storage: '阴凉干燥处，避光保存', price: '58-78元/500g'
+    },
     '荆条': {
       name: '荆条蜜', 
-      image: 'https://images.unsplash.com/photo-1595159815606-7ec52c1c63ed?w=600', // 紫色荆条花
+      image: 'https://images.unsplash.com/photo-1595159815606-7ec52c1c63ed?w=600',
       color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
       crystallize: '易结晶，颗粒细腻',
       taste: '甜润醇厚、略带微酸，口感绵密顺滑，回味持久，有独特草本清香',
@@ -529,7 +539,7 @@ const DataManager = (function() {
     },
     '枣花': {
       name: '枣花蜜', 
-      image: 'https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=600', // 枣树/枣花
+      image: 'https://images.unsplash.com/photo-1444930694458-01babf71870c?w=600',
       color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '新疆',
       crystallize: '不易结晶，色深质浓',
       taste: '浓郁甘甜、枣香四溢，口感厚重饱满，甜度较高，回味带有红枣特有香气',
@@ -539,7 +549,7 @@ const DataManager = (function() {
     },
     '椴树': {
       name: '椴树蜜', 
-      image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600', // 椴树/林间
+      image: 'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600',
       color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '长白山',
       crystallize: '易结晶，雪白细腻',
       taste: '清香怡人、甜而不腻，口感细腻如脂，入口即化，带有椴树花独特清香',
