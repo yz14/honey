@@ -805,17 +805,17 @@ const MapView = (function() {
         
         <!-- 口感特点 -->
         <div class="honey-detail__block honey-detail__block--taste">
-          <p class="honey-detail__block-text">${details.taste}</p>
+          <p class="honey-detail__block-text"><strong>口感：</strong>${details.taste}，是品质上乘的天然佳品。</p>
         </div>
         
         <!-- 营养成分 -->
         <div class="honey-detail__block honey-detail__block--nutrition">
-          <p class="honey-detail__block-text">${details.nutrition}</p>
+          <p class="honey-detail__block-text"><strong>营养：</strong>${details.nutrition}，营养丰富均衡。</p>
         </div>
         
         <!-- 主要功效 -->
         <div class="honey-detail__block honey-detail__block--benefits">
-          <p class="honey-detail__block-text">${details.benefits}</p>
+          <p class="honey-detail__block-text"><strong>功效：</strong>${details.benefits}，老少皆宜。</p>
         </div>
         
         <!-- 储存提示 -->
