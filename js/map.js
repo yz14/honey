@@ -809,35 +809,12 @@ const MapView = (function() {
         
         <!-- 营养成分 -->
         <div class="honey-detail__block honey-detail__block--nutrition">
-          <div class="honey-detail__nutrition-grid">
-            <div class="honey-detail__nutrition-item">
-              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.glucose)}; --color: #66BB6A;">
-                <span>${details.nutrition.glucose}</span>
-              </div>
-              <span class="honey-detail__nutrition-name">葡萄糖</span>
-            </div>
-            <div class="honey-detail__nutrition-item">
-              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.fructose)}; --color: #42A5F5;">
-                <span>${details.nutrition.fructose}</span>
-              </div>
-              <span class="honey-detail__nutrition-name">果糖</span>
-            </div>
-            <div class="honey-detail__nutrition-text-item">
-              <span class="honey-detail__nutrition-label">维生素</span>
-              <span class="honey-detail__nutrition-value">${details.nutrition.vitamins}</span>
-            </div>
-            <div class="honey-detail__nutrition-text-item">
-              <span class="honey-detail__nutrition-label">矿物质</span>
-              <span class="honey-detail__nutrition-value">${details.nutrition.minerals}</span>
-            </div>
-          </div>
+          <p class="honey-detail__block-text">${details.nutrition}</p>
         </div>
         
         <!-- 主要功效 -->
         <div class="honey-detail__block honey-detail__block--benefits">
-          <div class="honey-detail__benefits">
-            ${details.benefits.map(b => `<span class="honey-detail__benefit-tag">${b}</span>`).join('')}
-          </div>
+          <p class="honey-detail__block-text">${details.benefits}</p>
         </div>
         
         <!-- 储存提示 -->

@@ -479,50 +479,56 @@ const DataManager = (function() {
   const honeyDetails = {
     '油菜花': {
       name: '油菜花蜜', image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600',
-      color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南、四川、贵州',
-      taste: '清香淡雅，口感细腻', crystallize: '易结晶，结晶后呈乳白色',
-      nutrition: { glucose: '35%', fructose: '40%', vitamins: 'B1,B2,C', minerals: '钙、铁、锌' },
-      benefits: ['清热解毒', '润肺止咳', '美容养颜', '促进消化'],
+      color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南',
+      crystallize: '易结晶，乳白细腻',
+      taste: '清香淡雅、口感细腻，甜度适中，入口即化，后味清爽回甘',
+      nutrition: '果糖≈40%，葡萄糖≈35%，维生素B1、B2、C，矿物质钙、铁、锌，多种活性酶',
+      benefits: '清热解毒、润肺止咳，美容养颜、淡化色斑，促进消化、增进食欲',
       storage: '阴凉干燥处，避光保存', price: '68-88元/500g'
     },
     '高原野花': {
       name: '高原野花蜜', image: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600',
-      color: '#DAA520', baume: '42-43°Be', season: '夏季(5-7月)', origin: '四川阿坝、青海、西藏',
-      taste: '花香浓郁，回味悠长', crystallize: '不易结晶，质地浓稠',
-      nutrition: { glucose: '32%', fructose: '42%', vitamins: 'B群,E', minerals: '钾、镁、硒' },
-      benefits: ['增强免疫', '抗氧化', '调节血压', '改善睡眠'],
+      color: '#DAA520', baume: '42-43°Be', season: '夏季(5-7月)', origin: '四川阿坝',
+      crystallize: '不易结晶，质地浓稠',
+      taste: '花香浓郁、层次丰富，口感醇厚饱满，回味悠长，带有高原野花独特芬芳',
+      nutrition: '果糖≈42%，葡萄糖≈32%，维生素B群、E，富含硒、钾、镁等微量元素，天然抗氧化物质',
+      benefits: '增强免疫、提升抵抗力，抗氧化、延缓衰老，调节血压、改善睡眠质量',
       storage: '密封冷藏，保质期长', price: '128-168元/500g'
     },
     '槐花': {
       name: '槐花蜜', image: 'https://images.unsplash.com/photo-1571506165871-ee72a35bc9d4?w=600',
-      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '山东、河南、陕西',
-      taste: '清淡爽口，带槐花香', crystallize: '不易结晶，色泽清透',
-      nutrition: { glucose: '30%', fructose: '45%', vitamins: 'C,K', minerals: '钙、磷' },
-      benefits: ['清热凉血', '护肝养胃', '安神助眠', '润肠通便'],
+      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '山东',
+      crystallize: '不易结晶，色泽清透',
+      taste: '清香淡雅、甜而不腻，口味柔和细腻，后味清爽，带有淡淡槐花香气',
+      nutrition: '果糖≈45%，葡萄糖≈30%，维生素C、K，矿物质钙、磷，多种酶类：淀粉酶、转化酶等',
+      benefits: '润肺止咳、清热解燥，安神助眠、改善睡眠，促进肠道蠕动、缓解便秘，温和不燥',
       storage: '常温避光保存', price: '78-98元/500g'
     },
     '荆条': {
       name: '荆条蜜', image: 'https://images.unsplash.com/photo-1550411294-875e72553a22?w=600',
-      color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北、山西、内蒙古',
-      taste: '甜润醇厚，略带酸味', crystallize: '易结晶，颗粒细腻',
-      nutrition: { glucose: '33%', fructose: '40%', vitamins: 'B1,B2', minerals: '铁、锰' },
-      benefits: ['补气养血', '健脾益胃', '祛风除湿', '增强体质'],
+      color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
+      crystallize: '易结晶，颗粒细腻',
+      taste: '甜润醇厚、略带微酸，口感绵密顺滑，回味持久，有独特草本清香',
+      nutrition: '果糖≈40%，葡萄糖≈33%，维生素B1、B2，矿物质铁、锰、铜，天然果酸',
+      benefits: '补气养血、强身健体，健脾益胃、促进消化，祛风除湿、增强体质',
       storage: '阴凉干燥处', price: '58-78元/500g'
     },
     '枣花': {
       name: '枣花蜜', image: 'https://images.unsplash.com/photo-1471943311424-646960669fbc?w=600',
-      color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '河北、山东、新疆',
-      taste: '浓郁甘甜，枣香四溢', crystallize: '不易结晶，色深质浓',
-      nutrition: { glucose: '32%', fructose: '43%', vitamins: 'C,P', minerals: '铁、铜、锌' },
-      benefits: ['补血养气', '安神益智', '养肝护肝', '美容驻颜'],
+      color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '新疆',
+      crystallize: '不易结晶，色深质浓',
+      taste: '浓郁甘甜、枣香四溢，口感厚重饱满，甜度较高，回味带有红枣特有香气',
+      nutrition: '果糖≈43%，葡萄糖≈32%，维生素C、P，矿物质铁、铜、锌，丰富的氨基酸',
+      benefits: '补血养气、滋补强身，安神益智、养心宁神，养肝护肝、美容驻颜',
       storage: '密封避光保存', price: '88-118元/500g'
     },
     '椴树': {
       name: '椴树蜜', image: 'https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600',
-      color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '黑龙江、吉林、长白山',
-      taste: '清香怡人，甜而不腻', crystallize: '易结晶，雪白细腻',
-      nutrition: { glucose: '36%', fructose: '39%', vitamins: 'B群,E', minerals: '钙、镁、钾' },
-      benefits: ['清热润燥', '养心安神', '增强记忆', '延缓衰老'],
+      color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '长白山',
+      crystallize: '易结晶，雪白细腻',
+      taste: '清香怡人、甜而不腻，口感细腻如脂，入口即化，带有椴树花独特清香',
+      nutrition: '果糖≈39%，葡萄糖≈36%，维生素B群、E，矿物质钙、镁、钾，多种活性酶和有机酸',
+      benefits: '清热润燥、生津止渴，养心安神、缓解焦虑，增强记忆、延缓衰老',
       storage: '低温密封保存', price: '98-128元/500g'
     }
   };
