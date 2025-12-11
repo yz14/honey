@@ -72,55 +72,55 @@ const DataManager = (function() {
         id: 2,
         // distanceFromPrev: 手工设置从上一个地点到这里的实际行驶距离（公里）
         // 如果不设置，则自动计算两点直线距离
-        distanceFromPrev: 950, // 从云南大理到四川若尔盖的实际行驶距离约950公里
+        distanceFromPrev: 800, // 从云南大理到广西南宁的实际行驶距离约800公里
         location: {
-          name: "四川阿坝若尔盖草原",
-          province: "四川省",
-          city: "阿坝州",
-          lng: 102.96,
-          lat: 33.58
+          name: "广西南宁武鸣区",
+          province: "广西",
+          city: "南宁市",
+          lng: 108.27,
+          lat: 23.16
         },
         date: {
           start: "2024-05-10",
-          end: "2024-06-25"
+          end: "2024-06-20"
         },
         honey: {
-          type: "高原野花蜜",
+          type: "龙眼蜜",
           amount: 350,
           unit: "kg",
           quality: "特优"
         },
         weather: {
-          avgTemp: 18,
-          condition: "多云",
-          icon: "⛅"
+          avgTemp: 28,
+          condition: "晴朗",
+          icon: "☀️"
         },
         story: {
-          title: "若尔盖高原寻蜜之旅",
-          excerpt: "海拔3500米的高原上，野花遍地，蜜蜂们在蓝天下自由飞翔...",
-          content: `若尔盖，这片被誉为"川西北高原的绿洲"的地方，是我们每年必访的采蜜圣地。
+          title: "广西龙眼花海采蜜记",
+          excerpt: "五月的广西，龙眼花开满枝头，空气中弥漫着甜蜜的芬芳...",
+          content: `广西南宁武鸣区，素有"龙眼之乡"的美誉，这里种植着大片的龙眼果园。
 
-五月的高原，正是百花盛开的季节。紫色的马先蒿、黄色的金莲花、白色的狼毒花...构成了一幅绚丽多彩的画卷。
+五月初，龙眼花开始绽放。淡黄色的小花密密麻麻挂满枝头，散发出浓郁的蜜香，吸引着蜜蜂们前来采集。龙眼蜜是华南地区最受欢迎的蜂蜜品种之一。
 
-高原的蜂蜜有着独特的韵味，因为花期短暂，蜜蜂们采集的每一滴蜜都格外珍贵。这里的野花蜜带有淡淡的草药香气，据说有很好的保健功效。
+龙眼蜜色泽金黄透亮，口感浓郁甘甜，带有龙眼特有的果香。它不易结晶，营养价值极高，有"蜂蜜中的上品"之称。
 
-在这片广袤的草原上，我们与牧民们结下了深厚的友谊。他们淳朴热情，常常邀请我们品尝酥油茶和青稞酒。`
+在广西的日子里，我们不仅收获了优质的龙眼蜜，还品尝了当地新鲜的龙眼和各种热带水果，感受到了南国的热情与甜蜜。`
         },
         media: [
           {
             type: "image",
-            url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
-            thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
-            caption: "若尔盖草原风光"
+            url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+            thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400",
+            caption: "龙眼果园"
           },
           {
             type: "image",
-            url: "https://images.unsplash.com/photo-1551516594-56cb78394645?w=800",
-            thumbnail: "https://images.unsplash.com/photo-1551516594-56cb78394645?w=400",
-            caption: "高原野花"
+            url: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800",
+            thumbnail: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400",
+            caption: "采蜜中的蜜蜂"
           }
         ],
-        tags: ["野花蜜", "高原", "四川", "特优蜜源"],
+        tags: ["龙眼蜜", "夏季", "广西", "特优蜜源"],
         featured: true
       },
       {
@@ -178,53 +178,53 @@ const DataManager = (function() {
       {
         id: 4,
         location: {
-          name: "新疆伊犁河谷",
-          province: "新疆",
-          city: "伊犁州",
-          lng: 81.32,
-          lat: 43.92
+          name: "湖北恩施土家族苗族自治州",
+          province: "湖北省",
+          city: "恩施州",
+          lng: 109.47,
+          lat: 30.30
         },
         date: {
-          start: "2024-06-20",
-          end: "2024-07-30"
+          start: "2024-08-20",
+          end: "2024-09-25"
         },
         honey: {
-          type: "薰衣草蜜",
+          type: "五倍子蜜",
           amount: 200,
           unit: "kg",
           quality: "特优"
         },
         weather: {
-          avgTemp: 26,
-          condition: "晴朗",
-          icon: "☀️"
+          avgTemp: 24,
+          condition: "多云",
+          icon: "⛅"
         },
         story: {
-          title: "伊犁薰衣草花海",
-          excerpt: "紫色的花海一望无际，空气中弥漫着迷人的芳香...",
-          content: `伊犁，被称为"塞外江南"的地方，六月的这里是薰衣草的天堂。
+          title: "恩施深山五倍子采蜜",
+          excerpt: "在鄂西南的崇山峻岭中，五倍子花悄然绽放，孕育着珍贵的蜂蜜...",
+          content: `恩施，位于湖北省西南部的武陵山区，这里山高林密，生态环境极为优越。
 
-紫色的花海延绵数十公里，当风吹过时，花浪翻滚，美不胜收。我们的蜜蜂在这片紫色海洋中忙碌着，采集着这独特的芳香。
+八月末，五倍子树开始开花。这种树木喜欢生长在深山老林中，花朵小而密集，散发着独特的清香。五倍子蜜是中国特有的珍稀蜂蜜品种，产量稀少。
 
-薰衣草蜜是所有蜂蜜中最具特色的品种之一，它带有浓郁的薰衣草香气，颜色呈琥珀色，入口后有淡淡的花香在舌尖萦绕。
+五倍子蜜色泽深琥珀色，口感醇厚略带微涩，有独特的药香。它富含单宁酸等活性物质，具有很好的保健功效，素有"药蜜"之称。
 
-在伊犁的日子里，我们不仅收获了珍贵的薰衣草蜜，还领略了新疆的大美风光。雪山、草原、河谷...每一处都是一幅绝美的画卷。`
+在恩施的大山深处，我们克服了崎岖的山路，找到了这片珍贵的蜜源地。每一滴五倍子蜜都凝聚着大自然的馈赠和我们的艰辛付出。`
         },
         media: [
           {
             type: "image",
-            url: "https://images.unsplash.com/photo-1499002238440-d264f7d4eb93?w=800",
-            thumbnail: "https://images.unsplash.com/photo-1499002238440-d264f7d4eb93?w=400",
-            caption: "伊犁薰衣草花田"
+            url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800",
+            thumbnail: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400",
+            caption: "恩施深山林区"
           },
           {
-            type: "video",
-            url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            thumbnail: "https://images.unsplash.com/photo-1499002238440-d264f7d4eb93?w=400",
-            caption: "薰衣草田采蜜记录"
+            type: "image",
+            url: "https://images.unsplash.com/photo-1471943311424-646960669fbc?w=800",
+            thumbnail: "https://images.unsplash.com/photo-1471943311424-646960669fbc?w=400",
+            caption: "山间蜂场"
           }
         ],
-        tags: ["薰衣草", "夏季", "新疆", "芳香蜜"],
+        tags: ["五倍子蜜", "秋季", "湖北", "药蜜"],
         featured: true
       },
       {
@@ -487,15 +487,25 @@ const DataManager = (function() {
       benefits: '清热解毒、润肺止咳，美容养颜、淡化色斑，促进消化、增进食欲',
       storage: '阴凉干燥处，避光保存', price: '68-88元/500g'
     },
-    '高原野花': {
-      name: '高原野花蜜', 
-      image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600', // 高原野花
-      color: '#DAA520', baume: '42-43°Be', season: '夏季(5-7月)', origin: '四川阿坝',
+    '龙眼': {
+      name: '龙眼蜜', 
+      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600', // 龙眼果园
+      color: '#D4A574', baume: '42-43°Be', season: '夏季(5-6月)', origin: '广西南宁',
       crystallize: '不易结晶，质地浓稠',
-      taste: '花香浓郁、层次丰富，口感醇厚饱满，回味悠长，带有高原野花独特芬芳',
-      nutrition: '果糖≈42%，葡萄糖≈32%，维生素B群、E，富含硒、钾、镁等微量元素，天然抗氧化物质',
-      benefits: '增强免疫、提升抵抗力，抗氧化、延缓衰老，调节血压、改善睡眠质量',
-      storage: '密封冷藏，保质期长', price: '128-168元/500g'
+      taste: '浓郁甘甜、果香四溢，口感醇厚丝滑，回味悠长，带有龙眼特有的鲜果芳香',
+      nutrition: '果糖≈45%，葡萄糖≈30%，维生素B1、B2、C，富含铁、镁、锂等矿物质，多种氨基酸和活性酶',
+      benefits: '补气养血、安神益智，滑肤美容、延缓衰老，温补脏腔、增强体质',
+      storage: '密封阴凉保存', price: '98-128元/500g'
+    },
+    '五倍子': {
+      name: '五倍子蜜', 
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600', // 深山林区
+      color: '#8B5A2B', baume: '42-43°Be', season: '秋季(8-9月)', origin: '湖北恩施',
+      crystallize: '不易结晶，质地细腻',
+      taste: '醇厚微涩、药香独特，口感细腻浓稠，回味甘润，带有山野草本清香',
+      nutrition: '果糖≈38%，葡萄糖≈35%，富含单宁酸、没食子酸，维生素C、E，多种微量元素',
+      benefits: '清热解毒、消炎杀菌，润肺止咳、化痰平喘，收敛止治、改善肠胃',
+      storage: '密封避光保存', price: '138-188元/500g'
     },
     '槐花': {
       name: '槐花蜜', 
