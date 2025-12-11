@@ -802,30 +802,22 @@ const MapView = (function() {
           </div>
         </div>
         
-        <!-- 口感特点（突出） -->
-        <div class="honey-detail__highlight">
-          <div class="honey-detail__highlight-header">
-            <span class="honey-detail__highlight-icon">🍯</span>
-            <h3 class="honey-detail__highlight-title">口感特点</h3>
-          </div>
-          <p class="honey-detail__highlight-text">${details.taste}</p>
+        <!-- 口感特点 -->
+        <div class="honey-detail__block honey-detail__block--taste">
+          <p class="honey-detail__block-text">${details.taste}</p>
         </div>
         
-        <!-- 营养成分（重点突出） -->
-        <div class="honey-detail__highlight honey-detail__highlight--nutrition">
-          <div class="honey-detail__highlight-header">
-            <span class="honey-detail__highlight-icon">🧪</span>
-            <h3 class="honey-detail__highlight-title">营养成分</h3>
-          </div>
+        <!-- 营养成分 -->
+        <div class="honey-detail__block honey-detail__block--nutrition">
           <div class="honey-detail__nutrition-grid">
             <div class="honey-detail__nutrition-item">
-              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.glucose)}; --color: #FFD700;">
+              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.glucose)}; --color: #66BB6A;">
                 <span>${details.nutrition.glucose}</span>
               </div>
               <span class="honey-detail__nutrition-name">葡萄糖</span>
             </div>
             <div class="honey-detail__nutrition-item">
-              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.fructose)}; --color: #FF9800;">
+              <div class="honey-detail__nutrition-circle" style="--percent: ${parseInt(details.nutrition.fructose)}; --color: #42A5F5;">
                 <span>${details.nutrition.fructose}</span>
               </div>
               <span class="honey-detail__nutrition-name">果糖</span>
@@ -841,19 +833,10 @@ const MapView = (function() {
           </div>
         </div>
         
-        <!-- 主要功效（重点突出） -->
-        <div class="honey-detail__highlight honey-detail__highlight--benefits">
-          <div class="honey-detail__highlight-header">
-            <span class="honey-detail__highlight-icon">✨</span>
-            <h3 class="honey-detail__highlight-title">主要功效</h3>
-          </div>
+        <!-- 主要功效 -->
+        <div class="honey-detail__block honey-detail__block--benefits">
           <div class="honey-detail__benefits">
-            ${details.benefits.map((b, i) => `
-              <div class="honey-detail__benefit">
-                <span class="honey-detail__benefit-num">${i + 1}</span>
-                <span class="honey-detail__benefit-text">${b}</span>
-              </div>
-            `).join('')}
+            ${details.benefits.map(b => `<span class="honey-detail__benefit-tag">${b}</span>`).join('')}
           </div>
         </div>
         
