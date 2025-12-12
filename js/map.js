@@ -810,30 +810,27 @@ const MapView = (function() {
     // 取第一个产地
     const mainOrigin = details.origin.split('、')[0];
     
-    // 生成营养成分HTML（数组格式，每条不同颜色）
+    // 提取结晶简短描述（如"易结晶"）
+    const crystalShort = details.crystallize.split('，')[0].replace(/结晶后.*/, '').trim();
+    
+    // 生成营养成分HTML（用分号连接，每种不同颜色）
     let nutritionHtml = '';
     if (Array.isArray(details.nutrition)) {
       nutritionHtml = details.nutrition.map((item, index) => 
-        `<p class="honey-detail__list-item" style="color: ${nutritionColors[index % nutritionColors.length]}">
-          <span class="honey-detail__list-dot" style="background: ${nutritionColors[index % nutritionColors.length]}"></span>
-          ${item}
-        </p>`
-      ).join('');
+        `<span style="color: ${nutritionColors[index % nutritionColors.length]}">${item}</span>`
+      ).join('；');
     } else {
-      nutritionHtml = `<p class="honey-detail__list-item">${details.nutrition}</p>`;
+      nutritionHtml = details.nutrition;
     }
     
-    // 生成功效HTML（数组格式，每条不同颜色，列举式）
+    // 生成功效HTML（列举式，无圆点，每条不同颜色，无白色底框）
     let benefitsHtml = '';
     if (Array.isArray(details.benefits)) {
       benefitsHtml = details.benefits.map((item, index) => 
-        `<p class="honey-detail__list-item honey-detail__benefit-item" style="color: ${benefitColors[index % benefitColors.length]}">
-          <span class="honey-detail__list-dot" style="background: ${benefitColors[index % benefitColors.length]}"></span>
-          ${item}
-        </p>`
+        `<p class="honey-detail__benefit-line" style="color: ${benefitColors[index % benefitColors.length]}">${item}</p>`
       ).join('');
     } else {
-      benefitsHtml = `<p class="honey-detail__list-item">${details.benefits}</p>`;
+      benefitsHtml = `<p class="honey-detail__benefit-line">${details.benefits}</p>`;
     }
     
     content.innerHTML = `
@@ -865,48 +862,28 @@ const MapView = (function() {
             <span class="honey-detail__attr-label">产地</span>
           </div>
           <div class="honey-detail__attr">
-            <span class="honey-detail__attr-value" style="font-size: 11px;">${details.crystallize}</span>
+            <span class="honey-detail__attr-value">${crystalShort}</span>
             <span class="honey-detail__attr-label">结晶</span>
           </div>
         </div>
         
-        <!-- 色泽外观 -->
-        ${details.appearance ? `
-        <div class="honey-detail__block honey-detail__block--appearance">
-          <div class="honey-detail__block-title">🎨 色泽外观</div>
-          <p class="honey-detail__block-text">${details.appearance}</p>
-        </div>
-        ` : ''}
-        
-        <!-- 口感特点 -->
+        <!-- 口感 -->
         <div class="honey-detail__block honey-detail__block--taste">
-          <div class="honey-detail__block-title">👅 口感风味</div>
-          <p class="honey-detail__block-text">${details.taste}</p>
+          <p class="honey-detail__inline-text"><strong>口感：</strong>${details.taste}</p>
         </div>
         
-        <!-- 营养成分（多颜色列表） -->
+        <!-- 营养（分号连接，每种颜色不同） -->
         <div class="honey-detail__block honey-detail__block--nutrition">
-          <div class="honey-detail__block-title">🧬 营养成分</div>
-          <div class="honey-detail__list">
-            ${nutritionHtml}
-          </div>
+          <p class="honey-detail__inline-text"><strong>营养：</strong>${nutritionHtml}</p>
         </div>
         
-        <!-- 主要功效（多颜色列表） -->
+        <!-- 功效（列举式，无圆点，每条颜色不同） -->
         <div class="honey-detail__block honey-detail__block--benefits">
-          <div class="honey-detail__block-title">✨ 养生功效</div>
-          <div class="honey-detail__list">
+          <p class="honey-detail__inline-label"><strong>功效：</strong></p>
+          <div class="honey-detail__benefits-list">
             ${benefitsHtml}
           </div>
         </div>
-        
-        <!-- 适宜人群 -->
-        ${details.suitable ? `
-        <div class="honey-detail__block honey-detail__block--suitable">
-          <div class="honey-detail__block-title">👥 适宜人群</div>
-          <p class="honey-detail__block-text honey-detail__suitable-text">${details.suitable}</p>
-        </div>
-        ` : ''}
         
         <!-- 储存提示 -->
         <div class="honey-detail__storage">

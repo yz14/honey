@@ -953,66 +953,42 @@
 }
 
 
-/* ===== 区块标题 ===== */
-.honey-detail__block-title {
-  font-size: 14px;
+/* ===== 行内文字样式 ===== */
+.honey-detail__inline-text {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  color: #5D4037;
+}
+
+.honey-detail__inline-text strong {
   font-weight: 700;
   color: #5D4037;
-  margin-bottom: 8px;
+}
+
+.honey-detail__inline-label {
+  font-size: 13px;
+  margin: 0 0 6px 0;
+  color: #5D4037;
+}
+
+.honey-detail__inline-label strong {
+  font-weight: 700;
+}
+
+/* ===== 功效列表（无圆点） ===== */
+.honey-detail__benefits-list {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 6px;
 }
 
-/* ===== 列表样式（营养/功效） ===== */
-.honey-detail__list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.honey-detail__list-item {
+.honey-detail__benefit-line {
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
-  padding-left: 16px;
-  position: relative;
+  padding: 4px 0;
   font-weight: 500;
-}
-
-.honey-detail__list-dot {
-  position: absolute;
-  left: 0;
-  top: 7px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* 功效项目样式增强 */
-.honey-detail__benefit-item {
-  font-size: 13px;
-  padding: 6px 6px 6px 20px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 6px;
-  margin: 0;
-}
-
-/* 色泽外观 - 淡紫色 */
-.honey-detail__block--appearance {
-  background: #F3E5F5;
-}
-.honey-detail__block--appearance .honey-detail__block-text {
-  color: #7B1FA2;
-}
-
-/* 适宜人群 - 淡黄色 */
-.honey-detail__block--suitable {
-  background: #FFF8E1;
-}
-.honey-detail__suitable-text {
-  color: #F57F17 !important;
-  font-weight: 600;
 }
 
 /* ===== 储存提示 ===== */
