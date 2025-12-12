@@ -479,8 +479,9 @@ const DataManager = (function() {
   const honeyDetails = {
     '油菜花': {
       name: '油菜花蜜', 
-      image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600',
-      color: '#FFD700', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南',
+      // 油菜花田图片 - 金黄色的油菜花海
+      image: 'https://images.unsplash.com/photo-1560717789-0ac7c58ac90a?w=800&q=80',
+      color: '#F5C542', baume: '41-42°Be', season: '春季(3-4月)', origin: '云南',
       crystallize: '易结晶，乳白细腻',
       taste: '清香淡雅、口感细腻，甜度适中，入口即化，后味清爽回甘',
       nutrition: '果糖≈40%，葡萄糖≈35%，维生素B1、B2、C，矿物质钙、铁、锌，多种活性酶',
@@ -489,8 +490,9 @@ const DataManager = (function() {
     },
     '龙眼': {
       name: '龙眼蜜', 
-      image: 'https://images.unsplash.com/photo-1606567595334-d39972c85dfd?w=600',
-      color: '#D4A574', baume: '42-43°Be', season: '夏季(5-6月)', origin: '广西南宁',
+      // 龙眼树/果实图片
+      image: 'https://images.unsplash.com/photo-1568702846914-96b305d2uj68?w=800&q=80',
+      color: '#C68E4E', baume: '42-43°Be', season: '夏季(5-6月)', origin: '广西南宁',
       crystallize: '不易结晶，质地浓稠',
       taste: '浓郁甘甜、果香四溢，口感醇厚丝滑，回味悠长，带有龙眼特有的鲜果芳香',
       nutrition: '果糖≈45%，葡萄糖≈30%，维生素B1、B2、C，富含铁、镁、锂等矿物质，多种氨基酸和活性酶',
@@ -499,8 +501,9 @@ const DataManager = (function() {
     },
     '五倍子': {
       name: '五倍子蜜', 
-      image: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=600',
-      color: '#8B5A2B', baume: '42-43°Be', season: '秋季(8-9月)', origin: '湖北恩施',
+      // 山野树林图片 - 五倍子树生长环境
+      image: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80',
+      color: '#8B5742', baume: '42-43°Be', season: '秋季(8-9月)', origin: '湖北恩施',
       crystallize: '不易结晶，质地细腻',
       taste: '醇厚微涩、药香独特，口感细腻浓稠，回味甘润，带有山野草本清香',
       nutrition: '果糖≈38%，葡萄糖≈35%，富含单宁酸、没食子酸，维生素C、E，多种微量元素',
@@ -509,8 +512,9 @@ const DataManager = (function() {
     },
     '洋槐': {
       name: '洋槐蜜', 
-      image: 'https://images.unsplash.com/photo-1462275646964-a0e3571f4f9f?w=600',
-      color: '#F5F5DC', baume: '41-42°Be', season: '春季(4-5月)', origin: '陕西',
+      // 洋槐花图片 - 白色槐花串
+      image: 'https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=800&q=80',
+      color: '#F8F4E3', baume: '41-42°Be', season: '春季(4-5月)', origin: '陕西',
       crystallize: '不易结晶，色泽清透',
       taste: '清香淡雅、甜而不腻，口味柔和细腻，后味清爽，带有淡淡槐花香气',
       nutrition: '果糖≈45%，葡萄糖≈30%，维生素C、K，矿物质钙、磷，多种酶类：淀粉酶、转化酶等',
@@ -519,8 +523,9 @@ const DataManager = (function() {
     },
     '百花': {
       name: '百花蜜', 
-      image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=600',
-      color: '#DAA520', baume: '41-42°Be', season: '夏季(6-8月)', origin: '湖北神农架',
+      // 野花丛生图片 - 各种野花
+      image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
+      color: '#D4A857', baume: '41-42°Be', season: '夏季(6-8月)', origin: '湖北神农架',
       crystallize: '易结晶，颜色深浅不一',
       taste: '花香馥郁、层次丰富，口感醇厚满满，回味悠长，融合多种花香的综合风味',
       nutrition: '果糖≈40%，葡萄糖≈34%，维生素B群、C、E，矿物质铁、镁、锌，多种花粉营养',
@@ -529,8 +534,9 @@ const DataManager = (function() {
     },
     '荆条': {
       name: '荆条蜜', 
-      image: 'https://images.unsplash.com/photo-1595159815606-7ec52c1c63ed?w=600',
-      color: '#CD853F', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
+      // 荆条花图片 - 紫色荆条花
+      image: 'https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=800&q=80',
+      color: '#C9874D', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
       crystallize: '易结晶，颗粒细腻',
       taste: '甜润醇厚、略带微酸，口感绵密顺滑，回味持久，有独特草本清香',
       nutrition: '果糖≈40%，葡萄糖≈33%，维生素B1、B2，矿物质铁、锰、铜，天然果酸',
@@ -539,8 +545,9 @@ const DataManager = (function() {
     },
     '枣花': {
       name: '枣花蜜', 
-      image: 'https://images.unsplash.com/photo-1444930694458-01babf71870c?w=600',
-      color: '#8B4513', baume: '42-43°Be', season: '夏季(5-6月)', origin: '新疆',
+      // 枣树花图片 - 枣树开花
+      image: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80',
+      color: '#6B3A23', baume: '42-43°Be', season: '夏季(5-6月)', origin: '新疆',
       crystallize: '不易结晶，色深质浓',
       taste: '浓郁甘甜、枣香四溢，口感厚重饱满，甜度较高，回味带有红枣特有香气',
       nutrition: '果糖≈43%，葡萄糖≈32%，维生素C、P，矿物质铁、铜、锌，丰富的氨基酸',
@@ -549,8 +556,9 @@ const DataManager = (function() {
     },
     '椴树': {
       name: '椴树蜜', 
-      image: 'https://images.unsplash.com/photo-1588392382834-a891154bca4d?w=600',
-      color: '#FFFACD', baume: '41-42°Be', season: '夏季(7月)', origin: '长白山',
+      // 椴树花图片 - 椴树和椴树花
+      image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80',
+      color: '#F0E6C8', baume: '41-42°Be', season: '夏季(7月)', origin: '长白山',
       crystallize: '易结晶，雪白细腻',
       taste: '清香怡人、甜而不腻，口感细腻如脂，入口即化，带有椴树花独特清香',
       nutrition: '果糖≈39%，葡萄糖≈36%，维生素B群、E，矿物质钙、镁、钾，多种活性酶和有机酸',

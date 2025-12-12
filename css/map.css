@@ -978,4 +978,215 @@
     display: block;
     bottom: 20px; /* 往上移动，确保在屏幕内 */
   }
+  
+  /* 蜂蜜瓶均匀分布 */
+  .honey-bottles__scroll {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0;
+    overflow-x: visible;
+    padding: 0 8px;
+  }
+  
+  .honey-bottle {
+    flex: 1;
+    max-width: 60px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ===== 联系方式按钮 ===== */
+.contact-btn {
+  position: absolute;
+  top: calc(var(--space-2) + 80px); /* 在放大缩小按钮下方 */
+  right: var(--space-2);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.contact-btn:hover,
+.contact-btn:active {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.5);
+}
+
+.contact-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== 联系方式弹窗 ===== */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.contact-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.contact-modal__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 24px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.contact-modal.open .contact-modal__content {
+  transform: translateY(0);
+}
+
+.contact-modal__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.contact-modal__icon {
+  font-size: 28px;
+}
+
+.contact-modal__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+/* 联系人卡片 */
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.contact-item:hover,
+.contact-item:active {
+  border-color: #FFA726;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
+}
+
+.contact-item__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5D4037;
+  min-width: 70px;
+}
+
+.contact-item__phone {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  color: #E65100;
+  letter-spacing: 1px;
+}
+
+.contact-item__icon {
+  font-size: 24px;
+  animation: phoneRing 1s ease-in-out infinite;
+}
+
+@keyframes phoneRing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+.contact-modal__close {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.contact-modal__close:hover,
+.contact-modal__close:active {
+  background: #eee;
+}
+
+/* 桌面端隐藏联系按钮（仅手机端显示） */
+@media (min-width: 769px) {
+  .contact-btn {
+    display: none;
+  }
+}
+
+/* ===== 蜂蜜瓶子增强效果 ===== */
+.honey-bottle__jar {
+  position: relative;
+}
+
+/* 蜂蜜瓶子悬停光晕效果 */
+.honey-bottle:active .honey-bottle__body {
+  box-shadow: 
+    inset 0 -10px 20px rgba(0,0,0,0.1),
+    inset 0 2px 4px rgba(255,255,255,0.5),
+    0 4px 16px rgba(255, 152, 0, 0.4),
+    0 0 20px rgba(255, 193, 7, 0.3);
+}
+
+/* 蜂蜜瓶子底部渐变优化 */
+.honey-bottles-container {
+  background: linear-gradient(
+    to top,
+    rgba(255, 253, 247, 0.98) 0%,
+    rgba(255, 253, 247, 0.95) 60%,
+    rgba(255, 253, 247, 0) 100%
+  );
+}
+
+/* 详情卡片图片加载优化 */
+.honey-detail__header img {
+  background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+  object-position: center;
+}
+
+/* 详情卡片标题增强 */
+.honey-detail__title {
+  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive, serif;
+  letter-spacing: 2px;
 }

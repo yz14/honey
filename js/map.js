@@ -44,16 +44,16 @@ const MapView = (function() {
       honeyByType[type] = (honeyByType[type] || 0) + r.honey.amount;
     });
     
-    // 蜂蜜瓶子颜色（与蜂蜜颜色对应）
+    // 蜂蜜瓶子颜色（与真实蜂蜜颜色对应）
     const honeyColors = {
-      '油菜花': '#FFD700',
-      '龙眼': '#D4A574',
-      '五倍子': '#8B5A2B',
-      '洋槐': '#F5F5DC',
-      '百花': '#DAA520',
-      '荆条': '#CD853F',
-      '枣花': '#8B4513',
-      '椴树': '#FFFACD'
+      '油菜花': '#F5C542',   // 金黄色，油菜花蜜特有的金黄
+      '龙眼': '#C68E4E',     // 琥珀色，龙眼蜜深琥珀色
+      '五倍子': '#8B5742',   // 深棕褐色，五倍子蜜颜色较深
+      '洋槐': '#F8F4E3',     // 水白色，洋槐蜜几乎透明
+      '百花': '#D4A857',     // 深金色，百花蜜颜色中等
+      '荆条': '#C9874D',     // 棕黄色，荆条蜜特有颜色
+      '枣花': '#6B3A23',     // 深红棕色，枣花蜜颜色最深
+      '椴树': '#F0E6C8'      // 乳白淡黄，椴树蜜色浅细腻
     };
     
     const honeyBottlesHtml = Object.entries(honeyByType)
@@ -104,6 +104,37 @@ const MapView = (function() {
         <div class="map-controls">
           <button class="map-control-btn" title="放大" onclick="MapView.zoomIn()">+</button>
           <button class="map-control-btn" title="缩小" onclick="MapView.zoomOut()">−</button>
+        </div>
+        
+        <!-- 联系方式按钮 -->
+        <button class="contact-btn" title="联系我们" onclick="MapView.showContactModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </button>
+        
+        <!-- 联系方式弹窗 -->
+        <div class="contact-modal" id="contact-modal">
+          <div class="contact-modal__overlay" onclick="MapView.closeContactModal()"></div>
+          <div class="contact-modal__content">
+            <div class="contact-modal__header">
+              <span class="contact-modal__icon">📞</span>
+              <h3 class="contact-modal__title">联系我们</h3>
+            </div>
+            <div class="contact-modal__body">
+              <div class="contact-item" onclick="MapView.callPhone('12345678901')">
+                <span class="contact-item__name">袁师傅</span>
+                <span class="contact-item__phone">123-4567-8901</span>
+                <span class="contact-item__icon">📱</span>
+              </div>
+              <div class="contact-item" onclick="MapView.callPhone('12345678901')">
+                <span class="contact-item__name">张师傅</span>
+                <span class="contact-item__phone">123-4567-8901</span>
+                <span class="contact-item__icon">📱</span>
+              </div>
+            </div>
+            <button class="contact-modal__close" onclick="MapView.closeContactModal()">关闭</button>
+          </div>
         </div>
         
         <!-- 图例 -->
@@ -840,6 +871,29 @@ const MapView = (function() {
     }
   }
 
+  // 显示联系方式弹窗
+  function showContactModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+      modal.classList.add('open');
+    }
+  }
+
+  // 关闭联系方式弹窗
+  function closeContactModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+      modal.classList.remove('open');
+    }
+  }
+
+  // 拨打电话（带确认）
+  function callPhone(phoneNumber) {
+    if (confirm(`确认拨打 ${phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')} ?`)) {
+      window.location.href = 'tel:' + phoneNumber;
+    }
+  }
+
   // 公开API
   return {
     init,
@@ -851,6 +905,9 @@ const MapView = (function() {
     refresh,
     destroy,
     showHoneyDetail,
-    closeHoneyDetail
+    closeHoneyDetail,
+    showContactModal,
+    closeContactModal,
+    callPhone
   };
 })();
