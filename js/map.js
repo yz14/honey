@@ -823,14 +823,14 @@ const MapView = (function() {
       nutritionHtml = details.nutrition;
     }
     
-    // 生成功效HTML（列举式，无圆点，每条不同颜色，无白色底框）
+    // 生成功效HTML（用分号连接，每条不同颜色）
     let benefitsHtml = '';
     if (Array.isArray(details.benefits)) {
       benefitsHtml = details.benefits.map((item, index) => 
-        `<p class="honey-detail__benefit-line" style="color: ${benefitColors[index % benefitColors.length]}">${item}</p>`
-      ).join('');
+        `<span style="color: ${benefitColors[index % benefitColors.length]}">${item}</span>`
+      ).join('；');
     } else {
-      benefitsHtml = `<p class="honey-detail__benefit-line">${details.benefits}</p>`;
+      benefitsHtml = details.benefits;
     }
     
     content.innerHTML = `
@@ -877,12 +877,9 @@ const MapView = (function() {
           <p class="honey-detail__inline-text"><strong>营养：</strong>${nutritionHtml}</p>
         </div>
         
-        <!-- 功效（列举式，无圆点，每条颜色不同） -->
+        <!-- 功效（分号连接，每条颜色不同） -->
         <div class="honey-detail__block honey-detail__block--benefits">
-          <p class="honey-detail__inline-label"><strong>功效：</strong></p>
-          <div class="honey-detail__benefits-list">
-            ${benefitsHtml}
-          </div>
+          <p class="honey-detail__inline-text"><strong>功效：</strong>${benefitsHtml}</p>
         </div>
         
         <!-- 储存提示 -->
