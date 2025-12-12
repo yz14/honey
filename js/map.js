@@ -44,16 +44,17 @@ const MapView = (function() {
       honeyByType[type] = (honeyByType[type] || 0) + r.honey.amount;
     });
     
-    // 蜂蜜瓶子颜色（与真实蜂蜜颜色对应）
+    // 蜂蜜瓶子颜色（与真实蜂蜜颜色对应 - 按用户文案）
     const honeyColors = {
-      '油菜花': '#F5C542',   // 金黄色，油菜花蜜特有的金黄
-      '龙眼': '#C68E4E',     // 琥珀色，龙眼蜜深琥珀色
-      '五倍子': '#8B5742',   // 深棕褐色，五倍子蜜颜色较深
-      '洋槐': '#FDF9E8',     // 水白色微黄，洋槐蜜是最清澈透明的蜂蜜
-      '百花': '#D4A857',     // 深金色，百花蜜颜色中等
-      '荆条': '#E5B56A',     // 浅琥珀色，荆条蜜颜色偏浅
-      '枣花': '#6B3A23',     // 深红棕色，枣花蜜颜色最深
-      '椴树': '#F0E6C8'      // 乳白淡黄，椴树蜜色浅细腻
+      '椴树': '#F0E6C8',     // 浅琥珀色至乳白色
+      '百花': '#D4A857',     // 金黄至深琥珀色
+      '洋槐': '#FDF9E8',     // 水白色至浅黄色
+      '龙眼': '#C68E4E',     // 琥珀色至深褐色
+      '荔枝': '#E8C170',     // 浅黄色至琥珀色（新增）
+      '油菜花': '#F5DFA0',   // 浅黄色至白色
+      '五倍子': '#8B5742',   // 深琥珀色至棕褐色
+      '枣花': '#6B3A23',     // 深琥珀色至红棕色
+      '荆条': '#E5B56A'      // 浅琥珀色至深黄色
     };
     
     const honeyBottlesHtml = Object.entries(honeyByType)
@@ -785,6 +786,11 @@ const MapView = (function() {
     }
   }
 
+  // 营养成分颜色数组
+  const nutritionColors = ['#E65100', '#1976D2', '#388E3C', '#7B1FA2'];
+  // 功效颜色数组
+  const benefitColors = ['#C62828', '#00838F', '#558B2F', '#6A1B9A'];
+
   // 显示蜂蜜详情卡片
   function showHoneyDetail(type) {
     const details = DataManager.getHoneyDetails(type);
@@ -793,13 +799,34 @@ const MapView = (function() {
     const card = document.getElementById('honey-detail-card');
     const content = document.getElementById('honey-detail-content');
     
-    // 解析结晶特性（分成两行）
-    const crystalParts = details.crystallize.split('，');
-    const crystalLine1 = crystalParts[0] || '';
-    const crystalLine2 = crystalParts[1] || '';
-    
     // 取第一个产地
     const mainOrigin = details.origin.split('、')[0];
+    
+    // 生成营养成分HTML（数组格式，每条不同颜色）
+    let nutritionHtml = '';
+    if (Array.isArray(details.nutrition)) {
+      nutritionHtml = details.nutrition.map((item, index) => 
+        `<p class="honey-detail__list-item" style="color: ${nutritionColors[index % nutritionColors.length]}">
+          <span class="honey-detail__list-dot" style="background: ${nutritionColors[index % nutritionColors.length]}"></span>
+          ${item}
+        </p>`
+      ).join('');
+    } else {
+      nutritionHtml = `<p class="honey-detail__list-item">${details.nutrition}</p>`;
+    }
+    
+    // 生成功效HTML（数组格式，每条不同颜色，列举式）
+    let benefitsHtml = '';
+    if (Array.isArray(details.benefits)) {
+      benefitsHtml = details.benefits.map((item, index) => 
+        `<p class="honey-detail__list-item honey-detail__benefit-item" style="color: ${benefitColors[index % benefitColors.length]}">
+          <span class="honey-detail__list-dot" style="background: ${benefitColors[index % benefitColors.length]}"></span>
+          ${item}
+        </p>`
+      ).join('');
+    } else {
+      benefitsHtml = `<p class="honey-detail__list-item">${details.benefits}</p>`;
+    }
     
     content.innerHTML = `
       <button class="honey-detail__close" onclick="MapView.closeHoneyDetail()">×</button>
@@ -830,25 +857,48 @@ const MapView = (function() {
             <span class="honey-detail__attr-label">产地</span>
           </div>
           <div class="honey-detail__attr">
-            <span class="honey-detail__attr-value">${crystalLine1}</span>
-            <span class="honey-detail__attr-label">${crystalLine2}</span>
+            <span class="honey-detail__attr-value" style="font-size: 11px;">${details.crystallize}</span>
+            <span class="honey-detail__attr-label">结晶</span>
           </div>
         </div>
         
+        <!-- 色泽外观 -->
+        ${details.appearance ? `
+        <div class="honey-detail__block honey-detail__block--appearance">
+          <div class="honey-detail__block-title">🎨 色泽外观</div>
+          <p class="honey-detail__block-text">${details.appearance}</p>
+        </div>
+        ` : ''}
+        
         <!-- 口感特点 -->
         <div class="honey-detail__block honey-detail__block--taste">
-          <p class="honey-detail__block-text"><strong>口感：</strong>${details.taste}，是品质上乘的天然佳品。</p>
+          <div class="honey-detail__block-title">👅 口感风味</div>
+          <p class="honey-detail__block-text">${details.taste}</p>
         </div>
         
-        <!-- 营养成分 -->
+        <!-- 营养成分（多颜色列表） -->
         <div class="honey-detail__block honey-detail__block--nutrition">
-          <p class="honey-detail__block-text"><strong>营养：</strong>${details.nutrition}，营养丰富均衡。</p>
+          <div class="honey-detail__block-title">🧬 营养成分</div>
+          <div class="honey-detail__list">
+            ${nutritionHtml}
+          </div>
         </div>
         
-        <!-- 主要功效 -->
+        <!-- 主要功效（多颜色列表） -->
         <div class="honey-detail__block honey-detail__block--benefits">
-          <p class="honey-detail__block-text"><strong>功效：</strong>${details.benefits}，老少皆宜。</p>
+          <div class="honey-detail__block-title">✨ 养生功效</div>
+          <div class="honey-detail__list">
+            ${benefitsHtml}
+          </div>
         </div>
+        
+        <!-- 适宜人群 -->
+        ${details.suitable ? `
+        <div class="honey-detail__block honey-detail__block--suitable">
+          <div class="honey-detail__block-title">👥 适宜人群</div>
+          <p class="honey-detail__block-text honey-detail__suitable-text">${details.suitable}</p>
+        </div>
+        ` : ''}
         
         <!-- 储存提示 -->
         <div class="honey-detail__storage">
