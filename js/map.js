@@ -95,6 +95,14 @@ const MapView = (function() {
           <div class="honey-bottles__scroll">${honeyBottlesHtml}</div>
         </div>
         
+        <!-- 手机端标语（竖排） -->
+        <div class="map-slogan" id="map-slogan">
+          <div class="map-slogan__column">春<br>入<br>云<br>南</div>
+          <div class="map-slogan__column">夏<br>越<br>秦<br>岭</div>
+          <div class="map-slogan__column">逐<br>花<br>深<br>入<br>云<br>深<br>处</div>
+          <div class="map-slogan__column">采<br>得<br>山<br>野<br>四<br>时<br>甜</div>
+        </div>
+        
         <!-- 蜂蜜详情卡片 -->
         <div class="honey-detail-card" id="honey-detail-card">
           <div class="honey-detail-card__overlay" onclick="MapView.closeHoneyDetail()"></div>

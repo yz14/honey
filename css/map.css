@@ -1056,6 +1056,86 @@
     display: flex;
     justify-content: center;
   }
+  
+  /* ===== 手机端标语样式 ===== */
+  .map-slogan {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 12px;
+    position: absolute;
+    bottom: 95px;
+    left: 0;
+    right: 0;
+    padding: 12px 20px;
+    z-index: 50;
+  }
+  
+  .map-slogan__column {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: "KaiTi", "STKaiti", "楷体", "华文楷体", "FangSong", "仿宋", serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    line-height: 1.8;
+    color: #5D4037;
+    text-shadow: 
+      1px 1px 0 rgba(255, 255, 255, 0.9),
+      -1px -1px 0 rgba(255, 255, 255, 0.9),
+      1px -1px 0 rgba(255, 255, 255, 0.9),
+      -1px 1px 0 rgba(255, 255, 255, 0.9);
+    background: linear-gradient(180deg, 
+      rgba(255, 248, 225, 0.85) 0%,
+      rgba(255, 236, 179, 0.75) 100%);
+    padding: 10px 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+    position: relative;
+  }
+  
+  /* 添加装饰性顶部 */
+  .map-slogan__column::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      #D4A857 30%, 
+      #E65100 50%, 
+      #D4A857 70%, 
+      transparent);
+    border-radius: 2px;
+  }
+  
+  /* 短句（4字） */
+  .map-slogan__column:nth-child(1),
+  .map-slogan__column:nth-child(2) {
+    font-size: 14px;
+    padding: 8px 5px;
+  }
+  
+  /* 长句（7字） */
+  .map-slogan__column:nth-child(3),
+  .map-slogan__column:nth-child(4) {
+    font-size: 15px;
+    background: linear-gradient(180deg, 
+      rgba(255, 243, 224, 0.9) 0%,
+      rgba(255, 224, 178, 0.8) 100%);
+    border-color: rgba(230, 81, 0, 0.25);
+  }
+}
+
+/* 桌面端隐藏标语 */
+@media (min-width: 769px) {
+  .map-slogan {
+    display: none;
+  }
 }
 
 /* ===== 联系方式按钮 ===== */
