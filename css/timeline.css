@@ -654,29 +654,6 @@
 
 /* ===== 手机端新增元素样式 ===== */
 @media (max-width: 768px) {
-  /* 手机端蜂蜜产量徽章 */
-  .timeline-item__honey-badge--mobile {
-    display: flex !important;
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-    padding: 8px 12px;
-    background: linear-gradient(135deg, rgba(255, 193, 7, 0.95), rgba(255, 152, 0, 0.95));
-    backdrop-filter: blur(4px);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    justify-content: center;
-    gap: 4px;
-  }
-  
-  .timeline-item__honey-badge--desktop {
-    display: none !important;
-  }
-  
   /* 蜂蜜产量展示条 */
   .timeline-item__yield {
     display: flex;
@@ -721,21 +698,43 @@
     text-align: right;
   }
   
-  /* 统计卡片配色 */
+  /* 统计卡片配色和SVG图标样式 */
   .timeline-item__stat--honey {
     background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  }
+  
+  .timeline-item__stat--honey .timeline-item__stat-icon {
+    color: #E65100;
   }
   
   .timeline-item__stat--quality {
     background: linear-gradient(135deg, #FFF8E1, #FFECB3);
   }
   
+  .timeline-item__stat--quality .timeline-item__stat-icon {
+    color: #F9A825;
+  }
+  
   .timeline-item__stat--days {
     background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
   }
   
+  .timeline-item__stat--days .timeline-item__stat-icon {
+    color: #388E3C;
+  }
+  
   .timeline-item__stat--weather {
     background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  }
+  
+  .timeline-item__stat--weather .timeline-item__stat-icon {
+    color: #1976D2;
+  }
+  
+  /* SVG图标尺寸 */
+  .timeline-item__stat-icon svg {
+    width: 22px;
+    height: 22px;
   }
   
   /* 缩略图选中效果增强 */
