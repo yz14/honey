@@ -86,8 +86,12 @@ const TimelineView = (function() {
               <button class="timeline-item__story-btn" onclick="ModalView.open(${record.id})">
                 查看故事
               </button>
+              <!-- 手机端显示蜂蜜产量徽章 -->
+              <div class="timeline-item__honey-badge timeline-item__honey-badge--mobile">
+                🍯 ${record.honey.amount}${record.honey.unit} · ${record.honey.type}
+              </div>
             </div>
-            ${renderThumbnails(record.media)}
+            ${renderThumbnails(record.media, record.id)}
           </div>
         </div>
         
@@ -117,35 +121,45 @@ const TimelineView = (function() {
             </div>
             <p class="timeline-item__excerpt">${record.story.excerpt}</p>
             
+            <!-- 统计信息卡片 -->
             <div class="timeline-item__stats">
-              <div class="timeline-item__stat">
+              <div class="timeline-item__stat timeline-item__stat--honey">
                 <span class="timeline-item__stat-icon">🌸</span>
                 <div class="timeline-item__stat-content">
                   <span class="timeline-item__stat-value">${record.honey.type}</span>
                   <span class="timeline-item__stat-label">蜜源类型</span>
                 </div>
               </div>
-              <div class="timeline-item__stat">
+              <div class="timeline-item__stat timeline-item__stat--quality">
                 <span class="timeline-item__stat-icon">⭐</span>
                 <div class="timeline-item__stat-content">
                   <span class="timeline-item__stat-value">${record.honey.quality}</span>
                   <span class="timeline-item__stat-label">品质等级</span>
                 </div>
               </div>
-              <div class="timeline-item__stat">
+              <div class="timeline-item__stat timeline-item__stat--days">
                 <span class="timeline-item__stat-icon">📅</span>
                 <div class="timeline-item__stat-content">
                   <span class="timeline-item__stat-value">${dateRange.days}天</span>
                   <span class="timeline-item__stat-label">驻留时间</span>
                 </div>
               </div>
-              <div class="timeline-item__stat">
+              <div class="timeline-item__stat timeline-item__stat--weather">
                 <span class="timeline-item__stat-icon">${record.weather.icon}</span>
                 <div class="timeline-item__stat-content">
                   <span class="timeline-item__stat-value">${record.weather.avgTemp}°C</span>
                   <span class="timeline-item__stat-label">平均气温</span>
                 </div>
               </div>
+            </div>
+            
+            <!-- 蜂蜜产量展示条 -->
+            <div class="timeline-item__yield">
+              <div class="timeline-item__yield-icon">🐝</div>
+              <div class="timeline-item__yield-bar">
+                <div class="timeline-item__yield-fill" style="width: ${Math.min(record.honey.amount / 5, 100)}%"></div>
+              </div>
+              <div class="timeline-item__yield-amount">${record.honey.amount}${record.honey.unit}</div>
             </div>
             
             <div class="timeline-item__tags">
@@ -163,16 +177,41 @@ const TimelineView = (function() {
   }
 
   // 渲染缩略图
-  function renderThumbnails(media) {
+  function renderThumbnails(media, recordId) {
     if (!media || media.length <= 1) return '';
     
     const thumbs = media.slice(0, 4).map((item, index) => `
-      <div class="timeline-item__thumb ${index === 0 ? 'active' : ''}">
+      <div class="timeline-item__thumb ${index === 0 ? 'active' : ''}" 
+           onclick="TimelineView.switchImage(${recordId}, ${index})"
+           data-index="${index}">
         <img src="${item.thumbnail}" alt="${item.caption || ''}" loading="lazy">
       </div>
     `).join('');
     
-    return `<div class="timeline-item__thumbnails">${thumbs}</div>`;
+    return `<div class="timeline-item__thumbnails" data-record-id="${recordId}">${thumbs}</div>`;
+  }
+
+  // 切换大图
+  function switchImage(recordId, imageIndex) {
+    const record = DataManager.getRecordById(recordId);
+    if (!record || !record.media || !record.media[imageIndex]) return;
+    
+    // 找到对应的timeline-item
+    const timelineItem = document.querySelector(`.timeline-item[data-id="${recordId}"]`);
+    if (!timelineItem) return;
+    
+    // 更新大图
+    const mainImage = timelineItem.querySelector('.timeline-item__main-image img');
+    if (mainImage) {
+      mainImage.src = record.media[imageIndex].url;
+      mainImage.alt = record.media[imageIndex].caption || record.story.title;
+    }
+    
+    // 更新缩略图选中状态
+    const thumbs = timelineItem.querySelectorAll('.timeline-item__thumb');
+    thumbs.forEach((thumb, index) => {
+      thumb.classList.toggle('active', index === imageIndex);
+    });
   }
 
   // 绑定滚动事件
@@ -271,6 +310,7 @@ const TimelineView = (function() {
     init,
     render,
     scrollToItem,
+    switchImage,
     destroy
   };
 })();

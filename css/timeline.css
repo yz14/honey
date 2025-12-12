@@ -517,35 +517,47 @@
   }
   
   .timeline-item__location {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     margin-bottom: 0;
+    font-weight: 600;
+  }
+  
+  .timeline-item__location svg {
+    width: 18px;
+    height: 18px;
+    color: var(--grass-green);
   }
   
   .timeline-item__date-mobile {
     display: block !important;
-    font-size: 11px;
-    color: var(--gray-500);
-    font-weight: 500;
-    padding: 2px 8px;
-    background: var(--gray-100);
+    font-size: 12px;
+    color: var(--honey-dark);
+    font-weight: 600;
+    padding: 4px 10px;
+    background: var(--honey-light);
     border-radius: var(--radius-full);
   }
   
   /* 标题 */
   .timeline-item__title {
-    font-size: var(--text-lg);
-    margin-bottom: var(--space-1);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive, serif;
+    letter-spacing: 1px;
+    color: var(--gray-800);
   }
   
   /* 简介 */
   .timeline-item__excerpt {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     color: var(--gray-600);
+    line-height: 1.6;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
   
   /* 统计信息 - 2x2网格 */
@@ -563,11 +575,16 @@
   }
   
   .timeline-item__stat-value {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
+    font-weight: 700;
   }
   
   .timeline-item__stat-label {
-    font-size: 10px;
+    font-size: 11px;
+  }
+  
+  .timeline-item__stat-icon {
+    font-size: var(--text-xl);
   }
   
   /* 标签 - 均匀分布 */
@@ -582,17 +599,27 @@
   .timeline-item__tag {
     flex: 1;
     text-align: center;
-    font-size: 11px;
-    padding: 4px 8px;
+    font-size: 12px;
+    padding: 6px 10px;
     min-width: 0;
+    font-weight: 600;
   }
   
-  /* 查看按钮 */
+  /* 查看按钮 - 去掉箭头，居中显示 */
   .timeline-item__btn {
     display: flex !important;
     width: 100%;
     justify-content: center;
     margin-top: auto;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-base);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  /* 手机端隐藏按钮箭头 */
+  .timeline-item__btn svg {
+    display: none !important;
   }
   
   /* 隐藏title-row和tags-inline（使用原始元素） */
@@ -614,5 +641,114 @@
 @media (min-width: 769px) {
   .timeline-item__honey-badge--desktop {
     display: flex !important;
+  }
+  
+  .timeline-item__honey-badge--mobile {
+    display: none !important;
+  }
+  
+  .timeline-item__yield {
+    display: none !important;
+  }
+}
+
+/* ===== 手机端新增元素样式 ===== */
+@media (max-width: 768px) {
+  /* 手机端蜂蜜产量徽章 */
+  .timeline-item__honey-badge--mobile {
+    display: flex !important;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.95), rgba(255, 152, 0, 0.95));
+    backdrop-filter: blur(4px);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    justify-content: center;
+    gap: 4px;
+  }
+  
+  .timeline-item__honey-badge--desktop {
+    display: none !important;
+  }
+  
+  /* 蜂蜜产量展示条 */
+  .timeline-item__yield {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-2);
+  }
+  
+  .timeline-item__yield-icon {
+    font-size: 20px;
+    animation: beeFly 2s ease-in-out infinite;
+  }
+  
+  @keyframes beeFly {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-3px) rotate(5deg); }
+  }
+  
+  .timeline-item__yield-bar {
+    flex: 1;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+  
+  .timeline-item__yield-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD54F, #FF8F00);
+    border-radius: var(--radius-full);
+    transition: width 0.5s ease;
+  }
+  
+  .timeline-item__yield-amount {
+    font-size: 14px;
+    font-weight: 700;
+    color: #E65100;
+    min-width: 50px;
+    text-align: right;
+  }
+  
+  /* 统计卡片配色 */
+  .timeline-item__stat--honey {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  }
+  
+  .timeline-item__stat--quality {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+  }
+  
+  .timeline-item__stat--days {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  }
+  
+  .timeline-item__stat--weather {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+  }
+  
+  /* 缩略图选中效果增强 */
+  .timeline-item__thumb.active {
+    opacity: 1;
+    border-color: var(--honey-gold);
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.4);
+    transform: scale(1.05);
+  }
+  
+  /* 图片区域圆角和阴影 */
+  .timeline-item__main-image {
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   }
 }
