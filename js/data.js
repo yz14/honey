@@ -514,7 +514,7 @@ const DataManager = (function() {
       name: '洋槐蜜', 
       // 洋槐花图片 - 白色槐花串
       image: 'https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=800&q=80',
-      color: '#F8F4E3', baume: '41-42°Be', season: '春季(4-5月)', origin: '陕西',
+      color: '#FDF9E8', baume: '41-42°Be', season: '春季(4-5月)', origin: '陕西',
       crystallize: '不易结晶，色泽清透',
       taste: '清香淡雅、甜而不腻，口味柔和细腻，后味清爽，带有淡淡槐花香气',
       nutrition: '果糖≈45%，葡萄糖≈30%，维生素C、K，矿物质钙、磷，多种酶类：淀粉酶、转化酶等',
@@ -536,7 +536,7 @@ const DataManager = (function() {
       name: '荆条蜜', 
       // 荆条花图片 - 紫色荆条花
       image: 'https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=800&q=80',
-      color: '#C9874D', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
+      color: '#E5B56A', baume: '41-42°Be', season: '夏季(6-7月)', origin: '河北',
       crystallize: '易结晶，颗粒细腻',
       taste: '甜润醇厚、略带微酸，口感绵密顺滑，回味持久，有独特草本清香',
       nutrition: '果糖≈40%，葡萄糖≈33%，维生素B1、B2，矿物质铁、锰、铜，天然果酸',
