@@ -698,37 +698,41 @@
     text-align: right;
   }
   
-  /* 统计卡片配色和SVG图标样式 */
-  .timeline-item__stat--honey {
-    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
-  }
-  
-  .timeline-item__stat--honey .timeline-item__stat-icon {
-    color: #E65100;
-  }
-  
-  .timeline-item__stat--quality {
-    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
-  }
-  
-  .timeline-item__stat--quality .timeline-item__stat-icon {
-    color: #F9A825;
-  }
-  
-  .timeline-item__stat--days {
+  /* 统计卡片配色 - 体现自然采集特点 */
+  /* 采蜜环境 - 森林绿 */
+  .timeline-item__stat--environment {
     background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
   }
   
-  .timeline-item__stat--days .timeline-item__stat-icon {
-    color: #388E3C;
+  .timeline-item__stat--environment .timeline-item__stat-icon {
+    color: #2E7D32;
   }
   
-  .timeline-item__stat--weather {
+  /* 海拔高度 - 山峰蓝 */
+  .timeline-item__stat--altitude {
     background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
   }
   
+  .timeline-item__stat--altitude .timeline-item__stat-icon {
+    color: #1565C0;
+  }
+  
+  /* 蜜蜂品种 - 蜂蜜金 */
+  .timeline-item__stat--bee {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+  }
+  
+  .timeline-item__stat--bee .timeline-item__stat-icon {
+    color: #F9A825;
+  }
+  
+  /* 平均气温 - 阳光橙 */
+  .timeline-item__stat--weather {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  }
+  
   .timeline-item__stat--weather .timeline-item__stat-icon {
-    color: #1976D2;
+    color: #E65100;
   }
   
   /* SVG图标尺寸 */

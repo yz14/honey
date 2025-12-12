@@ -117,45 +117,45 @@ const TimelineView = (function() {
             </div>
             <p class="timeline-item__excerpt">${record.story.excerpt}</p>
             
-            <!-- 统计信息卡片 -->
+            <!-- 统计信息卡片 - 体现自然采集特点 -->
             <div class="timeline-item__stats">
-              <div class="timeline-item__stat timeline-item__stat--honey">
-                <span class="timeline-item__stat-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                    <path d="M12 6c-2.67 0-8 1.34-8 4v2c0 2.66 5.33 4 8 4s8-1.34 8-4v-2c0-2.66-5.33-4-8-4z" fill="currentColor" opacity="0.3"/>
-                    <circle cx="12" cy="10" r="3" fill="currentColor"/>
-                  </svg>
-                </span>
-                <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.honey.type}</span>
-                  <span class="timeline-item__stat-label">蜜源类型</span>
-                </div>
-              </div>
-              <div class="timeline-item__stat timeline-item__stat--quality">
+              <div class="timeline-item__stat timeline-item__stat--environment">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/>
+                    <path d="M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z"/>
+                    <circle cx="17.5" cy="4.5" r="2.5"/>
                   </svg>
                 </span>
                 <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.honey.quality}</span>
-                  <span class="timeline-item__stat-label">品质等级</span>
+                  <span class="timeline-item__stat-value">${record.environment || '自然山野'}</span>
+                  <span class="timeline-item__stat-label">采蜜环境</span>
                 </div>
               </div>
-              <div class="timeline-item__stat timeline-item__stat--days">
+              <div class="timeline-item__stat timeline-item__stat--altitude">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                    <circle cx="12" cy="16" r="2" fill="currentColor"/>
+                    <path d="M12 2L2 22h20L12 2z"/>
+                    <path d="M12 8v8M8 16h8"/>
                   </svg>
                 </span>
                 <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${dateRange.days}天</span>
-                  <span class="timeline-item__stat-label">驻留时间</span>
+                  <span class="timeline-item__stat-value">${record.altitude || '800m'}</span>
+                  <span class="timeline-item__stat-label">海拔高度</span>
+                </div>
+              </div>
+              <div class="timeline-item__stat timeline-item__stat--bee">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <ellipse cx="12" cy="14" rx="5" ry="6"/>
+                    <ellipse cx="12" cy="6" rx="3" ry="3"/>
+                    <path d="M7 14c-2 0-4-1-4-2s2-2 4-2M17 14c2 0 4-1 4-2s-2-2-4-2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <line x1="8" y1="12" x2="16" y2="12" stroke="#FFF" stroke-width="1"/>
+                    <line x1="8" y1="15" x2="16" y2="15" stroke="#FFF" stroke-width="1"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.beeType || '中华蜂'}</span>
+                  <span class="timeline-item__stat-label">蜜蜂品种</span>
                 </div>
               </div>
               <div class="timeline-item__stat timeline-item__stat--weather">
