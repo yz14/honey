@@ -80,6 +80,14 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
+        <!-- 手机端标语（竖排）- 在地图标题正下方 -->
+        <div class="map-slogan" id="map-slogan">
+          <div class="map-slogan__col">春<br>入<br>云<br>南</div>
+          <div class="map-slogan__col">夏<br>越<br>秦<br>岭</div>
+          <div class="map-slogan__col">逐<br>花<br>深<br>入<br>云<br>深<br>处</div>
+          <div class="map-slogan__col">采<br>得<br>山<br>野<br>四<br>时<br>甜</div>
+        </div>
+        
         <!-- 省份名称显示 -->
         <div class="map-province-label" id="province-label"></div>
         
@@ -93,14 +101,6 @@ const MapView = (function() {
         <!-- 底部蜂蜜瓶子（手机端显示） -->
         <div class="honey-bottles-container" id="honey-bottles">
           <div class="honey-bottles__scroll">${honeyBottlesHtml}</div>
-        </div>
-        
-        <!-- 手机端标语（竖排） -->
-        <div class="map-slogan" id="map-slogan">
-          <div class="map-slogan__column">春<br>入<br>云<br>南</div>
-          <div class="map-slogan__column">夏<br>越<br>秦<br>岭</div>
-          <div class="map-slogan__column">逐<br>花<br>深<br>入<br>云<br>深<br>处</div>
-          <div class="map-slogan__column">采<br>得<br>山<br>野<br>四<br>时<br>甜</div>
         </div>
         
         <!-- 蜂蜜详情卡片 -->

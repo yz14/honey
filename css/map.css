@@ -1033,77 +1033,55 @@
     justify-content: center;
   }
   
-  /* ===== 手机端标语样式 ===== */
+  /* ===== 手机端标语样式 - 地图标题正下方，竖排一列一句 ===== */
   .map-slogan {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
     position: absolute;
-    bottom: 95px;
-    left: 0;
-    right: 0;
-    padding: 12px 20px;
-    z-index: 50;
-  }
-  
-  .map-slogan__column {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    font-family: "KaiTi", "STKaiti", "楷体", "华文楷体", "FangSong", "仿宋", serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    line-height: 1.8;
-    color: #5D4037;
-    text-shadow: 
-      1px 1px 0 rgba(255, 255, 255, 0.9),
-      -1px -1px 0 rgba(255, 255, 255, 0.9),
-      1px -1px 0 rgba(255, 255, 255, 0.9),
-      -1px 1px 0 rgba(255, 255, 255, 0.9);
-    background: linear-gradient(180deg, 
-      rgba(255, 248, 225, 0.85) 0%,
-      rgba(255, 236, 179, 0.75) 100%);
-    padding: 10px 6px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 193, 7, 0.3);
-    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
-    position: relative;
-  }
-  
-  /* 添加装饰性顶部 */
-  .map-slogan__column::before {
-    content: '';
-    position: absolute;
-    top: 0;
+    top: 32px;
     left: 50%;
     transform: translateX(-50%);
-    width: 60%;
-    height: 3px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      #D4A857 30%, 
-      #E65100 50%, 
-      #D4A857 70%, 
-      transparent);
-    border-radius: 2px;
+    z-index: 100;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, 
+      rgba(255, 251, 240, 0.92) 0%,
+      rgba(255, 243, 224, 0.88) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(212, 168, 87, 0.4);
+    box-shadow: 0 3px 12px rgba(139, 69, 19, 0.2);
   }
   
-  /* 短句（4字） */
-  .map-slogan__column:nth-child(1),
-  .map-slogan__column:nth-child(2) {
+  .map-slogan__col {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: "Ma Shan Zheng", "ZCOOL XiaoWei", "KaiTi", "STKaiti", "楷体", serif;
     font-size: 14px;
-    padding: 8px 5px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    color: #5D4037;
+    padding: 6px 4px;
+    border-right: 1px dashed rgba(212, 168, 87, 0.3);
   }
   
-  /* 长句（7字） */
-  .map-slogan__column:nth-child(3),
-  .map-slogan__column:nth-child(4) {
-    font-size: 15px;
-    background: linear-gradient(180deg, 
-      rgba(255, 243, 224, 0.9) 0%,
-      rgba(255, 224, 178, 0.8) 100%);
-    border-color: rgba(230, 81, 0, 0.25);
+  .map-slogan__col:last-child {
+    border-right: none;
+  }
+  
+  /* 第1、2列（短句4字） */
+  .map-slogan__col:nth-child(1),
+  .map-slogan__col:nth-child(2) {
+    color: #6D4C41;
+  }
+  
+  /* 第3、4列（长句7字）用深色突出 */
+  .map-slogan__col:nth-child(3),
+  .map-slogan__col:nth-child(4) {
+    color: #BF360C;
+    font-weight: 500;
   }
 }
 
