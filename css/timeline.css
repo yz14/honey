@@ -735,6 +735,42 @@
     color: #E65100;
   }
   
+  /* 产量 - 蜜滴红 */
+  .timeline-item__stat--yield {
+    background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+  }
+  
+  .timeline-item__stat--yield .timeline-item__stat-icon {
+    color: #C62828;
+  }
+  
+  /* 蜂蜜类型 - 琥珀棕 */
+  .timeline-item__stat--type {
+    background: linear-gradient(135deg, #EFEBE9, #D7CCC8);
+  }
+  
+  .timeline-item__stat--type .timeline-item__stat-icon {
+    color: #5D4037;
+  }
+  
+  /* 季节 - 春叶青 */
+  .timeline-item__stat--season {
+    background: linear-gradient(135deg, #F1F8E9, #DCEDC8);
+  }
+  
+  .timeline-item__stat--season .timeline-item__stat-icon {
+    color: #558B2F;
+  }
+  
+  /* 蜂蜜质量 - 星光金 */
+  .timeline-item__stat--quality {
+    background: linear-gradient(135deg, #FFFDE7, #FFF9C4);
+  }
+  
+  .timeline-item__stat--quality .timeline-item__stat-icon {
+    color: #F9A825;
+  }
+  
   /* SVG图标尺寸 */
   .timeline-item__stat-icon svg {
     width: 22px;

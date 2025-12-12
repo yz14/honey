@@ -170,25 +170,60 @@ const TimelineView = (function() {
                   <span class="timeline-item__stat-label">平均气温</span>
                 </div>
               </div>
-            </div>
-            
-            <!-- 蜂蜜产量展示条 -->
-            <div class="timeline-item__yield">
-              <div class="timeline-item__yield-icon">🐝</div>
-              <div class="timeline-item__yield-bar">
-                <div class="timeline-item__yield-fill" style="width: ${Math.min(record.honey.amount / 5, 100)}%"></div>
+              <!-- 产量 -->
+              <div class="timeline-item__stat timeline-item__stat--yield">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8 2 4 6 4 10c0 5.25 7 11.5 7.5 12 .28.28.72.28 1 0C13 21.5 20 15.25 20 10c0-4-4-8-8-8z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.honey.amount}${record.honey.unit}</span>
+                  <span class="timeline-item__stat-label">产量</span>
+                </div>
               </div>
-              <div class="timeline-item__yield-amount">${record.honey.amount}${record.honey.unit}</div>
+              <!-- 蜂蜜类型 -->
+              <div class="timeline-item__stat timeline-item__stat--type">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 3c-1.5 2-3 4-3 6 0 2.5 1.5 4 3 5 1.5-1 3-2.5 3-5 0-2-1.5-4-3-6z"/>
+                    <path d="M12 14c-2 1.5-4 3-4 5.5C8 21.5 10 23 12 23s4-1.5 4-3.5c0-2.5-2-4-4-5.5z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.honey.type}</span>
+                  <span class="timeline-item__stat-label">蜂蜜类型</span>
+                </div>
+              </div>
+              <!-- 季节 -->
+              <div class="timeline-item__stat timeline-item__stat--season">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.season || dateRange.season}</span>
+                  <span class="timeline-item__stat-label">季节</span>
+                </div>
+              </div>
+              <!-- 蜂蜜质量 -->
+              <div class="timeline-item__stat timeline-item__stat--quality">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.honey.quality || '优质'}</span>
+                  <span class="timeline-item__stat-label">蜂蜜质量</span>
+                </div>
+              </div>
             </div>
             
             <div class="timeline-item__tags">
               ${record.tags.map(tag => `<span class="timeline-item__tag">${tag}</span>`).join('')}
             </div>
-            
-            <button class="timeline-item__btn" onclick="ModalView.open(${record.id})">
-              查看完整故事
-              ${Utils.getIcon('chevronRight')}
-            </button>
           </div>
         </div>
       </div>
