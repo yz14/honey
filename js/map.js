@@ -89,7 +89,16 @@ const MapView = (function() {
           <div class="map-title-bar__main" onclick="location.reload()">
             好源蜜舍<span class="map-title-bar__dot">·</span>采蜜足迹图
           </div>
-          <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
+          <button class="map-title-bar__toggle" id="mobile-view-toggle" title="切换到时间轴">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+              <circle cx="7" cy="6" r="2" fill="currentColor"></circle>
+              <circle cx="12" cy="12" r="2" fill="currentColor"></circle>
+              <circle cx="17" cy="18" r="2" fill="currentColor"></circle>
+            </svg>
+          </button>
         </div>
         
         <!-- 手机端底部控制栏 - 联系按钮 | 年份（居中）| 放大缩小 -->

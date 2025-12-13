@@ -27,11 +27,17 @@ const TimelineView = (function() {
     );
     
     container.innerHTML = `
-      <!-- 手机端标题栏 - 独立一栏，只有居中标题 -->
+      <!-- 手机端标题栏 - 标题居中，切换按钮右对齐 -->
       <div class="timeline-title-bar" id="timeline-title-bar">
         <div class="timeline-title-bar__main" onclick="location.reload()">
           好源蜜舍<span class="timeline-title-bar__dot">·</span>采蜜足迹
         </div>
+        <button class="timeline-title-bar__toggle" id="timeline-view-toggle" title="切换到地图">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </button>
       </div>
       
       <!-- 中心时间轴线 -->
@@ -69,10 +75,17 @@ const TimelineView = (function() {
     bindTimelineTitleBarEvents();
   }
   
-  // 绑定时间轴标题栏事件（简化版 - 只有标题，无需额外绑定）
+  // 绑定时间轴标题栏事件
   function bindTimelineTitleBarEvents() {
-    // 标题栏已简化，只有居中标题，点击刷新页面（已在HTML onclick中处理）
-    // 无需额外绑定年份选择器和视图切换按钮
+    const viewToggle = document.getElementById('timeline-view-toggle');
+    
+    if (viewToggle) {
+      viewToggle.addEventListener('click', () => {
+        if (typeof App !== 'undefined' && App.switchView) {
+          App.switchView('map');
+        }
+      });
+    }
   }
   
   // 显示年份选择弹框
