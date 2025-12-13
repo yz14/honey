@@ -862,17 +862,9 @@ const MapView = (function() {
     });
   }
   
-  // 更新手机端切换文字
+  // 更新手机端切换按钮（图标模式，无需更新内容）
   function updateMobileViewToggle(view) {
-    const mapToggle = document.getElementById('mobile-view-toggle');
-    const timelineToggle = document.getElementById('timeline-view-toggle');
-    
-    if (mapToggle) {
-      mapToggle.textContent = view === 'map' ? '地图' : '时间轴';
-    }
-    if (timelineToggle) {
-      timelineToggle.textContent = view === 'map' ? '地图' : '时间轴';
-    }
+    // 切换按钮已改为图标，不再需要更新文字
   }
 
   // 缩放功能
