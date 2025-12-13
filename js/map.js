@@ -84,9 +84,11 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
-        <!-- 手机端标题（可点击刷新） -->
-        <div class="map-title-overlay" id="map-title-overlay" onclick="location.reload()">
-          好源蜜舍<span class="map-title-overlay__dot">·</span>采蜜足迹图
+        <!-- 手机端标题栏 -->
+        <div class="map-title-bar" id="map-title-bar">
+          <span class="map-title-bar__year" id="mobile-year-picker">${DataManager.getCurrentYear()}</span>
+          <span class="map-title-bar__title" onclick="location.reload()">好源蜜舍<span class="map-title-bar__dot">·</span>采蜜足迹图</span>
+          <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
         </div>
         
         <!-- 手机端标语 - 右上角竖列一句排列 -->
@@ -504,6 +506,9 @@ const MapView = (function() {
 
     // 应用配置
     chartInstance.setOption(option);
+    
+    // 绑定手机端标题栏事件
+    bindMobileTitleBarEvents();
 
     // 点击事件
     chartInstance.on('click', function(params) {
@@ -758,6 +763,88 @@ const MapView = (function() {
       label.classList.remove('show');
     }
   }
+  
+  // 绑定手机端标题栏事件
+  function bindMobileTitleBarEvents() {
+    const yearPicker = document.getElementById('mobile-year-picker');
+    const viewToggle = document.getElementById('mobile-view-toggle');
+    
+    if (yearPicker) {
+      yearPicker.addEventListener('click', showMobileYearPicker);
+    }
+    
+    if (viewToggle) {
+      viewToggle.addEventListener('click', () => {
+        const currentView = DataManager.getCurrentView();
+        const newView = currentView === 'map' ? 'timeline' : 'map';
+        
+        // 通过 App 切换视图
+        if (typeof App !== 'undefined' && App.switchView) {
+          App.switchView(newView);
+        }
+      });
+    }
+  }
+  
+  // 显示手机端年份选择弹框
+  function showMobileYearPicker() {
+    const currentYear = DataManager.getCurrentYear();
+    const minYear = 2020;
+    const maxYear = new Date().getFullYear();
+    const years = [];
+    for (let y = maxYear; y >= minYear; y--) {
+      years.push(y);
+    }
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'year-picker-overlay';
+    overlay.innerHTML = `
+      <div class="year-picker-modal">
+        <div class="year-picker-modal__title">选择年份</div>
+        <div class="year-picker-modal__list">
+          ${years.map(y => `
+            <button class="year-picker-modal__item ${y === currentYear ? 'active' : ''}" data-year="${y}">
+              ${y}年
+            </button>
+          `).join('')}
+        </div>
+        <button class="year-picker-modal__close">取消</button>
+      </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    overlay.querySelector('.year-picker-modal__close').addEventListener('click', () => {
+      overlay.remove();
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    
+    overlay.querySelectorAll('.year-picker-modal__item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const year = parseInt(btn.dataset.year);
+        DataManager.setCurrentYear(year);
+        
+        // 更新年份显示
+        const yearEl = document.getElementById('mobile-year-picker');
+        if (yearEl) yearEl.textContent = year;
+        
+        // 刷新视图
+        render();
+        overlay.remove();
+      });
+    });
+  }
+  
+  // 更新手机端切换文字
+  function updateMobileViewToggle(view) {
+    const toggle = document.getElementById('mobile-view-toggle');
+    if (toggle) {
+      toggle.textContent = view === 'map' ? '地图' : '时间轴';
+    }
+  }
 
   // 缩放功能
   function zoomIn() {
@@ -981,6 +1068,7 @@ const MapView = (function() {
     closeHoneyDetail,
     showContactModal,
     closeContactModal,
-    callPhone
+    callPhone,
+    updateMobileViewToggle
   };
 })();

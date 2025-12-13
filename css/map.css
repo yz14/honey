@@ -34,39 +34,72 @@
   z-index: 10;
 }
 
-/* === 手机端标题覆盖层 === */
-.map-title-overlay {
+/* === 手机端标题栏 === */
+.map-title-bar {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .map-title-overlay {
-    display: block;
+  .map-title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 8px;
+    left: 12px;
+    right: 12px;
     z-index: 50;
+  }
+  
+  .map-title-bar__year {
     font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #5D4037;
+    cursor: pointer;
+    text-shadow: 
+      2px 2px 4px rgba(255,255,255,0.95),
+      -2px -2px 4px rgba(255,255,255,0.95);
+  }
+  
+  .map-title-bar__year:active {
+    opacity: 0.7;
+  }
+  
+  .map-title-bar__title {
+    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
+    font-size: 18px;
     font-weight: bold;
     color: #6B4423;
-    white-space: nowrap;
     cursor: pointer;
     text-shadow: 
       2px 2px 4px rgba(255,255,255,0.95),
       -2px -2px 4px rgba(255,255,255,0.95),
       0 0 8px rgba(255,255,255,0.9);
-    transition: transform 0.2s;
   }
   
-  .map-title-overlay:active {
-    transform: translateX(-50%) scale(0.95);
+  .map-title-bar__title:active {
+    opacity: 0.7;
   }
   
-  .map-title-overlay__dot {
+  .map-title-bar__dot {
     color: #FFA726;
     margin: 0 2px;
+  }
+  
+  .map-title-bar__toggle {
+    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFA726;
+    cursor: pointer;
+    text-shadow: 
+      2px 2px 4px rgba(255,255,255,0.95),
+      -2px -2px 4px rgba(255,255,255,0.95);
+  }
+  
+  .map-title-bar__toggle:active {
+    opacity: 0.7;
   }
 }
 

@@ -498,13 +498,9 @@ a:hover {
     --header-height: 44px;
   }
   
-  /* 手机端header - 透明嵌入式 */
+  /* 手机端隐藏整个header */
   .header {
-    padding: 0 var(--space-3);
-    background: transparent;
-    backdrop-filter: none;
-    border-bottom: none;
-    justify-content: space-between;
+    display: none !important;
   }
   
   /* 手机端隐藏桌面Logo */
@@ -664,9 +660,13 @@ a:hover {
     display: none !important; /* 隐藏底部统计条 */
   }
   
-  /* 视图容器占满剩余空间 */
+  /* 视图容器占满全屏 */
   .view-container {
-    height: calc(100vh - 44px) !important;
+    height: 100vh !important;
+  }
+  
+  .main-content {
+    padding-top: 0;
   }
   
   .container {

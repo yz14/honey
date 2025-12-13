@@ -248,6 +248,11 @@ const App = (function() {
       elements.viewTextBtn.classList.toggle('timeline', view === 'timeline');
     }
     
+    // 更新地图标题栏中的切换文字
+    if (typeof MapView !== 'undefined' && MapView.updateMobileViewToggle) {
+      MapView.updateMobileViewToggle(view);
+    }
+    
     // 切换视图显示
     if (elements.mapView) {
       elements.mapView.classList.toggle('active', view === 'map');
