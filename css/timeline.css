@@ -13,15 +13,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     height: 44px;
     background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
     border-bottom: 2px solid #FFD54F;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    z-index: 100;
+    flex-shrink: 0;
   }
   
   .timeline-title-bar__main {
@@ -471,22 +468,21 @@
 }
 
 @media (max-width: 768px) {
-  /* 时间轴容器 */
+  /* 时间轴容器 - flex布局，标题在上，内容在下 */
   .timeline-view {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     padding: 0;
     overflow: hidden;
   }
   
-  /* 内容容器 - 预留顶部44px给标题栏 */
+  /* 内容容器 - 填满剩余空间 */
   .timeline {
     scroll-snap-type: y mandatory;
-    padding-top: 44px;
-    height: 100%;
+    flex: 1;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
   }
   
   /* 每个采集点充满整个可视区域（标题栏下方到底部） */
