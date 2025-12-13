@@ -311,7 +311,7 @@ const MapView = (function() {
           color: '#6B4423',
           fontSize: isMobile ? 20 : 24,
           fontWeight: 'bold',
-          fontFamily: '"ZCOOL XiaoWei", "Ma Shan Zheng", "STKaiti", "KaiTi", "楷体", cursive, serif'
+          fontFamily: '"ZCOOL XiaoWei", "ZCOOL KuaiLe", "STXinwei", "华文新魏", "PingFang SC", "Heiti SC", sans-serif'
         }
       },
       tooltip: {
