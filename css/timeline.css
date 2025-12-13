@@ -450,14 +450,11 @@
 }
 
 @media (max-width: 768px) {
-  /* 时间轴容器 - 固定定位，从标题栏下方开始 */
+  /* 时间轴容器 - 预留顶部标题栏空间 */
   .timeline-view {
-    position: fixed;
-    top: 44px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: auto;
+    position: relative;
+    margin-top: 44px;
+    height: calc(100vh - 44px);
     padding: 0;
     overflow: hidden;
   }
