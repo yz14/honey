@@ -130,6 +130,9 @@ const ModalView = (function() {
       </div>
       
       <div class="modal__body modal__body--story">
+        <!-- 媒体画廊（放在前面） -->
+        ${record.media && record.media.length > 0 ? renderGallery(record.media) : ''}
+        
         <!-- 采蜜故事 -->
         <div class="modal__section modal__section--story">
           <h3 class="modal__section-title modal__section-title--story">
@@ -146,9 +149,6 @@ const ModalView = (function() {
             ${record.story.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
           </div>
         </div>
-        
-        <!-- 媒体画廊 -->
-        ${record.media && record.media.length > 0 ? renderGallery(record.media) : ''}
       </div>
     `;
   }

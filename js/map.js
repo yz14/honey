@@ -97,9 +97,11 @@ const MapView = (function() {
         
         <!-- 左侧统计描述（手机端显示） -->
         <div class="map-stats-overlay" id="map-stats-overlay">
-          <p>踏足 <strong>${stats.provinces}</strong> 省</p>
-          <p>行程 <strong>${stats.totalKm}</strong> 公里</p>
-          <p>采集 <strong>${stats.totalHoney}</strong> 斤蜜</p>
+          <p>8次转场</p>
+          <p>6省辗转</p>
+          <p>4000次蜂箱搬运</p>
+          <p>12000公里风雨兼程</p>
+          <p>只为这一口山野的甜</p>
         </div>
         
         <!-- 底部蜂蜜瓶子（手机端显示） -->
@@ -309,7 +311,7 @@ const MapView = (function() {
           color: '#6B4423',
           fontSize: isMobile ? 20 : 24,
           fontWeight: 'bold',
-          fontFamily: 'Quicksand, Nunito, sans-serif'
+          fontFamily: '"Ma Shan Zheng", "ZCOOL XiaoWei", "STKaiti", "KaiTi", "楷体", cursive, serif'
         }
       },
       tooltip: {

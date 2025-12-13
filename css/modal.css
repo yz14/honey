@@ -702,6 +702,7 @@
   gap: var(--space-3);
   font-size: var(--text-xl);
   font-weight: 700;
+  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
   color: var(--honey-dark);
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);
@@ -719,8 +720,9 @@
 /* 故事内容 - 放大字体 */
 .modal__story--large {
   font-size: var(--text-base);
-  line-height: 1.9;
+  line-height: 2;
   color: var(--gray-700);
+  font-family: 'STKaiti', 'KaiTi', '楷体', 'PingFang SC', 'Microsoft YaHei', serif;
 }
 
 .modal__story--large p {
@@ -754,7 +756,8 @@
   
   .modal__story--large {
     font-size: 15px;
-    line-height: 1.85;
+    line-height: 1.9;
+    font-family: 'STKaiti', 'KaiTi', '楷体', 'PingFang SC', 'Microsoft YaHei', serif;
   }
   
   .modal__story--large p {
