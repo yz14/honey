@@ -119,6 +119,58 @@ const TimelineView = (function() {
             
             <!-- 统计信息卡片 - 体现自然采集特点 -->
             <div class="timeline-item__stats">
+              <!-- 1. 蜂蜜类型 -->
+              <div class="timeline-item__stat timeline-item__stat--type">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2V4c0-1.1-.9-2-2-2z"/>
+                    <path d="M5 11c-.55 0-1 .45-1 1v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-.55-.45-1-1-1H5zm7 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                    <circle cx="12" cy="16" r="2"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.honey.type}</span>
+                  <span class="timeline-item__stat-label">蜂蜜类型</span>
+                </div>
+              </div>
+              <!-- 2. 蜂蜜品质 -->
+              <div class="timeline-item__stat timeline-item__stat--quality">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.honey.quality || '优质'}</span>
+                  <span class="timeline-item__stat-label">蜂蜜品质</span>
+                </div>
+              </div>
+              <!-- 3. 季节 -->
+              <div class="timeline-item__stat timeline-item__stat--season">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${season.name}</span>
+                  <span class="timeline-item__stat-label">季节</span>
+                </div>
+              </div>
+              <!-- 4. 平均气温 -->
+              <div class="timeline-item__stat timeline-item__stat--weather">
+                <span class="timeline-item__stat-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+                </span>
+                <div class="timeline-item__stat-content">
+                  <span class="timeline-item__stat-value">${record.weather.avgTemp}°C</span>
+                  <span class="timeline-item__stat-label">平均气温</span>
+                </div>
+              </div>
+              <!-- 5. 采蜜环境 -->
               <div class="timeline-item__stat timeline-item__stat--environment">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -131,6 +183,7 @@ const TimelineView = (function() {
                   <span class="timeline-item__stat-label">采蜜环境</span>
                 </div>
               </div>
+              <!-- 6. 海拔高度 -->
               <div class="timeline-item__stat timeline-item__stat--altitude">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -143,6 +196,7 @@ const TimelineView = (function() {
                   <span class="timeline-item__stat-label">海拔高度</span>
                 </div>
               </div>
+              <!-- 7. 蜜蜂品种 -->
               <div class="timeline-item__stat timeline-item__stat--bee">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -158,23 +212,10 @@ const TimelineView = (function() {
                   <span class="timeline-item__stat-label">蜜蜂品种</span>
                 </div>
               </div>
-              <div class="timeline-item__stat timeline-item__stat--weather">
-                <span class="timeline-item__stat-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <circle cx="12" cy="12" r="5"/>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/>
-                  </svg>
-                </span>
-                <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.weather.avgTemp}°C</span>
-                  <span class="timeline-item__stat-label">平均气温</span>
-                </div>
-              </div>
-              <!-- 产量 -->
+              <!-- 8. 产量 -->
               <div class="timeline-item__stat timeline-item__stat--yield">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
-                    <!-- 油罐图标 -->
                     <path d="M4 21h16v-7H4v7zm2-5h12v3H6v-3z"/>
                     <path d="M6 13h12V9c0-1.1-.9-2-2-2h-1V5c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v2H8c-1.1 0-2 .9-2 2v4zm4-8h4v2h-4V5z"/>
                   </svg>
@@ -182,45 +223,6 @@ const TimelineView = (function() {
                 <div class="timeline-item__stat-content">
                   <span class="timeline-item__stat-value">${record.honey.amount}${record.honey.unit}</span>
                   <span class="timeline-item__stat-label">产量</span>
-                </div>
-              </div>
-              <!-- 蜂蜜类型 -->
-              <div class="timeline-item__stat timeline-item__stat--type">
-                <span class="timeline-item__stat-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <!-- 蜂蜜罐图标 -->
-                    <path d="M12 2c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2V4c0-1.1-.9-2-2-2z"/>
-                    <path d="M5 11c-.55 0-1 .45-1 1v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-.55-.45-1-1-1H5zm7 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
-                    <circle cx="12" cy="16" r="2"/>
-                  </svg>
-                </span>
-                <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.honey.type}</span>
-                  <span class="timeline-item__stat-label">蜂蜜类型</span>
-                </div>
-              </div>
-              <!-- 季节 -->
-              <div class="timeline-item__stat timeline-item__stat--season">
-                <span class="timeline-item__stat-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
-                  </svg>
-                </span>
-                <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${season.name}</span>
-                  <span class="timeline-item__stat-label">季节</span>
-                </div>
-              </div>
-              <!-- 蜂蜜质量 -->
-              <div class="timeline-item__stat timeline-item__stat--quality">
-                <span class="timeline-item__stat-icon">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                  </svg>
-                </span>
-                <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.honey.quality || '优质'}</span>
-                  <span class="timeline-item__stat-label">蜂蜜质量</span>
                 </div>
               </div>
             </div>

@@ -626,22 +626,10 @@ const MapView = (function() {
     const dateRange = Utils.getDateRange(record.date.start, record.date.end);
     
     title.textContent = record.location.name;
-    subtitle.textContent = `${record.location.province} · ${dateRange.rangeText}`;
+    subtitle.textContent = dateRange.rangeText;
     
     content.innerHTML = `
       <div class="map-info-panel__stats">
-        <div class="map-info-panel__stat">
-          <span class="map-info-panel__stat-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4 21h16v-7H4v7zm2-5h12v3H6v-3z"/>
-              <path d="M6 13h12V9c0-1.1-.9-2-2-2h-1V5c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v2H8c-1.1 0-2 .9-2 2v4zm4-8h4v2h-4V5z"/>
-            </svg>
-          </span>
-          <div>
-            <div class="map-info-panel__stat-value">${record.honey.amount}${record.honey.unit}</div>
-            <div class="map-info-panel__stat-label">产量</div>
-          </div>
-        </div>
         <div class="map-info-panel__stat">
           <span class="map-info-panel__stat-icon">
             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -679,6 +667,18 @@ const MapView = (function() {
           <div>
             <div class="map-info-panel__stat-value">${record.weather.avgTemp}°C</div>
             <div class="map-info-panel__stat-label">气温</div>
+          </div>
+        </div>
+        <div class="map-info-panel__stat">
+          <span class="map-info-panel__stat-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 21h16v-7H4v7zm2-5h12v3H6v-3z"/>
+              <path d="M6 13h12V9c0-1.1-.9-2-2-2h-1V5c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v2H8c-1.1 0-2 .9-2 2v4zm4-8h4v2h-4V5z"/>
+            </svg>
+          </span>
+          <div>
+            <div class="map-info-panel__stat-value">${record.honey.amount}${record.honey.unit}</div>
+            <div class="map-info-panel__stat-label">产量</div>
           </div>
         </div>
       </div>
