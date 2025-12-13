@@ -628,28 +628,51 @@ const MapView = (function() {
     content.innerHTML = `
       <div class="map-info-panel__stats">
         <div class="map-info-panel__stat">
-          <span class="map-info-panel__stat-icon">🍯</span>
+          <span class="map-info-panel__stat-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 21h16v-7H4v7zm2-5h12v3H6v-3z"/>
+              <path d="M6 13h12V9c0-1.1-.9-2-2-2h-1V5c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v2H8c-1.1 0-2 .9-2 2v4zm4-8h4v2h-4V5z"/>
+            </svg>
+          </span>
           <div>
             <div class="map-info-panel__stat-value">${record.honey.amount}${record.honey.unit}</div>
             <div class="map-info-panel__stat-label">产量</div>
           </div>
         </div>
         <div class="map-info-panel__stat">
-          <span class="map-info-panel__stat-icon">🌸</span>
+          <span class="map-info-panel__stat-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2V4c0-1.1-.9-2-2-2z"/>
+              <path d="M5 11c-.55 0-1 .45-1 1v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-.55-.45-1-1-1H5zm7 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+              <circle cx="12" cy="16" r="2"/>
+            </svg>
+          </span>
           <div>
             <div class="map-info-panel__stat-value">${record.honey.type}</div>
             <div class="map-info-panel__stat-label">蜜源</div>
           </div>
         </div>
         <div class="map-info-panel__stat">
-          <span class="map-info-panel__stat-icon">📅</span>
+          <span class="map-info-panel__stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </span>
           <div>
             <div class="map-info-panel__stat-value">${dateRange.days}天</div>
             <div class="map-info-panel__stat-label">驻留</div>
           </div>
         </div>
         <div class="map-info-panel__stat">
-          <span class="map-info-panel__stat-icon">${record.weather.icon}</span>
+          <span class="map-info-panel__stat-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+          </span>
           <div>
             <div class="map-info-panel__stat-value">${record.weather.avgTemp}°C</div>
             <div class="map-info-panel__stat-label">气温</div>

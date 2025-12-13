@@ -424,6 +424,15 @@
 
 .map-info-panel__stat-icon {
   font-size: var(--text-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--honey);
+}
+
+.map-info-panel__stat-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .map-info-panel__stat-label {
@@ -573,6 +582,11 @@
   
   .map-info-panel__stat-icon {
     font-size: var(--text-lg);
+  }
+  
+  .map-info-panel__stat-icon svg {
+    width: 20px;
+    height: 20px;
   }
   
   .map-info-panel__stat-value {
