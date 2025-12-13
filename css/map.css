@@ -1044,45 +1044,42 @@
     scroll-snap-align: start;
   }
   
-  /* ===== 手机端标语样式 - 右上角竖排一列一句 ===== */
+  /* ===== 手机端标语样式 - 右上角一句一竖列 ===== */
   .map-slogan {
     display: flex;
-    flex-direction: column; /* 改为竖向排列 */
-    justify-content: flex-start;
-    align-items: flex-end;
-    gap: 4px;
+    flex-direction: row; /* 多个竖列横向排列 */
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 6px;
     position: absolute;
-    top: 36px; /* 在标题下方 */
-    right: var(--space-2); /* 右上角 */
+    top: 40px;
+    right: var(--space-2);
     left: auto;
     transform: none;
     z-index: 100;
-    padding: 8px 10px;
-    background: linear-gradient(135deg, 
-      rgba(255, 251, 240, 0.95) 0%,
-      rgba(255, 243, 224, 0.92) 100%);
-    border-radius: 10px;
-    border: 1px solid rgba(212, 168, 87, 0.4);
-    box-shadow: 0 3px 12px rgba(139, 69, 19, 0.2);
+    /* 无背景框，直接嵌入 */
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
   }
   
   .map-slogan__col {
-    writing-mode: horizontal-tb; /* 水平书写 */
+    writing-mode: vertical-rl; /* 竖向书写 */
     text-orientation: mixed;
     font-family: "Ma Shan Zheng", "ZCOOL XiaoWei", "KaiTi", "STKaiti", "楷体", serif;
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    line-height: 1.3;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 1.2;
     color: #5D4037;
-    padding: 2px 0;
-    border-right: none;
-    border-bottom: 1px dashed rgba(212, 168, 87, 0.3);
-    text-align: right;
-  }
-  
-  .map-slogan__col:last-child {
-    border-bottom: none;
+    padding: 0;
+    border: none;
+    text-shadow: 
+      1px 1px 2px rgba(255, 255, 255, 0.9),
+      -1px -1px 2px rgba(255, 255, 255, 0.9),
+      0 0 8px rgba(255, 255, 255, 0.8);
   }
   
   /* 第1、2列（短句4字） */
@@ -1094,8 +1091,8 @@
   /* 第3、4列（长句7字）用深色突出 */
   .map-slogan__col:nth-child(3),
   .map-slogan__col:nth-child(4) {
-    color: #BF360C;
-    font-weight: 500;
+    color: #8B4513;
+    font-weight: 600;
   }
 }
 
