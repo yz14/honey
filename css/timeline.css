@@ -450,11 +450,15 @@
 }
 
 @media (max-width: 768px) {
-  /* 时间轴容器 - 全屏滚动，考虑顶部44px标题栏 */
+  /* 时间轴容器 - 固定定位，从标题栏下方开始 */
   .timeline-view {
-    height: calc(100vh - 44px);
-    padding-top: 44px;
-    padding-bottom: 0;
+    position: fixed;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    padding: 0;
     overflow: hidden;
   }
   
@@ -466,7 +470,7 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  /* 每个采集点充满整个屏幕（减去标题栏高度） */
+  /* 每个采集点充满整个可视区域（标题栏下方到底部） */
   .timeline-item {
     display: flex;
     flex-direction: column;

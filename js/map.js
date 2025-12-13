@@ -84,14 +84,25 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
-        <!-- 手机端标题栏 -->
+        <!-- 手机端标题栏 - 标题和地图按钮同行 -->
         <div class="map-title-bar" id="map-title-bar">
           <div class="map-title-bar__main" onclick="location.reload()">
             好源蜜舍<span class="map-title-bar__dot">·</span>采蜜足迹图
           </div>
-          <div class="map-title-bar__sub">
-            <span class="map-title-bar__year" id="mobile-year-picker">${DataManager.getCurrentYear()}</span>
-            <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
+          <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
+        </div>
+        
+        <!-- 手机端底部控制栏 - 联系按钮 | 年份（居中）| 放大缩小 -->
+        <div class="map-bottom-bar" id="map-bottom-bar">
+          <button class="map-bottom-bar__contact" title="联系我们" onclick="MapView.showContactModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </button>
+          <span class="map-bottom-bar__year" id="mobile-year-picker">${DataManager.getCurrentYear()}</span>
+          <div class="map-bottom-bar__controls">
+            <button class="map-bottom-bar__btn" title="放大" onclick="MapView.zoomIn()">+</button>
+            <button class="map-bottom-bar__btn" title="缩小" onclick="MapView.zoomOut()">−</button>
           </div>
         </div>
         

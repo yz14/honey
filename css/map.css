@@ -39,13 +39,20 @@
   display: none;
 }
 
+/* === 手机端底部控制栏 === */
+.map-bottom-bar {
+  display: none;
+}
+
 @media (max-width: 768px) {
+  /* ===== 顶部标题栏 - 标题和地图按钮同行 ===== */
   .map-title-bar {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     position: absolute;
-    top: 6px;
+    top: 8px;
     left: 12px;
     right: 12px;
     z-index: 50;
@@ -61,7 +68,6 @@
       2px 2px 4px rgba(255,255,255,0.95),
       -2px -2px 4px rgba(255,255,255,0.95),
       0 0 8px rgba(255,255,255,0.9);
-    margin-bottom: 4px;
   }
   
   .map-title-bar__main:active {
@@ -73,33 +79,9 @@
     margin: 0 2px;
   }
   
-  .map-title-bar__sub {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .map-title-bar__year {
-    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #5D4037;
-    cursor: pointer;
-    padding: 4px 12px;
-    background: rgba(255, 255, 255, 0.85);
-    border: 2px solid #8B4513;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  }
-  
-  .map-title-bar__year:active {
-    opacity: 0.7;
-  }
-  
   .map-title-bar__toggle {
     font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #FFA726;
     cursor: pointer;
@@ -112,6 +94,88 @@
   
   .map-title-bar__toggle:active {
     opacity: 0.7;
+  }
+  
+  /* ===== 底部控制栏 - 联系 | 年份 | 放大缩小 ===== */
+  .map-bottom-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 140px;
+    left: 12px;
+    right: 12px;
+    z-index: 200;
+  }
+  
+  .map-bottom-bar__contact {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .map-bottom-bar__contact:active {
+    transform: scale(0.95);
+  }
+  
+  .map-bottom-bar__year {
+    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #5D4037;
+    cursor: pointer;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .map-bottom-bar__year:active {
+    opacity: 0.7;
+  }
+  
+  .map-bottom-bar__controls {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+  }
+  
+  .map-bottom-bar__btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s;
+  }
+  
+  .map-bottom-bar__btn:active {
+    background: rgba(240, 240, 240, 0.95);
+  }
+  
+  /* 隐藏原来独立的控制按钮和联系按钮（已整合到底部控制栏） */
+  .map-controls,
+  .contact-btn {
+    display: none !important;
   }
 }
 
@@ -731,7 +795,7 @@
 .map-stats-overlay {
   display: none;
   position: absolute;
-  top: 75px;
+  top: 38px;
   left: var(--space-2);
   z-index: 50;
   font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
@@ -1171,7 +1235,7 @@
     align-items: flex-start;
     gap: 6px;
     position: absolute;
-    top: 75px;
+    top: 38px;
     right: var(--space-2);
     left: auto;
     transform: none;
