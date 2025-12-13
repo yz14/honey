@@ -176,7 +176,7 @@ a:hover {
 }
 
 .header__logo-text {
-  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
+  font-family: 'ZCOOL XiaoWei', 'Ma Shan Zheng', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
   font-size: 1.75rem;
   font-weight: 400;
   color: var(--honey-700);

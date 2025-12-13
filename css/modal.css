@@ -695,6 +695,11 @@
   margin-bottom: var(--space-4);
 }
 
+/* 无标题画廊 */
+.modal__gallery--no-title {
+  margin-bottom: var(--space-4);
+}
+
 /* 故事标题样式 */
 .modal__section-title--story {
   display: flex;
@@ -702,7 +707,7 @@
   gap: var(--space-3);
   font-size: var(--text-xl);
   font-weight: 700;
-  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
+  font-family: 'ZCOOL XiaoWei', 'Ma Shan Zheng', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
   color: var(--honey-dark);
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);

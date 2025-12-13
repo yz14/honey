@@ -97,10 +97,10 @@ const MapView = (function() {
         
         <!-- 左侧统计描述（手机端显示） -->
         <div class="map-stats-overlay" id="map-stats-overlay">
-          <p>8次转场</p>
-          <p>6省辗转</p>
-          <p>4000次蜂箱搬运</p>
-          <p>12000公里风雨兼程</p>
+          <p><strong>${stats.recordCount}</strong>次转场</p>
+          <p><strong>${stats.provinces}</strong>省辗转</p>
+          <p><strong>${stats.recordCount * 2 * 160}</strong>次蜂箱搬运</p>
+          <p><strong>${stats.totalKm}</strong>公里风雨兼程</p>
           <p>只为这一口山野的甜</p>
         </div>
         
@@ -311,7 +311,7 @@ const MapView = (function() {
           color: '#6B4423',
           fontSize: isMobile ? 20 : 24,
           fontWeight: 'bold',
-          fontFamily: '"Ma Shan Zheng", "ZCOOL XiaoWei", "STKaiti", "KaiTi", "楷体", cursive, serif'
+          fontFamily: '"ZCOOL XiaoWei", "Ma Shan Zheng", "STKaiti", "KaiTi", "楷体", cursive, serif'
         }
       },
       tooltip: {

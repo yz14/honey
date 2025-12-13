@@ -168,11 +168,7 @@ const ModalView = (function() {
     }).join('');
 
     return `
-      <div class="modal__section modal__gallery">
-        <h3 class="modal__section-title">
-          ${Utils.getIcon('image')}
-          照片与视频
-        </h3>
+      <div class="modal__section modal__gallery modal__gallery--no-title">
         <div class="modal__gallery-grid">
           ${items}
         </div>
