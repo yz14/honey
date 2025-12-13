@@ -495,12 +495,12 @@
     height: 100% !important;
   }
   
-  /* 地图控件 - 右上角横向排列 */
+  /* 地图控件 - 底部蜂蜜瓶上方，与联系按钮一起 */
   .map-controls {
     display: flex !important;
     flex-direction: row;
-    top: var(--space-2);
-    bottom: auto;
+    top: auto;
+    bottom: 110px; /* 在蜂蜜瓶上方 */
     right: var(--space-2);
     z-index: 200;
     gap: var(--space-1);
@@ -1033,42 +1033,45 @@
     justify-content: center;
   }
   
-  /* ===== 手机端标语样式 - 地图标题正下方，竖排一列一句 ===== */
+  /* ===== 手机端标语样式 - 右上角竖排一列一句 ===== */
   .map-slogan {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
+    flex-direction: column; /* 改为竖向排列 */
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 4px;
     position: absolute;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 36px; /* 在标题下方 */
+    right: var(--space-2); /* 右上角 */
+    left: auto;
+    transform: none;
     z-index: 100;
-    padding: 6px 10px;
+    padding: 8px 10px;
     background: linear-gradient(135deg, 
-      rgba(255, 251, 240, 0.92) 0%,
-      rgba(255, 243, 224, 0.88) 100%);
-    border-radius: 12px;
+      rgba(255, 251, 240, 0.95) 0%,
+      rgba(255, 243, 224, 0.92) 100%);
+    border-radius: 10px;
     border: 1px solid rgba(212, 168, 87, 0.4);
     box-shadow: 0 3px 12px rgba(139, 69, 19, 0.2);
   }
   
   .map-slogan__col {
-    writing-mode: vertical-rl;
-    text-orientation: upright;
+    writing-mode: horizontal-tb; /* 水平书写 */
+    text-orientation: mixed;
     font-family: "Ma Shan Zheng", "ZCOOL XiaoWei", "KaiTi", "STKaiti", "楷体", serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 400;
-    letter-spacing: 2px;
-    line-height: 1.4;
+    letter-spacing: 1px;
+    line-height: 1.3;
     color: #5D4037;
-    padding: 6px 4px;
-    border-right: 1px dashed rgba(212, 168, 87, 0.3);
+    padding: 2px 0;
+    border-right: none;
+    border-bottom: 1px dashed rgba(212, 168, 87, 0.3);
+    text-align: right;
   }
   
   .map-slogan__col:last-child {
-    border-right: none;
+    border-bottom: none;
   }
   
   /* 第1、2列（短句4字） */
@@ -1095,8 +1098,8 @@
 /* ===== 联系方式按钮 ===== */
 .contact-btn {
   position: absolute;
-  top: calc(var(--space-2) + 80px); /* 在放大缩小按钮下方 */
-  right: var(--space-2);
+  top: var(--space-4);
+  right: var(--space-4);
   width: 40px;
   height: 40px;
   display: flex;
@@ -1110,6 +1113,15 @@
   box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
   transition: all 0.3s ease;
   color: white;
+}
+
+/* 手机端联系按钮位置 - 底部蜂蜜瓶上方，放大缩小按钮左边 */
+@media (max-width: 768px) {
+  .contact-btn {
+    top: auto;
+    bottom: 110px;
+    right: calc(var(--space-2) + 80px); /* 在放大缩小按钮左边 */
+  }
 }
 
 .contact-btn:hover,

@@ -587,38 +587,39 @@
     font-size: var(--text-xl);
   }
   
-  /* 标签 - 均匀分布 */
-  .timeline-item__tags {
-    display: flex !important;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--space-2);
-    margin-bottom: var(--space-2);
+  /* 手机端隐藏标签 */
+  .timeline-item__tags--desktop {
+    display: none !important;
   }
   
-  .timeline-item__tag {
-    flex: 1;
-    text-align: center;
-    font-size: 12px;
-    padding: 6px 10px;
-    min-width: 0;
-    font-weight: 600;
-  }
-  
-  /* 查看按钮 - 去掉箭头，居中显示 */
-  .timeline-item__btn {
+  /* 手机端查看故事详情按钮 */
+  .timeline-item__detail-btn {
     display: flex !important;
     width: 100%;
     justify-content: center;
+    align-items: center;
     margin-top: auto;
     padding: var(--space-3) var(--space-4);
     font-size: var(--text-base);
     font-weight: 700;
     letter-spacing: 1px;
+    background: var(--gradient-honey);
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--white);
+    cursor: pointer;
+    box-shadow: var(--shadow-honey);
+    transition: all var(--transition-fast);
   }
   
-  /* 手机端隐藏按钮箭头 */
-  .timeline-item__btn svg {
+  .timeline-item__detail-btn:hover,
+  .timeline-item__detail-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(245, 166, 35, 0.4);
+  }
+  
+  /* 隐藏旧的按钮 */
+  .timeline-item__btn {
     display: none !important;
   }
   
@@ -634,7 +635,8 @@
 .timeline-item__date-mobile,
 .timeline-item__title-row,
 .timeline-item__tags-inline,
-.timeline-item__story-btn {
+.timeline-item__story-btn,
+.timeline-item__detail-btn {
   display: none;
 }
 
@@ -649,6 +651,11 @@
   
   .timeline-item__yield {
     display: none !important;
+  }
+  
+  /* 桌面端显示标签 */
+  .timeline-item__tags--desktop {
+    display: flex !important;
   }
 }
 

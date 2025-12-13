@@ -221,9 +221,15 @@ const TimelineView = (function() {
               </div>
             </div>
             
-            <div class="timeline-item__tags">
+            <!-- 桌面端显示标签 -->
+            <div class="timeline-item__tags timeline-item__tags--desktop">
               ${record.tags.map(tag => `<span class="timeline-item__tag">${tag}</span>`).join('')}
             </div>
+            
+            <!-- 手机端显示查看故事详情按钮（替代标签） -->
+            <button class="timeline-item__detail-btn" onclick="ModalView.open(${record.id})">
+              查看故事详情
+            </button>
           </div>
         </div>
       </div>

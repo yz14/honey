@@ -80,12 +80,12 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
-        <!-- 手机端标语（竖排）- 在地图标题正下方 -->
+        <!-- 手机端标语 - 右上角竖列一句排列 -->
         <div class="map-slogan" id="map-slogan">
-          <div class="map-slogan__col">春<br>入<br>云<br>南</div>
-          <div class="map-slogan__col">夏<br>越<br>秦<br>岭</div>
-          <div class="map-slogan__col">逐<br>花<br>深<br>入<br>云<br>深<br>处</div>
-          <div class="map-slogan__col">采<br>得<br>山<br>野<br>四<br>时<br>甜</div>
+          <div class="map-slogan__col">春入云南</div>
+          <div class="map-slogan__col">夏越秦岭</div>
+          <div class="map-slogan__col">逐花深入云深处</div>
+          <div class="map-slogan__col">采得山野四时甜</div>
         </div>
         
         <!-- 省份名称显示 -->
