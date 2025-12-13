@@ -65,7 +65,7 @@ const MapView = (function() {
       .map(type => {
         const color = honeyColors[type] || '#FFB347';
         const amount = honeyByType[type];
-        const amountText = amount ? `${amount}kg` : '待上新';
+        const amountText = amount ? `${amount}kg` : '售完';
         return `
           <div class="honey-bottle" onclick="MapView.showHoneyDetail('${type}')" data-type="${type}">
             <div class="honey-bottle__jar">

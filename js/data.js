@@ -522,7 +522,7 @@ const DataManager = (function() {
       image: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=800&q=80',
       color: '#D4A857', baume: '41-42°Be', season: '夏季(6-8月)', origin: '湖北神农架',
       appearance: '金黄至深琥珀色，随花源不同略有差异',
-      crystallize: '结晶速度因花源而异，晶体颗粒大小不一',
+      crystallize: '易结晶，晶体颗粒大小不一',
       taste: '花香馥郁复合，层次丰富，甜度适中，风味随季节变化',
       nutrition: [
         '汇聚多种花源精华，营养成分全面，含180余种天然物质',
@@ -566,7 +566,7 @@ const DataManager = (function() {
       image: 'https://images.unsplash.com/photo-1568702846914-96b305d2uj68?w=800&q=80',
       color: '#C68E4E', baume: '42-43°Be', season: '夏季(5-6月)', origin: '广西南宁',
       appearance: '琥珀色至深褐色，色泽浓郁饱满',
-      crystallize: '不易结晶，久置后可能出现轻微结晶',
+      crystallize: '易结晶，久置后可能出现轻微结晶',
       taste: '甘醇浓厚，带有龙眼果肉的独特芳香，余韵绵长',
       nutrition: [
         '蛋白质含量在蜂蜜中较高，约0.5-1%',
@@ -588,7 +588,7 @@ const DataManager = (function() {
       image: 'https://images.unsplash.com/photo-1558818498-28c1e002674f?w=800&q=80',
       color: '#E8C170', baume: '41-42°Be', season: '春季(4-5月)', origin: '广东',
       appearance: '浅黄色至琥珀色，透明度高，光泽鲜亮',
-      crystallize: '较难结晶，低温下可能出现细小晶体',
+      crystallize: '易结晶，低温下可能出现细小晶体',
       taste: '清甜芬芳，带有荔枝的清新果香，入喉爽滑',
       nutrition: [
         '维生素C含量较其他蜂蜜高，具有抗氧化特性',
