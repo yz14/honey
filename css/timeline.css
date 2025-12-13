@@ -11,26 +11,26 @@
 @media (max-width: 768px) {
   .timeline-title-bar {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     position: fixed;
-    top: 6px;
-    left: 12px;
-    right: 12px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+    border-bottom: 2px solid #FFD54F;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     z-index: 100;
   }
   
   .timeline-title-bar__main {
     font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #6B4423;
     cursor: pointer;
-    text-shadow: 
-      2px 2px 4px rgba(255,255,255,0.95),
-      -2px -2px 4px rgba(255,255,255,0.95),
-      0 0 8px rgba(255,255,255,0.9);
-    margin-bottom: 4px;
+    letter-spacing: 2px;
   }
   
   .timeline-title-bar__main:active {
@@ -39,44 +39,7 @@
   
   .timeline-title-bar__dot {
     color: #FFA726;
-    margin: 0 2px;
-  }
-  
-  .timeline-title-bar__sub {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .timeline-title-bar__year {
-    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #5D4037;
-    cursor: pointer;
-    text-shadow: 
-      2px 2px 4px rgba(255,255,255,0.95),
-      -2px -2px 4px rgba(255,255,255,0.95);
-  }
-  
-  .timeline-title-bar__year:active {
-    opacity: 0.7;
-  }
-  
-  .timeline-title-bar__toggle {
-    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: #4CAF50;
-    cursor: pointer;
-    text-shadow: 
-      2px 2px 4px rgba(255,255,255,0.95),
-      -2px -2px 4px rgba(255,255,255,0.95);
-  }
-  
-  .timeline-title-bar__toggle:active {
-    opacity: 0.7;
+    margin: 0 4px;
   }
 }
 
@@ -487,9 +450,10 @@
 }
 
 @media (max-width: 768px) {
-  /* 时间轴容器 - 全屏滚动 */
+  /* 时间轴容器 - 全屏滚动，考虑顶部44px标题栏 */
   .timeline-view {
-    height: calc(100vh - 52px);
+    height: calc(100vh - 44px);
+    padding-top: 44px;
     padding-bottom: 0;
     overflow: hidden;
   }
@@ -502,14 +466,14 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  /* 每个采集点充满整个屏幕 */
+  /* 每个采集点充满整个屏幕（减去标题栏高度） */
   .timeline-item {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
     padding: var(--space-3);
-    min-height: calc(100vh - 52px);
-    height: calc(100vh - 52px);
+    min-height: calc(100vh - 44px);
+    height: calc(100vh - 44px);
     background: var(--white);
     scroll-snap-align: start;
     scroll-snap-stop: always;

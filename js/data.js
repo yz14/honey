@@ -358,7 +358,8 @@ const DataManager = (function() {
   function loadData() {
     // 实际项目中可以从API或localStorage加载
     state.records = sampleData.records;
-    state.currentYear = sampleData.year;
+    // 不覆盖当前年份，保持使用系统当前年份
+    // state.currentYear 已在 state 初始化时设为 new Date().getFullYear()
   }
 
   // 获取所有记录

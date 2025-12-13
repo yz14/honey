@@ -27,14 +27,10 @@ const TimelineView = (function() {
     );
     
     container.innerHTML = `
-      <!-- 手机端标题栏 -->
+      <!-- 手机端标题栏 - 独立一栏，只有居中标题 -->
       <div class="timeline-title-bar" id="timeline-title-bar">
         <div class="timeline-title-bar__main" onclick="location.reload()">
           好源蜜舍<span class="timeline-title-bar__dot">·</span>采蜜足迹
-        </div>
-        <div class="timeline-title-bar__sub">
-          <span class="timeline-title-bar__year" id="timeline-year-picker">${DataManager.getCurrentYear()}</span>
-          <span class="timeline-title-bar__toggle" id="timeline-view-toggle">时间轴</span>
         </div>
       </div>
       
@@ -73,22 +69,10 @@ const TimelineView = (function() {
     bindTimelineTitleBarEvents();
   }
   
-  // 绑定时间轴标题栏事件
+  // 绑定时间轴标题栏事件（简化版 - 只有标题，无需额外绑定）
   function bindTimelineTitleBarEvents() {
-    const yearPicker = document.getElementById('timeline-year-picker');
-    const viewToggle = document.getElementById('timeline-view-toggle');
-    
-    if (yearPicker) {
-      yearPicker.addEventListener('click', showTimelineYearPicker);
-    }
-    
-    if (viewToggle) {
-      viewToggle.addEventListener('click', () => {
-        if (typeof App !== 'undefined' && App.switchView) {
-          App.switchView('map');
-        }
-      });
-    }
+    // 标题栏已简化，只有居中标题，点击刷新页面（已在HTML onclick中处理）
+    // 无需额外绑定年份选择器和视图切换按钮
   }
   
   // 显示年份选择弹框
