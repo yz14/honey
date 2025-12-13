@@ -12,13 +12,13 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐝</text></svg>">
   
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <!-- Google Fonts - 使用国内镜像 -->
+  <link rel="preconnect" href="https://fonts.googleapis.cn">
+  <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+  <link href="https://fonts.googleapis.cn/css2?family=Nunito:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
   
-  <!-- ECharts + 中国地图 (使用多个CDN备选) -->
-  <script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
+  <!-- ECharts + 中国地图 (使用国内CDN) -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
   <script>
     // 动态加载中国地图数据
     (function() {
@@ -27,9 +27,9 @@
         return;
       }
       
-      // 创建script标签加载地图
+      // 创建script标签加载地图 (使用国内CDN)
       var script = document.createElement('script');
-      script.src = 'https://unpkg.com/echarts@4.9.0/map/js/china.js';
+      script.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/4.9.0/map/js/china.js';
       script.onerror = function() {
         console.error('中国地图数据加载失败');
       };
