@@ -12,27 +12,18 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐝</text></svg>">
   
-  <!-- 中文书法字体 - 使用国内可访问的CDN加载 -->
+  <!-- 霞鹜文楷 - 开源中文楷书字体 (GitHub官方源) -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <style>
-    /* 站酷小薇体 - 圆润可爱的手写风格 */
     @font-face {
-      font-family: 'ZCOOL XiaoWei';
+      font-family: 'LXGW WenKai';
       font-style: normal;
       font-weight: 400;
       font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/nicetry521/fonts@master/ZCOOLXiaoWei-Regular.woff2') format('woff2'),
-           url('https://cdn.jsdelivr.net/gh/nicetry521/fonts@master/ZCOOLXiaoWei-Regular.woff') format('woff');
-    }
-    /* 站酷快乐体 - 手写风格备选 */
-    @font-face {
-      font-family: 'ZCOOL KuaiLe';
-      font-style: normal;
-      font-weight: 400;
-      font-display: swap;
-      src: url('https://cdn.jsdelivr.net/gh/nicetry521/fonts@master/ZCOOLKuaiLe-Regular.woff2') format('woff2'),
-           url('https://cdn.jsdelivr.net/gh/nicetry521/fonts@master/ZCOOLKuaiLe-Regular.woff') format('woff');
+      src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
   
   <!-- ECharts + 中国地图 (使用jsDelivr国内节点) -->
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
