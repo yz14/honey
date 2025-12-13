@@ -1086,18 +1086,6 @@
       0 0 8px rgba(255, 255, 255, 0.8);
   }
   
-  /* 第1、2列（短句4字） */
-  .map-slogan__col:nth-child(1),
-  .map-slogan__col:nth-child(2) {
-    color: #6D4C41;
-  }
-  
-  /* 第3、4列（长句7字）用深色突出 */
-  .map-slogan__col:nth-child(3),
-  .map-slogan__col:nth-child(4) {
-    color: #8B4513;
-    font-weight: 600;
-  }
 }
 
 /* 桌面端隐藏标语 */

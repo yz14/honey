@@ -132,11 +132,7 @@ const MapView = (function() {
         <div class="contact-modal" id="contact-modal">
           <div class="contact-modal__overlay" onclick="MapView.closeContactModal()"></div>
           <div class="contact-modal__content">
-            <div class="contact-modal__header">
-              <span class="contact-modal__icon">📞</span>
-              <h3 class="contact-modal__title">联系我们</h3>
-            </div>
-            <p class="contact-modal__note">蜂场事务繁忙，来电可能无法及时接听，欢迎通过电话号添加微信沟通，感谢理解！</p>
+            <p class="contact-modal__note">忙着照看蜂箱，来电不一定能及时接到，加微信留言更方便，感谢体谅！</p>
             <div class="contact-modal__body">
               <div class="contact-item" onclick="MapView.callPhone('12345678901')">
                 <span class="contact-item__name">袁师傅</span>
