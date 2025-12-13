@@ -176,7 +176,7 @@ a:hover {
 }
 
 .header__logo-text {
-  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive;
+  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'STKaiti', 'KaiTi', '楷体', cursive, serif;
   font-size: 1.75rem;
   font-weight: 400;
   color: var(--honey-700);
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .header__logo-subtitle {
-  font-family: 'Quicksand', sans-serif;
+  font-family: var(--font-primary);
   font-size: 10px;
   color: var(--gray-500);
   letter-spacing: 0.05em;

@@ -12,28 +12,37 @@
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐝</text></svg>">
   
-  <!-- Google Fonts - 使用国内镜像 -->
-  <link rel="preconnect" href="https://fonts.googleapis.cn">
-  <link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
-  <link href="https://fonts.googleapis.cn/css2?family=Nunito:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+  <!-- 中文字体 - 异步加载避免阻塞 -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@aspect-design/ma-shan-zheng@1.0.0/fonts/MaShanZheng-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    /* 内嵌关键字体，避免外部请求阻塞 */
+    @font-face {
+      font-family: 'Ma Shan Zheng';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('https://cdn.jsdelivr.net/npm/@aspect-design/ma-shan-zheng@1.0.0/fonts/MaShanZheng-Regular.woff2') format('woff2');
+    }
+  </style>
   
-  <!-- ECharts + 中国地图 (使用国内CDN) -->
-  <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  <!-- ECharts + 中国地图 (使用jsDelivr国内节点) -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
   <script>
     // 动态加载中国地图数据
     (function() {
-      if (typeof echarts === 'undefined') {
-        console.error('ECharts 加载失败');
-        return;
-      }
-      
-      // 创建script标签加载地图 (使用国内CDN)
-      var script = document.createElement('script');
-      script.src = 'https://cdn.bootcdn.net/ajax/libs/echarts/4.9.0/map/js/china.js';
-      script.onerror = function() {
-        console.error('中国地图数据加载失败');
-      };
-      document.head.appendChild(script);
+      var checkEcharts = setInterval(function() {
+        if (typeof echarts !== 'undefined') {
+          clearInterval(checkEcharts);
+          var script = document.createElement('script');
+          script.src = 'https://cdn.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js';
+          script.onerror = function() {
+            console.error('中国地图数据加载失败');
+          };
+          document.head.appendChild(script);
+        }
+      }, 100);
+      // 5秒超时
+      setTimeout(function() { clearInterval(checkEcharts); }, 5000);
     })();
   </script>
   
