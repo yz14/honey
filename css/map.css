@@ -758,6 +758,10 @@
   font-weight: 600;
   margin-top: 4px;
   text-align: center;
+  white-space: nowrap;
+  max-width: 48px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ===== 蜂蜜详情卡片 ===== */
@@ -1017,20 +1021,27 @@
     bottom: 20px; /* 往上移动，确保在屏幕内 */
   }
   
-  /* 蜂蜜瓶均匀分布 */
+  /* 蜂蜜瓶水平滚动（9种蜂蜜） */
   .honey-bottles__scroll {
     display: flex;
-    justify-content: space-evenly;
-    gap: 0;
-    overflow-x: visible;
-    padding: 0 8px;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 12px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .honey-bottles__scroll::-webkit-scrollbar {
+    display: none;
   }
   
   .honey-bottle {
-    flex: 1;
-    max-width: 60px;
+    flex: 0 0 auto;
+    width: 48px;
     display: flex;
     justify-content: center;
+    scroll-snap-align: start;
   }
   
   /* ===== 手机端标语样式 - 右上角竖排一列一句 ===== */
@@ -1297,4 +1308,12 @@
 .honey-detail__title {
   font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', cursive, serif;
   letter-spacing: 2px;
+}
+
+/* 功效关键词 - 毛笔字风格 */
+.honey-benefit-keyword {
+  font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', '楷体', 'KaiTi', serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 1px;
 }

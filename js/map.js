@@ -37,7 +37,7 @@ const MapView = (function() {
     const records = DataManager.getRecords();
     const stats = DataManager.getStats();
     
-    // 生成蜂蜜瓶子数据
+    // 生成蜂蜜瓶子数据 - 从采蜜记录中统计产量
     const honeyByType = {};
     records.forEach(r => {
       const type = r.honey.type.replace('蜜', '');
@@ -50,18 +50,22 @@ const MapView = (function() {
       '百花': '#D4A857',     // 金黄至深琥珀色
       '洋槐': '#FDF9E8',     // 水白色至浅黄色
       '龙眼': '#C68E4E',     // 琥珀色至深褐色
-      '荔枝': '#E8C170',     // 浅黄色至琥珀色（新增）
+      '荔枝': '#E8C170',     // 浅黄色至琥珀色
       '油菜花': '#F5DFA0',   // 浅黄色至白色
       '五倍子': '#8B5742',   // 深琥珀色至棕褐色
       '枣花': '#6B3A23',     // 深琥珀色至红棕色
       '荆条': '#E5B56A'      // 浅琥珀色至深黄色
     };
     
-    const honeyBottlesHtml = Object.entries(honeyByType)
-      .sort((a, b) => b[1] - a[1])
-      .map(([type, amount]) => {
+    // 获取所有9种蜂蜜类型（从 honeyDetails 数据库）
+    const allHoneyTypes = DataManager.getAllHoneyTypes();
+    
+    // 生成所有蜂蜜瓶子（有产量的显示产量，无产量的也显示但不显示产量）
+    const honeyBottlesHtml = allHoneyTypes
+      .map(type => {
         const color = honeyColors[type] || '#FFB347';
-        const details = DataManager.getHoneyDetails(type);
+        const amount = honeyByType[type];
+        const amountText = amount ? `${amount}kg` : '待上新';
         return `
           <div class="honey-bottle" onclick="MapView.showHoneyDetail('${type}')" data-type="${type}">
             <div class="honey-bottle__jar">
@@ -69,7 +73,7 @@ const MapView = (function() {
               <div class="honey-bottle__body" style="background: linear-gradient(180deg, ${color}dd 0%, ${color} 100%);">
                 <span class="honey-bottle__name">${type}</span>
               </div>
-              <div class="honey-bottle__amount">${amount}kg</div>
+              <div class="honey-bottle__amount">${amountText}</div>
             </div>
           </div>
         `;
@@ -823,12 +827,19 @@ const MapView = (function() {
       nutritionHtml = details.nutrition;
     }
     
-    // 生成功效HTML（用分号连接，每条不同颜色）
+    // 生成功效HTML（用分号连接，每条不同颜色，功效词语用毛笔字）
     let benefitsHtml = '';
     if (Array.isArray(details.benefits)) {
-      benefitsHtml = details.benefits.map((item, index) => 
-        `<span style="color: ${benefitColors[index % benefitColors.length]}">${item}</span>`
-      ).join('；');
+      benefitsHtml = details.benefits.map((item, index) => {
+        // 将 "养心安神：xxx" 中的 "养心安神" 用毛笔字包裹
+        const parts = item.split('：');
+        if (parts.length >= 2) {
+          const keyword = parts[0];
+          const desc = parts.slice(1).join('：');
+          return `<span style="color: ${benefitColors[index % benefitColors.length]}"><span class="honey-benefit-keyword">${keyword}</span>：${desc}</span>`;
+        }
+        return `<span style="color: ${benefitColors[index % benefitColors.length]}">${item}</span>`;
+      }).join('；');
     } else {
       benefitsHtml = details.benefits;
     }
