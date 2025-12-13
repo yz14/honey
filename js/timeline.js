@@ -174,7 +174,9 @@ const TimelineView = (function() {
               <div class="timeline-item__stat timeline-item__stat--yield">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C8 2 4 6 4 10c0 5.25 7 11.5 7.5 12 .28.28.72.28 1 0C13 21.5 20 15.25 20 10c0-4-4-8-8-8z"/>
+                    <!-- 油罐图标 -->
+                    <path d="M4 21h16v-7H4v7zm2-5h12v3H6v-3z"/>
+                    <path d="M6 13h12V9c0-1.1-.9-2-2-2h-1V5c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v2H8c-1.1 0-2 .9-2 2v4zm4-8h4v2h-4V5z"/>
                   </svg>
                 </span>
                 <div class="timeline-item__stat-content">
@@ -186,8 +188,10 @@ const TimelineView = (function() {
               <div class="timeline-item__stat timeline-item__stat--type">
                 <span class="timeline-item__stat-icon">
                   <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 3c-1.5 2-3 4-3 6 0 2.5 1.5 4 3 5 1.5-1 3-2.5 3-5 0-2-1.5-4-3-6z"/>
-                    <path d="M12 14c-2 1.5-4 3-4 5.5C8 21.5 10 23 12 23s4-1.5 4-3.5c0-2.5-2-4-4-5.5z"/>
+                    <!-- 蜂蜜罐图标 -->
+                    <path d="M12 2c-1.1 0-2 .9-2 2v1H8c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-2V4c0-1.1-.9-2-2-2z"/>
+                    <path d="M5 11c-.55 0-1 .45-1 1v8c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8c0-.55-.45-1-1-1H5zm7 9c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/>
+                    <circle cx="12" cy="16" r="2"/>
                   </svg>
                 </span>
                 <div class="timeline-item__stat-content">
@@ -203,7 +207,7 @@ const TimelineView = (function() {
                   </svg>
                 </span>
                 <div class="timeline-item__stat-content">
-                  <span class="timeline-item__stat-value">${record.season || dateRange.season}</span>
+                  <span class="timeline-item__stat-value">${season.name}</span>
                   <span class="timeline-item__stat-label">季节</span>
                 </div>
               </div>

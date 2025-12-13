@@ -106,7 +106,7 @@ const ModalView = (function() {
       : 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800';
 
     modalContainer.innerHTML = `
-      <div class="modal__header">
+      <div class="modal__header modal__header--compact">
         <div class="modal__header-image">
           <img src="${headerImage}" alt="${record.story.title}">
         </div>
@@ -125,74 +125,30 @@ const ModalView = (function() {
               ${Utils.getIcon('calendar')}
               ${dateRange.rangeText}
             </span>
-            <span class="modal__meta-item">
-              📅 ${dateRange.days} 天
-            </span>
-            <span class="modal__meta-item">
-              ${record.weather.icon} ${record.weather.avgTemp}°C
-            </span>
           </div>
         </div>
       </div>
       
-      <div class="modal__body">
-        <!-- 统计数据 -->
-        <div class="modal__stats">
-          <div class="modal__stat">
-            <div class="modal__stat-icon">🍯</div>
-            <div class="modal__stat-value">${record.honey.amount}${record.honey.unit}</div>
-            <div class="modal__stat-label">蜂蜜产量</div>
-          </div>
-          <div class="modal__stat">
-            <div class="modal__stat-icon">🌸</div>
-            <div class="modal__stat-value">${record.honey.type}</div>
-            <div class="modal__stat-label">蜜源类型</div>
-          </div>
-          <div class="modal__stat">
-            <div class="modal__stat-icon">⭐</div>
-            <div class="modal__stat-value">${record.honey.quality}</div>
-            <div class="modal__stat-label">品质等级</div>
-          </div>
-        </div>
-        
+      <div class="modal__body modal__body--story">
         <!-- 采蜜故事 -->
-        <div class="modal__section">
-          <h3 class="modal__section-title">
-            ${Utils.getIcon('book')}
+        <div class="modal__section modal__section--story">
+          <h3 class="modal__section-title modal__section-title--story">
+            <svg class="modal__story-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              <line x1="8" y1="7" x2="16" y2="7"/>
+              <line x1="8" y1="11" x2="16" y2="11"/>
+              <line x1="8" y1="15" x2="12" y2="15"/>
+            </svg>
             采蜜故事
           </h3>
-          <div class="modal__story">
+          <div class="modal__story modal__story--large">
             ${record.story.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
           </div>
         </div>
         
         <!-- 媒体画廊 -->
         ${record.media && record.media.length > 0 ? renderGallery(record.media) : ''}
-        
-        <!-- 天气信息 -->
-        <div class="modal__section">
-          <h3 class="modal__section-title">
-            ${record.weather.icon}
-            天气状况
-          </h3>
-          <div class="modal__weather">
-            <div class="modal__weather-icon">${record.weather.icon}</div>
-            <div class="modal__weather-info">
-              <div class="modal__weather-temp">${record.weather.avgTemp}°C</div>
-              <div class="modal__weather-desc">平均气温 · ${record.weather.condition}</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 标签 -->
-        <div class="modal__section">
-          <h3 class="modal__section-title">
-            🏷️ 标签
-          </h3>
-          <div class="modal__tags">
-            ${record.tags.map(tag => `<span class="modal__tag">${tag}</span>`).join('')}
-          </div>
-        </div>
       </div>
     `;
   }
