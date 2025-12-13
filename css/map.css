@@ -500,7 +500,7 @@
     display: flex !important;
     flex-direction: row;
     top: auto;
-    bottom: 110px; /* 在蜂蜜瓶上方 */
+    bottom: 140px; /* 在蜂蜜瓶上方，增加间距 */
     right: var(--space-2);
     z-index: 200;
     gap: var(--space-1);
@@ -1130,7 +1130,7 @@
 @media (max-width: 768px) {
   .contact-btn {
     top: auto;
-    bottom: 110px;
+    bottom: 140px; /* 增加间距 */
     right: calc(var(--space-2) + 80px); /* 在放大缩小按钮左边 */
   }
 }
