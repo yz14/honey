@@ -27,6 +27,17 @@ const TimelineView = (function() {
     );
     
     container.innerHTML = `
+      <!-- 手机端标题栏 -->
+      <div class="timeline-title-bar" id="timeline-title-bar">
+        <div class="timeline-title-bar__main" onclick="location.reload()">
+          好源蜜舍<span class="timeline-title-bar__dot">·</span>采蜜足迹
+        </div>
+        <div class="timeline-title-bar__sub">
+          <span class="timeline-title-bar__year" id="timeline-year-picker">${DataManager.getCurrentYear()}</span>
+          <span class="timeline-title-bar__toggle" id="timeline-view-toggle">时间轴</span>
+        </div>
+      </div>
+      
       <!-- 中心时间轴线 -->
       <div class="timeline__line"></div>
       
@@ -57,6 +68,79 @@ const TimelineView = (function() {
     
     // 绑定滚动事件
     bindScrollEvents();
+    
+    // 绑定手机端标题栏事件
+    bindTimelineTitleBarEvents();
+  }
+  
+  // 绑定时间轴标题栏事件
+  function bindTimelineTitleBarEvents() {
+    const yearPicker = document.getElementById('timeline-year-picker');
+    const viewToggle = document.getElementById('timeline-view-toggle');
+    
+    if (yearPicker) {
+      yearPicker.addEventListener('click', showTimelineYearPicker);
+    }
+    
+    if (viewToggle) {
+      viewToggle.addEventListener('click', () => {
+        if (typeof App !== 'undefined' && App.switchView) {
+          App.switchView('map');
+        }
+      });
+    }
+  }
+  
+  // 显示年份选择弹框
+  function showTimelineYearPicker() {
+    const currentYear = DataManager.getCurrentYear();
+    const minYear = 2020;
+    const maxYear = new Date().getFullYear();
+    const years = [];
+    for (let y = maxYear; y >= minYear; y--) {
+      years.push(y);
+    }
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'year-picker-overlay';
+    overlay.innerHTML = `
+      <div class="year-picker-modal">
+        <div class="year-picker-modal__title">选择年份</div>
+        <div class="year-picker-modal__list">
+          ${years.map(y => `
+            <button class="year-picker-modal__item ${y === currentYear ? 'active' : ''}" data-year="${y}">
+              ${y}年
+            </button>
+          `).join('')}
+        </div>
+        <button class="year-picker-modal__close">取消</button>
+      </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    overlay.querySelector('.year-picker-modal__close').addEventListener('click', () => {
+      overlay.remove();
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    
+    overlay.querySelectorAll('.year-picker-modal__item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const year = parseInt(btn.dataset.year);
+        DataManager.setCurrentYear(year);
+        
+        // 更新年份显示
+        const yearEl = document.getElementById('timeline-year-picker');
+        if (yearEl) yearEl.textContent = year;
+        
+        // 刷新视图
+        render();
+        overlay.remove();
+      });
+    });
   }
 
   // 渲染单个时间轴项目（全屏）

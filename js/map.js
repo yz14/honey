@@ -86,9 +86,13 @@ const MapView = (function() {
         
         <!-- 手机端标题栏 -->
         <div class="map-title-bar" id="map-title-bar">
-          <span class="map-title-bar__year" id="mobile-year-picker">${DataManager.getCurrentYear()}</span>
-          <span class="map-title-bar__title" onclick="location.reload()">好源蜜舍<span class="map-title-bar__dot">·</span>采蜜足迹图</span>
-          <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
+          <div class="map-title-bar__main" onclick="location.reload()">
+            好源蜜舍<span class="map-title-bar__dot">·</span>采蜜足迹图
+          </div>
+          <div class="map-title-bar__sub">
+            <span class="map-title-bar__year" id="mobile-year-picker">${DataManager.getCurrentYear()}</span>
+            <span class="map-title-bar__toggle" id="mobile-view-toggle">地图</span>
+          </div>
         </div>
         
         <!-- 手机端标语 - 右上角竖列一句排列 -->
@@ -840,9 +844,14 @@ const MapView = (function() {
   
   // 更新手机端切换文字
   function updateMobileViewToggle(view) {
-    const toggle = document.getElementById('mobile-view-toggle');
-    if (toggle) {
-      toggle.textContent = view === 'map' ? '地图' : '时间轴';
+    const mapToggle = document.getElementById('mobile-view-toggle');
+    const timelineToggle = document.getElementById('timeline-view-toggle');
+    
+    if (mapToggle) {
+      mapToggle.textContent = view === 'map' ? '地图' : '时间轴';
+    }
+    if (timelineToggle) {
+      timelineToggle.textContent = view === 'map' ? '地图' : '时间轴';
     }
   }
 
