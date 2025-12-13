@@ -79,6 +79,11 @@ const ModalView = (function() {
     const record = DataManager.getRecordById(recordId);
     if (!record) return;
 
+    // 关闭地图信息面板
+    if (typeof MapView !== 'undefined' && MapView.closeInfoPanel) {
+      MapView.closeInfoPanel();
+    }
+
     renderModal(record);
     
     // 显示模态框
