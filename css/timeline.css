@@ -450,21 +450,22 @@
 }
 
 @media (max-width: 768px) {
-  /* 时间轴容器 - 预留顶部标题栏空间 */
+  /* 时间轴容器 */
   .timeline-view {
     position: relative;
-    margin-top: 44px;
-    height: calc(100vh - 44px);
+    height: 100vh;
     padding: 0;
     overflow: hidden;
   }
   
+  /* 内容容器 - 预留顶部44px给标题栏 */
   .timeline {
     scroll-snap-type: y mandatory;
-    padding: 0;
+    padding-top: 44px;
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
   }
   
   /* 每个采集点充满整个可视区域（标题栏下方到底部） */
