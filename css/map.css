@@ -353,7 +353,7 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  z-index: 100;
+  z-index: 2500;
   transform: translateX(-110%);
   transition: transform var(--transition-base);
 }
@@ -363,7 +363,11 @@
 }
 
 .map-info-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: var(--space-4);
+  padding-right: 56px;
   background: var(--gradient-honey);
   color: var(--white);
 }
@@ -390,15 +394,20 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+.map-info-panel__close svg {
+  width: 18px;
+  height: 18px;
+}
+
 .map-info-panel__title {
   font-size: var(--text-xl);
   font-weight: 700;
-  margin-bottom: var(--space-1);
 }
 
 .map-info-panel__subtitle {
   font-size: var(--text-sm);
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 .map-info-panel__content {
@@ -427,13 +436,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--honey);
 }
 
 .map-info-panel__stat-icon svg {
   width: 24px;
   height: 24px;
 }
+
+/* 统计图标颜色 */
+.map-info-panel__stat:nth-child(1) .map-info-panel__stat-icon { color: #FFA726; }
+.map-info-panel__stat:nth-child(2) .map-info-panel__stat-icon { color: #AB47BC; }
+.map-info-panel__stat:nth-child(3) .map-info-panel__stat-icon { color: #42A5F5; }
+.map-info-panel__stat:nth-child(4) .map-info-panel__stat-icon { color: #FF7043; }
 
 .map-info-panel__stat-label {
   font-size: var(--text-xs);
@@ -552,6 +566,11 @@
     top: var(--space-2);
     right: var(--space-2);
     font-size: var(--text-xl);
+  }
+  
+  .map-info-panel__close svg {
+    width: 22px;
+    height: 22px;
   }
   
   .map-info-panel__title {
