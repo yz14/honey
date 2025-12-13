@@ -55,8 +55,8 @@
       </div>
       
       <nav class="header__nav">
-        <!-- 年份选择器 -->
-        <div class="header__year-selector">
+        <!-- 年份选择器 - 桌面端 -->
+        <div class="header__year-selector header__year-selector--desktop">
           <button class="header__year-btn" id="year-prev" title="上一年">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
@@ -69,6 +69,14 @@
             </svg>
           </button>
         </div>
+        
+        <!-- 年份选择器 - 手机端（点击弹框） -->
+        <button class="header__year-picker" id="year-picker">
+          <span id="year-picker-value">2024</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
         
         <!-- 视图切换 - 桌面端按钮 -->
         <div class="view-toggle view-toggle--desktop">
@@ -89,14 +97,8 @@
           </button>
         </div>
         
-        <!-- 视图切换 - 手机端开关 -->
-        <div class="view-switch" id="view-switch">
-          <span class="view-switch__label" id="view-switch-label">地图</span>
-          <label class="view-switch__toggle">
-            <input type="checkbox" id="view-switch-input">
-            <span class="view-switch__slider"></span>
-          </label>
-        </div>
+        <!-- 视图切换 - 手机端文字按钮 -->
+        <button class="view-text-btn" id="view-text-btn">地图</button>
       </nav>
     </header>
     

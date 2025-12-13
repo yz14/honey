@@ -480,8 +480,16 @@ a:hover {
   }
 }
 
-/* 桌面端隐藏手机开关 */
+/* 桌面端隐藏手机端元素 */
 .view-switch {
+  display: none;
+}
+
+.header__year-picker {
+  display: none;
+}
+
+.view-text-btn {
   display: none;
 }
 
@@ -506,40 +514,72 @@ a:hover {
   
   /* 手机端隐藏桌面按钮式切换 */
   .view-toggle--desktop {
-    display: none;
+    display: none !important;
   }
   
-  /* 年份选择器 - 左对齐 */
+  .view-toggle {
+    display: none !important;
+  }
+  
+  /* 手机端隐藏桌面年份选择器 */
+  .header__year-selector--desktop {
+    display: none !important;
+  }
+  
+  /* 年份选择器 - 手机端 */
   .header__nav {
     width: 100%;
     margin-left: 0;
     justify-content: space-between;
   }
   
-  .header__year-selector {
-    padding: var(--space-1) var(--space-2);
-    margin-right: 0;
-    gap: var(--space-1);
-    background: transparent;
-  }
-  
-  .header__year-btn {
-    width: 28px;
-    height: 28px;
-    min-width: 36px;
-    min-height: 36px;
-    background: rgba(255,255,255,0.6);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  
-  .header__year-value {
-    font-size: var(--text-base);
+  .header__year-picker {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.7);
+    border: 2px solid #FFA726;
+    border-radius: 20px;
+    font-size: 14px;
     font-weight: 600;
     color: #5D4037;
-    min-width: auto;
-    text-shadow: 
-      1px 1px 2px rgba(255,255,255,0.9),
-      -1px -1px 2px rgba(255,255,255,0.9);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+  }
+  
+  .header__year-picker:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.9);
+  }
+  
+  .header__year-picker svg {
+    color: #FFA726;
+  }
+  
+  /* 视图切换 - 手机端文字按钮 */
+  .view-text-btn {
+    display: block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #FFA726, #FF9800);
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(255,152,0,0.4);
+    transition: all 0.2s;
+  }
+  
+  .view-text-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .view-text-btn.timeline {
+    background: linear-gradient(135deg, #66BB6A, #4CAF50);
+    box-shadow: 0 2px 6px rgba(76,175,80,0.4);
   }
   
   /* 手机端开关样式 */
@@ -673,4 +713,74 @@ a:hover {
 .empty-state__desc {
   color: var(--gray-500);
   margin-bottom: var(--space-6);
+}
+
+/* === Year Picker Modal === */
+.year-picker-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  animation: fadeIn 0.2s ease;
+}
+
+.year-picker-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  min-width: 200px;
+  max-width: 280px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.year-picker-modal__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.year-picker-modal__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.year-picker-modal__item {
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.year-picker-modal__item:active {
+  transform: scale(0.98);
+}
+
+.year-picker-modal__item.active {
+  background: linear-gradient(135deg, #FFA726, #FF9800);
+  color: white;
+}
+
+.year-picker-modal__close {
+  width: 100%;
+  padding: 12px;
+  margin-top: 16px;
+  background: #eee;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #666;
+  cursor: pointer;
 }

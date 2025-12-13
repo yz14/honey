@@ -43,7 +43,7 @@
   .map-title-overlay {
     display: block;
     position: absolute;
-    top: 48px;
+    top: 6px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 50;

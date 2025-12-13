@@ -58,9 +58,12 @@ const App = (function() {
     elements.timelineView = document.getElementById('timeline-view');
     elements.logo = document.querySelector('.header__logo');
     
-    // 手机端开关
+    // 手机端元素
     elements.viewSwitchInput = document.getElementById('view-switch-input');
     elements.viewSwitchLabel = document.getElementById('view-switch-label');
+    elements.yearPicker = document.getElementById('year-picker');
+    elements.yearPickerValue = document.getElementById('year-picker-value');
+    elements.viewTextBtn = document.getElementById('view-text-btn');
     
     // 统计数据元素
     elements.statHoney = document.getElementById('stat-honey');
@@ -108,12 +111,25 @@ const App = (function() {
       });
     }
     
-    // 手机端开关切换
+    // 手机端开关切换（旧版保留兼容）
     if (elements.viewSwitchInput) {
       elements.viewSwitchInput.addEventListener('change', () => {
         const view = elements.viewSwitchInput.checked ? 'timeline' : 'map';
         switchView(view);
       });
+    }
+    
+    // 手机端文字按钮切换
+    if (elements.viewTextBtn) {
+      elements.viewTextBtn.addEventListener('click', () => {
+        const newView = currentView === 'map' ? 'timeline' : 'map';
+        switchView(newView);
+      });
+    }
+    
+    // 手机端年份选择器
+    if (elements.yearPicker) {
+      elements.yearPicker.addEventListener('click', showYearPicker);
     }
     
     // 窗口大小变化
@@ -141,6 +157,11 @@ const App = (function() {
       elements.yearValue.textContent = currentYear;
     }
     
+    // 更新手机端年份显示
+    if (elements.yearPickerValue) {
+      elements.yearPickerValue.textContent = currentYear;
+    }
+    
     // 更新按钮状态
     const minYear = 2020;
     const maxYear = new Date().getFullYear();
@@ -151,6 +172,56 @@ const App = (function() {
     if (elements.yearNextBtn) {
       elements.yearNextBtn.disabled = currentYear >= maxYear;
     }
+  }
+  
+  // 显示年份选择弹框
+  function showYearPicker() {
+    const minYear = 2020;
+    const maxYear = new Date().getFullYear();
+    const years = [];
+    for (let y = maxYear; y >= minYear; y--) {
+      years.push(y);
+    }
+    
+    // 创建弹框
+    const overlay = document.createElement('div');
+    overlay.className = 'year-picker-overlay';
+    overlay.innerHTML = `
+      <div class="year-picker-modal">
+        <div class="year-picker-modal__title">选择年份</div>
+        <div class="year-picker-modal__list">
+          ${years.map(y => `
+            <button class="year-picker-modal__item ${y === currentYear ? 'active' : ''}" data-year="${y}">
+              ${y}年
+            </button>
+          `).join('')}
+        </div>
+        <button class="year-picker-modal__close">取消</button>
+      </div>
+    `;
+    
+    document.body.appendChild(overlay);
+    
+    // 绑定事件
+    overlay.querySelector('.year-picker-modal__close').addEventListener('click', () => {
+      overlay.remove();
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    
+    overlay.querySelectorAll('.year-picker-modal__item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const year = parseInt(btn.dataset.year);
+        currentYear = year;
+        DataManager.setCurrentYear(currentYear);
+        updateYearDisplay();
+        updateStats();
+        refreshCurrentView();
+        overlay.remove();
+      });
+    });
   }
 
   // 切换视图
@@ -169,6 +240,12 @@ const App = (function() {
     }
     if (elements.viewSwitchLabel) {
       elements.viewSwitchLabel.textContent = (view === 'map') ? '地图' : '时间轴';
+    }
+    
+    // 更新手机端文字按钮
+    if (elements.viewTextBtn) {
+      elements.viewTextBtn.textContent = (view === 'map') ? '地图' : '时间轴';
+      elements.viewTextBtn.classList.toggle('timeline', view === 'timeline');
     }
     
     // 切换视图显示
