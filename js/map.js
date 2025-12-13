@@ -84,6 +84,11 @@ const MapView = (function() {
         <!-- ECharts 地图容器 -->
         <div class="echarts-map" id="echarts-map"></div>
         
+        <!-- 手机端标题（可点击刷新） -->
+        <div class="map-title-overlay" id="map-title-overlay" onclick="location.reload()">
+          好源蜜舍<span class="map-title-overlay__dot">·</span>采蜜足迹图
+        </div>
+        
         <!-- 手机端标语 - 右上角竖列一句排列 -->
         <div class="map-slogan" id="map-slogan">
           <div class="map-slogan__col">春入云南</div>
@@ -304,7 +309,7 @@ const MapView = (function() {
     const option = {
       backgroundColor: 'transparent',
       title: {
-        text: '采蜜足迹图',
+        text: isMobile ? '' : '采蜜足迹图',
         left: 'center',
         top: isMobile ? 6 : 15,
         textStyle: {

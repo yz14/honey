@@ -58,6 +58,10 @@ const App = (function() {
     elements.timelineView = document.getElementById('timeline-view');
     elements.logo = document.querySelector('.header__logo');
     
+    // 手机端开关
+    elements.viewSwitchInput = document.getElementById('view-switch-input');
+    elements.viewSwitchLabel = document.getElementById('view-switch-label');
+    
     // 统计数据元素
     elements.statHoney = document.getElementById('stat-honey');
     elements.statLocations = document.getElementById('stat-locations');
@@ -104,6 +108,14 @@ const App = (function() {
       });
     }
     
+    // 手机端开关切换
+    if (elements.viewSwitchInput) {
+      elements.viewSwitchInput.addEventListener('change', () => {
+        const view = elements.viewSwitchInput.checked ? 'timeline' : 'map';
+        switchView(view);
+      });
+    }
+    
     // 窗口大小变化
     window.addEventListener('resize', Utils.debounce(handleResize, 250));
   }
@@ -146,10 +158,18 @@ const App = (function() {
     currentView = view;
     DataManager.setCurrentView(view);
     
-    // 更新按钮状态
+    // 更新桌面端按钮状态
     elements.viewToggleBtns.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.view === view);
     });
+    
+    // 更新手机端开关状态
+    if (elements.viewSwitchInput) {
+      elements.viewSwitchInput.checked = (view === 'timeline');
+    }
+    if (elements.viewSwitchLabel) {
+      elements.viewSwitchLabel.textContent = (view === 'map') ? '地图' : '时间轴';
+    }
     
     // 切换视图显示
     if (elements.mapView) {

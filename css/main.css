@@ -480,69 +480,134 @@ a:hover {
   }
 }
 
+/* 桌面端隐藏手机开关 */
+.view-switch {
+  display: none;
+}
+
 @media (max-width: 768px) {
   :root {
-    --header-height: 52px;
+    --header-height: 44px;
   }
   
+  /* 手机端header - 透明嵌入式 */
   .header {
-    padding: 0 var(--space-2);
+    padding: 0 var(--space-3);
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: none;
+    justify-content: space-between;
   }
   
-  .header__logo {
-    gap: var(--space-2);
-  }
-  
-  .header__logo-icon {
-    font-size: 1.25rem;
-  }
-  
-  .header__logo-text {
-    font-size: 1.25rem;
-    letter-spacing: 0.1em;
-  }
-  
-  .header__logo-subtitle {
+  /* 手机端隐藏桌面Logo */
+  .header__logo--desktop {
     display: none;
   }
   
-  /* 年份选择器 - 更紧凑 */
+  /* 手机端隐藏桌面按钮式切换 */
+  .view-toggle--desktop {
+    display: none;
+  }
+  
+  /* 年份选择器 - 左对齐 */
+  .header__nav {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+  
   .header__year-selector {
     padding: var(--space-1) var(--space-2);
-    margin-right: var(--space-1);
+    margin-right: 0;
     gap: var(--space-1);
+    background: transparent;
   }
   
   .header__year-btn {
-    width: 32px;
-    height: 32px;
-    min-width: 44px; /* 触摸区域最小44px */
-    min-height: 44px;
+    width: 28px;
+    height: 28px;
+    min-width: 36px;
+    min-height: 36px;
+    background: rgba(255,255,255,0.6);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   }
   
   .header__year-value {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: #5D4037;
+    min-width: auto;
+    text-shadow: 
+      1px 1px 2px rgba(255,255,255,0.9),
+      -1px -1px 2px rgba(255,255,255,0.9);
+  }
+  
+  /* 手机端开关样式 */
+  .view-switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  
+  .view-switch__label {
     font-size: var(--text-sm);
-    min-width: 44px;
+    font-weight: 600;
+    color: #5D4037;
+    min-width: 42px;
+    text-align: right;
+    text-shadow: 
+      1px 1px 2px rgba(255,255,255,0.9),
+      -1px -1px 2px rgba(255,255,255,0.9);
   }
   
-  /* 视图切换 - 更紧凑但触摸区域足够 */
-  .view-toggle {
-    padding: 2px;
+  .view-switch__toggle {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 26px;
   }
   
-  .view-toggle__btn {
-    padding: var(--space-2);
-    min-width: 44px;
-    min-height: 44px;
+  .view-switch__toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
   
-  .view-toggle__btn span {
-    display: none;
+  .view-switch__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.7);
+    border: 2px solid #FFA726;
+    border-radius: 26px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
   
-  .view-toggle__btn svg {
-    width: 20px;
-    height: 20px;
+  .view-switch__slider::before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background: linear-gradient(135deg, #FFA726, #FF9800);
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .view-switch__toggle input:checked + .view-switch__slider {
+    background: rgba(255,255,255,0.9);
+    border-color: #4CAF50;
+  }
+  
+  .view-switch__toggle input:checked + .view-switch__slider::before {
+    transform: translateX(22px);
+    background: linear-gradient(135deg, #66BB6A, #4CAF50);
   }
   
   /* 手机端：隐藏左侧统计栏，改为底部悬浮条 */
@@ -561,7 +626,7 @@ a:hover {
   
   /* 视图容器占满剩余空间 */
   .view-container {
-    height: calc(100vh - 52px) !important;
+    height: calc(100vh - 44px) !important;
   }
   
   .container {

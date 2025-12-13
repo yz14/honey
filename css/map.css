@@ -34,6 +34,42 @@
   z-index: 10;
 }
 
+/* === 手机端标题覆盖层 === */
+.map-title-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .map-title-overlay {
+    display: block;
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    font-family: 'Ma Shan Zheng', 'ZCOOL XiaoWei', 'KaiTi', 'STKaiti', '楷体', cursive, serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6B4423;
+    white-space: nowrap;
+    cursor: pointer;
+    text-shadow: 
+      2px 2px 4px rgba(255,255,255,0.95),
+      -2px -2px 4px rgba(255,255,255,0.95),
+      0 0 8px rgba(255,255,255,0.9);
+    transition: transform 0.2s;
+  }
+  
+  .map-title-overlay:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+  
+  .map-title-overlay__dot {
+    color: #FFA726;
+    margin: 0 2px;
+  }
+}
+
 /* === Map Path SVG === */
 .map-path-svg {
   position: absolute;
