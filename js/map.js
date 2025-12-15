@@ -128,6 +128,7 @@ const MapView = (function() {
         
         <!-- 左侧统计描述（手机端显示） -->
         <div class="map-stats-overlay" id="map-stats-overlay">
+          <p><strong>2</strong>人<strong>2</strong>狗<strong>1</strong>帐篷</p>
           <p><strong>${stats.recordCount}</strong>次转场</p>
           <p><strong>${stats.provinces}</strong>省辗转</p>
           <p><strong>${stats.recordCount * 2 * 160}</strong>次蜂箱搬运</p>
